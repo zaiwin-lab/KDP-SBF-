@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>SBF BizFund2 · Hybrid Digital PMO by KOBIS Berhad</title>
+<title>BizFund2 PULSE · The Hybrid Digital PMO for SBF, by KOBIS Berhad</title>
 <meta name="description" content="The practical, hybrid Programme Management Office for SBF BizFund2: digital only where it solves real problems. Provider applications, training execution dashboard, and a clear payment flow.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -174,6 +174,7 @@ p{margin:0 0 1em;max-width:66ch;text-wrap:pretty}
 .chip.watch{color:var(--amber-deep);background:var(--amber-tint)}
 .chip.info{color:var(--blue-deep);background:var(--blue-tint)}
 .chip.bad{color:#9A3412;background:#FCEBE3}
+.chip.plain{color:var(--ink-3);background:var(--bg-soft);border:1px solid var(--line)}
 .steps-line{display:flex;gap:.4rem;flex-wrap:wrap;align-items:center;font-size:.78rem;font-weight:600;color:var(--ink-3)}
 .steps-line .st{display:inline-flex;align-items:center;gap:.4rem;background:var(--bg-soft);border:1px solid var(--line);border-radius:999px;padding:.32rem .75rem}
 .steps-line .st.done{background:var(--green-tint);border-color:var(--green-line);color:var(--green-deep)}
@@ -221,6 +222,55 @@ p{margin:0 0 1em;max-width:66ch;text-wrap:pretty}
 .cert-fill{height:100%;background:var(--amber);border-radius:0 4px 4px 0;width:0;transition:width .9s cubic-bezier(.22,1,.36,1)}
 #tip{position:fixed;z-index:var(--z-tip);background:var(--navy);color:#fff;font:500 .74rem/1.4 var(--f-mono);padding:.45rem .65rem;border-radius:7px;pointer-events:none;opacity:0;transition:opacity .15s ease;max-width:240px}
 #tip.on{opacity:1}
+
+/* ---------- living schedule (PULSE registry) ---------- */
+.then-now{display:grid;grid-template-columns:1fr 1fr;gap:0;border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;margin-bottom:2.4rem;box-shadow:var(--shadow)}
+@media (max-width:760px){.then-now{grid-template-columns:1fr}}
+.tn-col{padding:1.3rem 1.5rem}
+.tn-col.old{background:var(--bg-soft)}
+.tn-col.new{background:#0E2C4A;color:#fff}
+.tn-col h3{font-size:.95rem;margin-bottom:1rem;display:flex;align-items:center;gap:.55rem}
+.tn-col.old h3{color:var(--ink-3)}
+.tn-col.new h3{color:#7EB4F2}
+.tn-col ul{list-style:none;margin:0;padding:0}
+.tn-col li{display:flex;gap:.6rem;align-items:flex-start;padding:.45rem 0;font-size:.9rem}
+.tn-col.old li{color:var(--ink-2)}
+.tn-col.new li{color:#D7E4F2}
+.tn-col li svg{width:15px;height:15px;flex:none;margin-top:.28rem}
+.tn-col.old li svg{color:#B4443C}
+.tn-col.new li svg{color:#4CC38A}
+.pulse-feed{display:flex;gap:.6rem;align-items:center;flex-wrap:wrap;margin-bottom:1.2rem;font-size:.8rem}
+.pulse-feed .pf-label{display:inline-flex;align-items:center;gap:.5rem;font-family:var(--f-mono);font-size:.66rem;letter-spacing:.1em;color:var(--green-deep);font-weight:500}
+.pulse-feed .pf-dot{width:8px;height:8px;border-radius:50%;background:var(--green);animation:pulse-dot 2s ease-in-out infinite}
+@keyframes pulse-dot{0%,100%{box-shadow:0 0 0 0 rgba(27,138,75,.45)}50%{box-shadow:0 0 0 6px rgba(27,138,75,0)}}
+@media (prefers-reduced-motion:reduce){.pulse-feed .pf-dot{animation:none}}
+.pulse-feed .pf-item{background:#fff;border:1px solid var(--line);border-radius:999px;padding:.35rem .85rem;color:var(--ink-2);font-size:.76rem}
+.pulse-feed .pf-item b{color:var(--ink);font-weight:700}
+.reg-bar{display:flex;gap:.6rem;flex-wrap:wrap;align-items:center;background:#fff;border:1px solid var(--line);border-radius:12px;padding:.8rem .9rem;margin-bottom:1.1rem;box-shadow:var(--shadow)}
+.reg-bar input[type="search"]{flex:1;min-width:170px;font:500 .9rem var(--f-sans);color:var(--ink);background:var(--bg-soft);border:1px solid var(--line);border-radius:8px;padding:.55rem .8rem}
+.reg-bar select{font:600 .84rem var(--f-sans);color:var(--ink);background:var(--bg-soft);border:1px solid var(--line);border-radius:8px;padding:.55rem .7rem;cursor:pointer}
+.reg-count{margin-left:auto;font-family:var(--f-mono);font-size:.72rem;color:var(--ink-3);white-space:nowrap}
+.reg-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(330px,1fr));gap:1rem}
+.reg-card{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:1.15rem 1.25rem;box-shadow:var(--shadow);display:flex;flex-direction:column;gap:.7rem;transition:transform .2s ease,border-color .2s ease}
+.reg-card:hover{transform:translateY(-2px);border-color:#B9C7DA}
+.reg-sector{display:inline-flex;align-items:center;gap:.45rem;font-size:.68rem;font-weight:800;letter-spacing:.09em;text-transform:uppercase;color:var(--ink-3)}
+.reg-sector i{width:9px;height:9px;border-radius:3px;display:inline-block}
+.reg-card h3{font-size:1.02rem;margin:0;line-height:1.3}
+.reg-meta{font-size:.78rem;color:var(--ink-3)}
+.reg-meta b{color:var(--ink-2);font-weight:600}
+.cohorts{display:grid;gap:.45rem;margin-top:.1rem}
+.cohort{display:flex;flex-wrap:wrap;gap:.3rem .7rem;align-items:center;background:var(--bg-soft);border:1px solid var(--line);border-radius:9px;padding:.5rem .75rem;font-size:.78rem}
+.cohort .c-id{font-family:var(--f-mono);font-size:.68rem;color:var(--ink-3);flex:none}
+.cohort .c-date{color:var(--ink-2);font-weight:600;white-space:nowrap}
+.cohort .c-date small{display:block;font-weight:500;color:var(--amber-deep);font-size:.7rem;white-space:normal}
+.cohort .chip{margin-left:auto}
+.reg-foot{display:flex;align-items:center;justify-content:space-between;gap:.8rem;border-top:1px dashed var(--line);padding-top:.75rem;margin-top:auto}
+.reg-foot .seats{font-size:.76rem;color:var(--ink-3)}
+.reg-foot .seats b{color:var(--green-deep);font-family:var(--f-mono);font-weight:500}
+.reg-int{background:#fff;border:1.5px solid var(--blue);color:var(--blue-deep);font:700 .78rem var(--f-sans);border-radius:8px;padding:.45rem .8rem;cursor:pointer;transition:all .2s ease}
+.reg-int:hover{background:var(--blue);color:#fff}
+.reg-int.done-btn{border-color:var(--line);color:var(--ink-3);cursor:default}
+.reg-empty{grid-column:1/-1;text-align:center;color:var(--ink-3);padding:2.5rem 1rem;font-size:.95rem}
 
 /* ---------- payment table ---------- */
 .pay-table{width:100%;border-collapse:collapse;font-size:.88rem}
@@ -303,11 +353,12 @@ footer{background:#0E2C4A;color:#fff}
         <path d="M12 26V15l8-4 8 4v11" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
         <path d="M16 26v-6h8v6" stroke="#5B8DF0" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
       </svg>
-      <span>SBF BizFund2<small data-i18n="nav.by">Hybrid Digital PMO</small></span>
+      <span>BizFund2 PULSE<small data-i18n="nav.by">Hybrid Digital PMO · SBF × KOBIS</small></span>
     </a>
     <div class="nav-links">
       <a href="#why" data-i18n="nav.why">Why hybrid</a>
       <a href="#apply" data-i18n="nav.apply">Apply</a>
+      <a href="#schedule" data-i18n="nav.sched">Schedule</a>
       <a href="#dashboard" data-i18n="nav.dash">Dashboard</a>
       <a href="#payment" data-i18n="nav.pay">Payment</a>
       <a href="#stakeholders" data-i18n="nav.stake">Stakeholders</a>
@@ -453,6 +504,54 @@ footer{background:#0E2C4A;color:#fff}
         </div>
       </div>
     </div>
+  </div>
+</section>
+
+<!-- ============ PULSE · LIVING SCHEDULE ============ -->
+<section class="sec" id="schedule">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="sec-tag tag-navy" data-i18n="sc.tag">PULSE · THE LIVING SCHEDULE</span>
+      <h2 data-i18n="sc.title">Last season's training list, upgraded from PDF to pulse</h2>
+      <p data-i18n="sc.lede">The Recovery BizFund schedule lived in a PDF, updated by hand and full of TBA. Every programme below is real, taken from that exact list. In PULSE each cohort carries a live status, live seats and a live outcome, and the list can never be out of date again.</p>
+    </div>
+
+    <div class="then-now">
+      <div class="tn-col old">
+        <h3><svg width="15" height="15" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M5 2.5h7l3.5 3.5v11.5H5z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M12 2.5V6h3.5" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg><span data-i18n="sc.oldh">The 2023/24 list · a PDF</span></h3>
+        <ul>
+          <li><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4 4l8 8M12 4l-8 8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg><span data-i18n="sc.o1">Updated by hand: "Updated 14 February 2024", emailed around, versions everywhere</span></li>
+          <li><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4 4l8 8M12 4l-8 8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg><span data-i18n="sc.o2">Most cohorts marked TBA, with no way to know when that changes</span></li>
+          <li><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4 4l8 8M12 4l-8 8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg><span data-i18n="sc.o3">"Register your interest": an email to the secretariat, no seat counts</span></li>
+          <li><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4 4l8 8M12 4l-8 8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg><span data-i18n="sc.o4">No record of what happened: who attended, who was certified, what it proved</span></li>
+        </ul>
+      </div>
+      <div class="tn-col new">
+        <h3><svg width="15" height="15" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M2 10h3.5l2-5 4 10 2-5H18" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg><span data-i18n="sc.newh">BizFund2 PULSE · alive</span></h3>
+        <ul>
+          <li><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8.5L6.5 12 13 4.5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span data-i18n="sc.n1">One living schedule, current the moment anything changes, with a visible change feed</span></li>
+          <li><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8.5L6.5 12 13 4.5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span data-i18n="sc.n2">TBA becomes a status that moves: Planned → Dates confirmed → Open → Running → Completed</span></li>
+          <li><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8.5L6.5 12 13 4.5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span data-i18n="sc.n3">One-tap interest per cohort, with live seat counts the secretariat can plan around</span></li>
+          <li><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8.5L6.5 12 13 4.5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span data-i18n="sc.n4">Every completed cohort keeps its proof: enrolled, attended, certified, feeding the dashboard above</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="pulse-feed" aria-label="Latest schedule changes">
+      <span class="pf-label"><span class="pf-dot" aria-hidden="true"></span><span data-i18n="sc.feed">LIVE CHANGES</span></span>
+      <span class="pf-item"><b>BIM Modelling of Architecture</b> · <span data-i18n="sc.f1">Cohort 7 dates confirmed, 4 to 7 Mar</span></span>
+      <span class="pf-item"><b>Wireman Grade 1</b> · <span data-i18n="sc.f2">Cohort 5 now open, 18 seats left</span></span>
+      <span class="pf-item"><b>Safe Handling of Chemicals (Miri)</b> · <span data-i18n="sc.f3">Cohort 2 completed, 26 certified</span></span>
+    </div>
+
+    <div class="reg-bar">
+      <input type="search" id="regSearch" data-i18n-ph="sc.search" placeholder="Search programme or provider" aria-label="Search programmes">
+      <select id="regSector" aria-label="Filter by sector"></select>
+      <select id="regLoc" aria-label="Filter by location"></select>
+      <select id="regStatus" aria-label="Filter by status"></select>
+      <span class="reg-count" id="regCount"></span>
+    </div>
+    <div class="reg-grid" id="regGrid"></div>
   </div>
 </section>
 
@@ -679,7 +778,20 @@ fillTicker("tickerTrack1"); fillTicker("tickerTrack2");
 var I18N = {
 bm:{
 "a11y.skip":"Langkau ke kandungan",
-"nav.by":"PMO Digital Hibrid","nav.why":"Kenapa hibrid","nav.apply":"Mohon","nav.dash":"Papan Pemuka","nav.pay":"Bayaran","nav.stake":"Pemegang Taruh","nav.cta":"Mohon sebagai penyedia",
+"nav.by":"PMO Digital Hibrid · SBF × KOBIS","nav.why":"Kenapa hibrid","nav.apply":"Mohon","nav.sched":"Jadual","nav.dash":"Papan Pemuka","nav.pay":"Bayaran","nav.stake":"Pemegang Taruh","nav.cta":"Mohon sebagai penyedia",
+"sc.tag":"PULSE · JADUAL YANG HIDUP","sc.title":"Senarai latihan musim lepas, dinaik taraf daripada PDF kepada nadi",
+"sc.lede":"Jadual Recovery BizFund dahulu hidup dalam PDF, dikemas kini secara manual dan penuh TBA. Setiap program di bawah adalah benar, diambil daripada senarai itu. Dalam PULSE setiap kohort membawa status, kerusi dan hasil secara langsung, dan senarai ini tidak boleh lapuk lagi.",
+"sc.oldh":"Senarai 2023/24 · sebuah PDF","sc.newh":"BizFund2 PULSE · hidup",
+"sc.o1":"Dikemas kini manual: \"Updated 14 February 2024\", diedar melalui e-mel, versi merata-rata",
+"sc.o2":"Kebanyakan kohort ditanda TBA, tanpa cara mengetahui bila ia berubah",
+"sc.o3":"\"Daftar minat\": e-mel kepada sekretariat, tiada kiraan kerusi",
+"sc.o4":"Tiada rekod hasil: siapa hadir, siapa bersijil, apa buktinya",
+"sc.n1":"Satu jadual hidup, terkini sebaik sahaja apa-apa berubah, dengan suapan perubahan yang jelas",
+"sc.n2":"TBA menjadi status yang bergerak: Dirancang → Tarikh disahkan → Dibuka → Berjalan → Selesai",
+"sc.n3":"Daftar minat satu ketukan bagi setiap kohort, dengan kiraan kerusi langsung untuk perancangan sekretariat",
+"sc.n4":"Setiap kohort selesai menyimpan buktinya: mendaftar, hadir, bersijil, terus ke papan pemuka di atas",
+"sc.feed":"PERUBAHAN LANGSUNG",
+"sc.f1":"Tarikh Kohort 7 disahkan, 4 hingga 7 Mac","sc.f2":"Kohort 5 kini dibuka, 18 kerusi tinggal","sc.f3":"Kohort 2 selesai, 26 bersijil",
 "hero.badge":"SBF × KOBIS Berhad · Pejabat Pengurusan Program",
 "hero.title":"BizFund2, dijalankan secara praktikal: <em>digital hanya di tempat yang penting.</em>",
 "hero.sub":"Sebahagian besar BizFund2 kekal dijalankan manusia: jurulatih di bilik latihan, pelatih di tempat kerja, jawatankuasa membuat keputusan. PMO menambah alat digital pada tiga titik di mana kertas benar-benar gagal, supaya permohonan bergerak, latihan kelihatan dan penyedia dibayar tepat pada masa.",
@@ -744,7 +856,20 @@ bm:{
 },
 zh:{
 "a11y.skip":"跳至内容",
-"nav.by":"混合数字 PMO","nav.why":"为何混合","nav.apply":"申请","nav.dash":"仪表盘","nav.pay":"付款","nav.stake":"相关方","nav.cta":"以机构身份申请",
+"nav.by":"混合数字 PMO · SBF × KOBIS","nav.why":"为何混合","nav.apply":"申请","nav.sched":"课程表","nav.dash":"仪表盘","nav.pay":"付款","nav.stake":"相关方","nav.cta":"以机构身份申请",
+"sc.tag":"PULSE · 活的课程表","sc.title":"上一季的培训清单：从 PDF 升级为脉搏",
+"sc.lede":"Recovery BizFund 的课程表曾经活在一份手工更新、写满 TBA 的 PDF 里。下面每个项目都是真实的，取自那份清单。在 PULSE 中，每个班次都有实时状态、实时名额与实时成果，这份清单再也不会过期。",
+"sc.oldh":"2023/24 清单 · 一份 PDF","sc.newh":"BizFund2 PULSE · 活的",
+"sc.o1":"手工更新：\"Updated 14 February 2024\"，靠邮件传阅，版本混乱",
+"sc.o2":"大多数班次标注 TBA，无从得知何时会变",
+"sc.o3":"\"登记意向\"：发邮件给秘书处，没有名额数字",
+"sc.o4":"没有结果记录：谁出席、谁获证、有何凭据",
+"sc.n1":"一份活的课程表，任何变动即刻生效，配有可见的变更动态",
+"sc.n2":"TBA 变成会移动的状态：已规划 → 日期已定 → 开放报名 → 进行中 → 已完成",
+"sc.n3":"每个班次一键登记意向，实时名额让秘书处心中有数",
+"sc.n4":"每个完成的班次保留凭据：报名、出席、获证，直接汇入上方仪表盘",
+"sc.feed":"实时变更",
+"sc.f1":"第 7 班日期已定，3月4日至7日","sc.f2":"第 5 班开放报名，余 18 个名额","sc.f3":"第 2 班已完成，26 人获证",
 "hero.badge":"SBF × KOBIS Berhad · 项目管理办公室",
 "hero.title":"BizFund2，务实地运作：<em>只在关键处数字化。</em>",
 "hero.sub":"BizFund2 的大部分仍由人来完成：培训师在课室，学员在岗位，委员会做决策。PMO 只在纸张真正失灵的三个环节加上数字工具，让申请流动、培训可见、机构准时收款。",
@@ -809,7 +934,20 @@ zh:{
 },
 ib:{
 "a11y.skip":"Lompat ngagai isi",
-"nav.by":"PMO Digital Hibrid","nav.why":"Nama kebuah hibrid","nav.apply":"Mohon","nav.dash":"Dashboard","nav.pay":"Bayar","nav.stake":"Raban","nav.cta":"Mohon nyadi penyedia",
+"nav.by":"PMO Digital Hibrid · SBF × KOBIS","nav.why":"Nama kebuah hibrid","nav.apply":"Mohon","nav.sched":"Jadual","nav.dash":"Dashboard","nav.pay":"Bayar","nav.stake":"Raban","nav.cta":"Mohon nyadi penyedia",
+"sc.tag":"PULSE · JADUAL TI IDUP","sc.title":"Senarai latih musim tadi, dipejalai ari PDF ngagai nadi",
+"sc.lede":"Jadual Recovery BizFund suba diau dalam PDF, dikemansang ngena jari lalu penuh TBA. Genap program di baruh amat, diambi ari senarai nya. Dalam PULSE genap kohort mai status, kerusi enggau asil ti idup, lalu senarai tu enda ulih lapuk agi.",
+"sc.oldh":"Senarai 2023/24 · siti PDF","sc.newh":"BizFund2 PULSE · idup",
+"sc.o1":"Dikemansang ngena jari: \"Updated 14 February 2024\", dianjur ngena e-mel, versi merata",
+"sc.o2":"Mayuh kohort ditanda TBA, nadai chara nemu kemaya iya berubah",
+"sc.o3":"\"Daftar minat\": e-mel ngagai sekretariat, nadai kiraan kerusi",
+"sc.o4":"Nadai rekod asil: sapa datai, sapa besijil, nama buktinya",
+"sc.n1":"Siti jadual idup, terkini lebuh utai berubah, enggau suapan pengubah ti terang",
+"sc.n2":"TBA nyadi status ti bejalai: Dirancha → Tarikh disah → Dibuka → Bejalai → Tembu",
+"sc.n3":"Daftar minat sekali tekan ke genap kohort, enggau kiraan kerusi idup ke sekretariat",
+"sc.n4":"Genap kohort tembu nyimpan buktinya: daftar, datai, besijil, terus ngagai dashboard di atas",
+"sc.feed":"PENGUBAH IDUP",
+"sc.f1":"Tarikh Kohort 7 disah, 4 ngagai 7 Mac","sc.f2":"Kohort 5 diatu dibuka, 18 kerusi agi","sc.f3":"Kohort 2 tembu, 26 besijil",
 "hero.badge":"SBF × KOBIS Berhad · Opis Pengelola Program",
 "hero.title":"BizFund2, dipejalai chara praktikal: <em>digital semina ba endur ti beguna.</em>",
 "hero.sub":"Mayuh agi BizFund2 agi dipejalai mensia: pengajar ba bilik, murid ba endur pengawa, jawatankuasa mutus ka penemu. PMO nambah ka alat digital ba tiga endur alai kertas amat enda ulih, ngambika permohon bejalai, latih ulih dipeda lalu penyedia dibayar tepat maya.",
@@ -892,7 +1030,10 @@ function applyLanguage(l){
   document.documentElement.lang = lang === "zh" ? "zh" : (lang === "bm" ? "ms" : (lang === "ib" ? "iba" : "en"));
   document.querySelectorAll(".lang-switch button").forEach(function(b){ b.classList.toggle("active", b.dataset.lang === lang); });
   try{ localStorage.setItem("sbfbizfund2-lang", lang); }catch(e){}
+  var PH = {en:"Search programme or provider",bm:"Cari program atau penyedia",zh:"搜索项目或机构",ib:"Giga program tauka penyedia"};
+  document.querySelectorAll("[data-i18n-ph]").forEach(function(el){ el.placeholder = PH[lang] || PH.en; });
   renderDivisions();
+  if(typeof fillRegFilters === "function"){ fillRegFilters(); renderReg(); }
 }
 document.querySelectorAll(".lang-switch button").forEach(function(b){
   b.addEventListener("click", function(){ applyLanguage(b.dataset.lang); });
@@ -934,6 +1075,144 @@ function animateIn(scope){
   });
 }
 renderMonths();
+
+/* ---------- PULSE living schedule registry ---------- */
+/* Real programmes from the SBF Recovery BizFund approved training list (updated 14 Feb 2024); statuses/seats are demo values. */
+var SECTOR_DOT = {Construction:"#2563EB",Electrical:"#B45309",Logistics:"#7C3AED",Safety:"#1B8A4B",Maritime:"#0E7490",Tourism:"#BE185D",Plantation:"#4D7C0F",Digital:"#DB2777",Business:"#475569"};
+var PROG = [
+{s:"Construction",t:"BIM Modelling of Architecture",p:"CIDB Malaysia",d:"4 days",c:[
+  {n:"C5",l:"Kuching",dt:"22–25 Jan",st:"done",cert:"24 / 25"},
+  {n:"C6",l:"Kuching",dt:"5–8 Feb",st:"done",cert:"22 / 24"},
+  {n:"C7",l:"Kuching",dt:"4–7 Mar",st:"run"}]},
+{s:"Construction",t:"BIM Coordinator Part 1: Setup",p:"CIDB Malaysia",d:"3 days",c:[
+  {n:"C3",l:"Kuching",dt:"15–17 Jan",st:"done",cert:"18 / 20"},
+  {n:"C4",l:"Kuching",dt:"14–16 Mar",st:"open",seats:8}]},
+{s:"Electrical",t:"Chargeman L1 · Low Voltage Main Switchboard",p:"Sarawak Skills (PPKS)",d:"12 days",c:[
+  {n:"C1",l:"Kuching",dt:"18 Jan – 15 Mar",st:"run",exam:"EIU exam 19–21 Mar"},
+  {n:"C2",l:"Kuching",dt:"18 Apr – 21 Jun",st:"open",seats:6,exam:"EIU exam 25–27 Jun"}]},
+{s:"Electrical",t:"Wireman Grade 1 (Three Phase)",p:"Sarawak Skills (PPKS)",d:"5 days",c:[
+  {n:"C4",l:"Kuching",dt:"5–9 Feb",st:"done",cert:"15 / 16",exam:"EIU exam 7–8 Mar"},
+  {n:"C5",l:"Kuching",dt:"13–17 May",st:"open",seats:18},
+  {n:"C6",l:"Kuching",dt:"15–19 Jul",st:"soon"}]},
+{s:"Electrical",t:"Mains Layer",p:"Sarawak Skills (PPKS)",d:"5 days",c:[
+  {n:"C4",l:"Kuching",dt:"8–12 Jan",st:"done",cert:"14 / 15"},
+  {n:"C5",l:"Kuching",dt:"22–26 Apr",st:"soon",exam:"Exam 13–17 May"}]},
+{s:"Logistics",t:"UNESCAP Certificate in MTO Freighting",p:"SFFLA · CLLB · Learning Evolution",d:"8 days",c:[
+  {n:"C5",l:"Kuching",dt:"10–19 Jun",st:"soon"},
+  {n:"C6",l:"Kuching",dt:"TBA",st:"tba"}]},
+{s:"Safety",t:"OSH Coordinator",p:"Chemsain HRD Sdn Bhd",d:"3 days",c:[
+  {n:"C6",l:"Kuching",dt:"8–10 Apr",st:"open",seats:12}]},
+{s:"Safety",t:"Safe Handling of Chemicals Hazardous to Health",p:"Methodist Pilley Institute (MPI)",d:"1 day",c:[
+  {n:"C2",l:"Miri",dt:"23 Mar",st:"done",cert:"26 / 28"},
+  {n:"C1",l:"Sibu",dt:"TBA",st:"tba"},
+  {n:"C1",l:"Kuching",dt:"TBA",st:"tba"}]},
+{s:"Digital",t:"CAAM Certified Drone Pilot (RCOC-B)",p:"Chemsain HRD Sdn Bhd",d:"5 days",c:[
+  {n:"C3",l:"Kuching",dt:"12–16 May",st:"open",seats:4},
+  {n:"C4",l:"Kuching",dt:"TBA",st:"tba"}]},
+{s:"Maritime",t:"Master Domestic <500 GT · Boat Captain Licence",p:"Seamaster Marine STC",d:"10 days",c:[
+  {n:"C1",l:"Sibu",dt:"17–28 Jun",st:"soon"},
+  {n:"C1",l:"Miri",dt:"TBA",st:"tba"}]},
+{s:"Plantation",t:"Plantation Management · Operational Modules",p:"MPI · Incorporated Society of Planters",d:"6 days",c:[
+  {n:"C1",l:"Bintulu",dt:"5 Jan – 3 Feb",st:"done",cert:"19 / 22"},
+  {n:"C1",l:"Kuching",dt:"8 Mar – 20 Apr",st:"run"},
+  {n:"C1",l:"Sibu",dt:"10 Nov – 9 Dec",st:"soon"}]},
+{s:"Tourism",t:"Regional Specific Tourist Guide (RSTG)",p:"SATT College",d:"5 months",c:[
+  {n:"C1",l:"Miri",dt:"1 Jul – 28 Nov",st:"soon"},
+  {n:"C1",l:"Sibu",dt:"TBA",st:"tba"}]},
+{s:"Business",t:"Computerised SQL Accounting & Payroll",p:"B.E.A.T Management Consultancy",d:"3 days",c:[
+  {n:"C3",l:"Miri",dt:"6–8 May",st:"open",seats:10}]}
+];
+var REG_STR = {
+en:{allsec:"All sectors",allloc:"All locations",allst:"All statuses",done:"Completed",run:"Running now",open:"Open",soon:"Dates confirmed",tba:"Dates pending",up:"Upcoming",cert:"certified",seats:"seats left",interest:"Register interest",notify:"Notify me",noted:"Interest noted ✓",season:"Season completed",showing:"programmes",cohorts:"cohorts live",none:"No programmes match those filters. Clear one and try again."},
+bm:{allsec:"Semua sektor",allloc:"Semua lokasi",allst:"Semua status",done:"Selesai",run:"Sedang berjalan",open:"Dibuka",soon:"Tarikh disahkan",tba:"Tarikh belum pasti",up:"Akan datang",cert:"bersijil",seats:"kerusi tinggal",interest:"Daftar minat",notify:"Maklumkan saya",noted:"Minat direkod ✓",season:"Musim selesai",showing:"program",cohorts:"kohort aktif",none:"Tiada program sepadan dengan tapisan itu. Kosongkan satu dan cuba lagi."},
+zh:{allsec:"全部领域",allloc:"全部地点",allst:"全部状态",done:"已完成",run:"进行中",open:"开放报名",soon:"日期已定",tba:"日期待定",up:"即将开课",cert:"获证",seats:"个名额",interest:"登记意向",notify:"通知我",noted:"已登记 ✓",season:"本季已结束",showing:"个项目",cohorts:"个班次",none:"没有符合筛选的项目。清除一个条件再试。"},
+ib:{allsec:"Semua sektor",allloc:"Semua endur",allst:"Semua status",done:"Tembu",run:"Benung bejalai",open:"Dibuka",soon:"Tarikh disah",tba:"Tarikh apin tentu",up:"Deka datai",cert:"besijil",seats:"kerusi agi",interest:"Daftar minat",notify:"Padah ka aku",noted:"Minat dicatat ✓",season:"Musim tembu",showing:"program",cohorts:"kohort idup",none:"Nadai program sebaka enggau tapis nya. Buai siti lalu uji baru."}
+};
+function rstr(k){ return (REG_STR[lang] || REG_STR.en)[k]; }
+var CH_ICON = {
+  done:'<svg viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2 6.5L4.8 9 10 3.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>',
+  run:'<svg viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M4 2.5l5 3.5-5 3.5z" fill="currentColor"/></svg>',
+  open:'<svg viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M6 1v10M1 6h10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>',
+  soon:'<svg viewBox="0 0 12 12" fill="none" aria-hidden="true"><rect x="1.5" y="2.5" width="9" height="8" rx="1.5" stroke="currentColor" stroke-width="1.5"/><path d="M1.5 5h9" stroke="currentColor" stroke-width="1.5"/></svg>',
+  tba:'<svg viewBox="0 0 12 12" fill="none" aria-hidden="true"><circle cx="6" cy="6" r="4.6" stroke="currentColor" stroke-width="1.6"/><path d="M6 3.6v2.8l1.8 1.2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>'
+};
+var CH_CLASS = {done:"ok",run:"info",open:"watch",soon:"info",tba:"plain"};
+function esc(x){ return String(x).replace(/&/g,"&amp;").replace(/</g,"&lt;"); }
+function chipFor(c){
+  var label = rstr(c.st);
+  if(c.st === "done" && c.cert) label += " · " + c.cert + " " + rstr("cert");
+  if(c.st === "open" && c.seats != null) label += " · " + c.seats + " " + rstr("seats");
+  return '<span class="chip ' + CH_CLASS[c.st] + '">' + CH_ICON[c.st] + "<span>" + esc(label) + "</span></span>";
+}
+function fillRegFilters(){
+  var sectors = Object.keys(SECTOR_DOT).filter(function(s){ return PROG.some(function(p){ return p.s === s; }); });
+  var locs = [];
+  PROG.forEach(function(p){ p.c.forEach(function(c){ if(locs.indexOf(c.l) < 0) locs.push(c.l); }); });
+  locs.sort();
+  function fill(id, first, arr, labels){
+    var el = document.getElementById(id); if(!el) return;
+    var cur = el.value;
+    el.innerHTML = '<option value="">' + esc(first) + "</option>" + arr.map(function(v, i){
+      return '<option value="' + esc(v) + '">' + esc(labels ? labels[i] : v) + "</option>";
+    }).join("");
+    el.value = cur || "";
+  }
+  fill("regSector", rstr("allsec"), sectors);
+  fill("regLoc", rstr("allloc"), locs);
+  fill("regStatus", rstr("allst"), ["open","run","done","up"], [rstr("open"), rstr("run"), rstr("done"), rstr("up")]);
+}
+function renderReg(){
+  var grid = document.getElementById("regGrid"); if(!grid) return;
+  var q = (document.getElementById("regSearch").value || "").toLowerCase();
+  var fs = document.getElementById("regSector").value;
+  var fl = document.getElementById("regLoc").value;
+  var fst = document.getElementById("regStatus").value;
+  var shown = 0, cohorts = 0, html = "";
+  PROG.forEach(function(p){
+    if(fs && p.s !== fs) return;
+    if(q && (p.t + " " + p.p).toLowerCase().indexOf(q) < 0) return;
+    var cs = p.c.filter(function(c){
+      if(fl && c.l !== fl) return false;
+      if(fst === "up") return c.st === "soon" || c.st === "tba";
+      if(fst) return c.st === fst;
+      return true;
+    });
+    if(!cs.length) return;
+    shown++; cohorts += cs.length;
+    var openC = cs.filter(function(c){ return c.st === "open"; })[0];
+    var allDone = cs.every(function(c){ return c.st === "done"; });
+    var foot;
+    if(openC){
+      foot = '<span class="seats"><b>' + openC.seats + "</b> " + esc(rstr("seats")) + " · " + esc(openC.n) + " " + esc(openC.l) + '</span><button class="reg-int" type="button" data-noted="' + esc(rstr("noted")) + '">' + esc(rstr("interest")) + "</button>";
+    }else if(allDone){
+      foot = '<span class="seats">' + esc(rstr("season")) + '</span><button class="reg-int done-btn" type="button" disabled>✓</button>';
+    }else{
+      foot = '<span class="seats"></span><button class="reg-int" type="button" data-noted="' + esc(rstr("noted")) + '">' + esc(rstr("notify")) + "</button>";
+    }
+    html += '<article class="reg-card">' +
+      '<span class="reg-sector"><i style="background:' + SECTOR_DOT[p.s] + '"></i>' + esc(p.s) + "</span>" +
+      "<h3>" + esc(p.t) + "</h3>" +
+      '<div class="reg-meta"><b>' + esc(p.p) + "</b> · " + esc(p.d) + "</div>" +
+      '<div class="cohorts">' + cs.map(function(c){
+        return '<div class="cohort"><span class="c-id">' + esc(c.n) + " · " + esc(c.l) + '</span><span class="c-date">' + esc(c.dt) + (c.exam ? "<small>" + esc(c.exam) + "</small>" : "") + "</span>" + chipFor(c) + "</div>";
+      }).join("") + "</div>" +
+      '<div class="reg-foot">' + foot + "</div></article>";
+  });
+  if(!shown) html = '<div class="reg-empty">' + esc(rstr("none")) + "</div>";
+  grid.innerHTML = html;
+  var count = document.getElementById("regCount");
+  if(count) count.textContent = shown + " " + rstr("showing") + " · " + cohorts + " " + rstr("cohorts");
+}
+["regSector","regLoc","regStatus"].forEach(function(id){
+  var el = document.getElementById(id);
+  if(el) el.addEventListener("change", renderReg);
+});
+var regSearch = document.getElementById("regSearch");
+if(regSearch) regSearch.addEventListener("input", renderReg);
+document.addEventListener("click", function(e){
+  var b = e.target.closest && e.target.closest(".reg-int");
+  if(b && !b.disabled && b.dataset.noted){ b.textContent = b.dataset.noted; b.classList.add("done-btn"); b.disabled = true; }
+});
 
 /* ---------- tooltip ---------- */
 var tip = document.getElementById("tip");
