@@ -542,6 +542,31 @@ footer{background:linear-gradient(180deg,#0E2C4A,#0A2138 70%,#081B2E)}
 .sec-head::before{content:"";position:absolute;left:0;top:-1px;width:64px;height:3px;border-radius:2px;
   background:linear-gradient(90deg,var(--gold),rgba(201,162,39,0))}
 html{scrollbar-color:#33517A #F0F3F8}
+
+/* ===== headline aura ===== */
+.hero h1{max-width:none;animation:h-rise .9s cubic-bezier(.22,1,.36,1) both}
+.hero h1 em{display:block;margin-top:.08em;color:#E3C25B;
+  text-shadow:0 2px 28px rgba(201,162,39,.35)}
+@supports ((-webkit-background-clip:text) or (background-clip:text)){
+  .hero h1 em{
+    background:linear-gradient(100deg,#F6E7AC 0%,#E3C25B 26%,#C9A227 50%,#F0D584 72%,#B8901F 100%);
+    background-size:230% 100%;
+    -webkit-background-clip:text;background-clip:text;color:transparent;
+    text-shadow:none;
+    filter:drop-shadow(0 3px 26px rgba(201,162,39,.3));
+    animation:gold-sheen 7s ease-in-out infinite, h-rise 1s .18s cubic-bezier(.22,1,.36,1) both}
+}
+.hero-sub{animation:h-rise .9s .3s cubic-bezier(.22,1,.36,1) both}
+.hero-btns{animation:h-rise .9s .42s cubic-bezier(.22,1,.36,1) both}
+.trust-chips{animation:h-rise .9s .55s cubic-bezier(.22,1,.36,1) both}
+@keyframes gold-sheen{0%,100%{background-position:0% 0}50%{background-position:100% 0}}
+@keyframes h-rise{from{opacity:0;transform:translateY(26px)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){
+  .hero h1,.hero h1 em,.hero-sub,.hero-btns,.trust-chips{animation:none}
+  @supports ((-webkit-background-clip:text) or (background-clip:text)){
+    .hero h1 em{animation:none}
+  }
+}
 </style>
 </head>
 <body>
@@ -586,7 +611,7 @@ html{scrollbar-color:#33517A #F0F3F8}
 <header class="hero" id="top">
   <div class="wrap">
     <span class="hero-badge"><i aria-hidden="true"></i><span data-i18n="hero.badge">Sarawak Business Federation · BizFund2 Programme</span></span>
-    <h1 data-i18n="hero.title">The training your business needs. <em>The funding already arranged.</em></h1>
+    <h1 data-i18n="hero.title">Building Better Businesses. <em>Empowering Every Entrepreneur.</em></h1>
     <p class="hero-sub" data-i18n="hero.sub">BizFund2 places funded seats with shortlisted training providers across all twelve divisions of Sarawak: from BIM and electrical licensing to maritime, safety and plantation management. Browse the live schedule, register your interest in one tap, and earn a credential that goes on record.</p>
     <div class="hero-btns">
       <a class="btn btn-gold" href="#schedule" data-i18n="hero.cta1">Find your training</a>
@@ -1077,7 +1102,7 @@ bm:{
 "lg.a2":"Penyedia Latihan","lg.a2r":"Serumpun Skills Sdn Bhd · memasukkan sesi, kehadiran dan sijil selepas setiap kelas",
 "lg.enter1":"Masuk konsol sekretariat","lg.enter2":"Masuk konsol penyedia",
 "hero.badge":"Sarawak Business Federation · Program BizFund2",
-"hero.title":"Latihan yang perniagaan anda perlukan. <em>Pembiayaannya sudah diuruskan.</em>",
+"hero.title":"Membina Perniagaan Lebih Baik. <em>Memperkasa Setiap Usahawan.</em>",
 "hero.sub":"BizFund2 menyediakan tempat berbiaya penuh dengan penyedia latihan tersenarai pendek di kesemua dua belas bahagian Sarawak: daripada BIM dan perlesenan elektrik hingga maritim, keselamatan dan pengurusan ladang. Semak imbas jadual langsung, daftar minat dengan satu ketukan, dan raih kelayakan yang tercatat dalam rekod.",
 "hero.cta1":"Cari latihan anda","hero.cta2":"Lihat papan pemuka langsung",
 "hero.p1":"Penyedia mohon dalam talian","hero.p2":"Latihan dijejak pada satu papan pemuka","hero.p3":"Bayaran mengalir hingga selesai",
@@ -1171,7 +1196,7 @@ zh:{
 "lg.a2":"培训机构","lg.a2r":"Serumpun Skills Sdn Bhd · 每堂课后录入课次、出席与证书",
 "lg.enter1":"进入秘书处控制台","lg.enter2":"进入机构控制台",
 "hero.badge":"砂拉越商业联合会 · BizFund2 计划",
-"hero.title":"您的企业需要的培训，<em>资金已经安排好。</em>",
+"hero.title":"打造更好的企业。<em>成就每一位创业者。</em>",
 "hero.sub":"BizFund2 与入围培训机构合作，在砂拉越全部十二个省份提供资助名额：从 BIM、电气执照到海事、安全与种植园管理。浏览实时课程表，一键登记意向，赢得一份记录在案的资格证书。",
 "hero.cta1":"找到您的培训","hero.cta2":"查看实时仪表盘",
 "hero.p1":"机构在线申请","hero.p2":"培训在一个仪表盘上跟踪","hero.p3":"付款一路走到完成",
@@ -1265,7 +1290,7 @@ ib:{
 "lg.a2":"Penyedia Latih","lg.a2r":"Serumpun Skills Sdn Bhd · ngengkah ka sesi, penatai enggau sijil udah genap kelas",
 "lg.enter1":"Tama konsol sekretariat","lg.enter2":"Tama konsol penyedia",
 "hero.badge":"Sarawak Business Federation · Program BizFund2",
-"hero.title":"Latih ti diguna dagang nuan. <em>Pembiayaan udah diatur.</em>",
+"hero.title":"Ngaga Dagang Manah Agi. <em>Ngemetul ka Genap Usahawan.</em>",
 "hero.sub":"BizFund2 nyedia ka kerusi dibiayai enggau penyedia latih ti udah dipilih ba semua dua belas bagi menua Sarawak: ari BIM enggau lesen elektrik ngagai maritim, keselamatan enggau pengelola ladang. Peda jadual idup, daftar minat sekali tekan, lalu bulih kelayak ti tercatat dalam rekod.",
 "hero.cta1":"Giga latih nuan","hero.cta2":"Peda dashboard idup",
 "hero.p1":"Penyedia mohon online","hero.p2":"Latih ditansang ba siti dashboard","hero.p3":"Bayar bejalai nyentuk tembu",
