@@ -1,0 +1,1016 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SBF BizFund2 · Hybrid Digital PMO by KOBIS Berhad</title>
+<meta name="description" content="The practical, hybrid Programme Management Office for SBF BizFund2: digital only where it solves real problems. Provider applications, training execution dashboard, and a clear payment flow.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800&family=Spline+Sans+Mono:wght@400;500&display=swap" rel="stylesheet">
+<!-- Critical CSS: ticker bars must render as a single clean line on first paint, before the main styles load. Literal values only. -->
+<style>
+*{box-sizing:border-box}
+.ticker-bar{position:sticky;top:0;z-index:200;height:32px;overflow:hidden;background:#123B63;color:#BFDCF7;display:flex;align-items:center;white-space:nowrap}
+.ticker-bar.ticker-static{position:static;opacity:.35}
+.ticker-track{display:inline-flex;align-items:center;gap:2.5rem;padding-left:1rem;animation:ticker-scroll 22s linear infinite;will-change:transform}
+.ticker-item{display:inline-flex;align-items:center;gap:.45rem;font-size:.72rem;letter-spacing:.08em;flex:none}
+.ticker-icon{width:14px;height:14px;vertical-align:-2px;margin-right:2px;flex:none}
+@keyframes ticker-scroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+@media (prefers-reduced-motion:reduce){.ticker-track{animation:none}}
+</style>
+<style>
+/* ============ SBF BizFund2 · Hybrid Digital PMO · KOBIS Berhad ============ */
+:root{
+  --white:#FFFFFF;
+  --bg-soft:#F6F8FB;
+  --ink:#17212E;
+  --ink-2:#425062;
+  --ink-3:#5E6C80;
+  --line:#DCE3EC;
+  /* stage colours (validated, light mode) */
+  --blue:#2563EB;   --blue-deep:#1D4FBE;  --blue-tint:#EDF3FE;  --blue-line:#C4D6F9;
+  --green:#1B8A4B;  --green-deep:#146B3A; --green-tint:#EBF7F0; --green-line:#BFE3CE;
+  --amber:#B45309;  --amber-deep:#92430A; --amber-tint:#FdF3E7; --amber-line:#F0D5B4;
+  --navy:#123B63;
+  /* status */
+  --good:#1B8A4B; --warn:#B45309; --bad:#C2410C;
+  /* kobis credit bar gradient hover */
+  --accent-lt:#5B8DF0; --accent:#2563EB; --accent-2:#1B8A4B;
+  --f-sans:'Figtree',system-ui,sans-serif;
+  --f-mono:'Spline Sans Mono',ui-monospace,monospace;
+  --z-nav:180; --z-ticker:200; --z-tip:300;
+  --radius:12px;
+  --pad:clamp(1.25rem,4vw,2.25rem);
+  --shadow:0 8px 28px rgba(23,33,46,.08);
+}
+html{scroll-behavior:smooth}
+[id]{scroll-margin-top:104px}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{margin:0;background:var(--white);color:var(--ink);font-family:var(--f-sans);font-size:1.0625rem;line-height:1.65;-webkit-font-smoothing:antialiased}
+img,svg{max-width:100%}
+a{color:var(--blue)}
+a:focus-visible,button:focus-visible,select:focus-visible{outline:2px solid var(--blue);outline-offset:3px;border-radius:4px}
+.skip-link{position:absolute;left:-999px;top:8px;background:var(--navy);color:#fff;padding:.55rem 1rem;font-weight:700;z-index:var(--z-tip);border-radius:6px}
+.skip-link:focus{left:8px}
+h1,h2,h3,h4{margin:0 0 .55em;font-weight:700;line-height:1.15;letter-spacing:-.015em;text-wrap:balance}
+p{margin:0 0 1em;max-width:66ch;text-wrap:pretty}
+.wrap{max-width:1140px;margin:0 auto;padding:0 var(--pad)}
+.mono{font-family:var(--f-mono)}
+.muted{color:var(--ink-2)}
+
+/* ---------- nav ---------- */
+.nav{position:sticky;top:32px;z-index:var(--z-nav);background:rgba(255,255,255,.94);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+.nav-inner{max-width:1240px;margin:0 auto;padding:.65rem var(--pad);display:flex;align-items:center;gap:1.3rem}
+.brand{display:flex;align-items:center;gap:.6rem;text-decoration:none;color:var(--ink);font-weight:800;flex:none}
+.brand-mark{width:34px;height:34px;flex:none}
+.brand small{display:block;font-weight:600;font-size:.64rem;color:var(--ink-3);letter-spacing:.12em;text-transform:uppercase}
+.nav-links{display:flex;gap:1.25rem;margin-left:auto;align-items:center}
+.nav-links a{color:var(--ink-2);text-decoration:none;font-size:.9rem;font-weight:600;transition:color .2s ease}
+.nav-links a:hover{color:var(--blue)}
+.lang-switch{display:flex;gap:.3rem;margin-left:.6rem;flex:none}
+.lang-switch button{font:700 .7rem/1 var(--f-mono);letter-spacing:.05em;color:var(--ink-2);background:#fff;border:1px solid var(--line);border-radius:999px;padding:.4rem .62rem;cursor:pointer;transition:all .2s ease}
+.lang-switch button:hover{border-color:var(--blue);color:var(--blue)}
+.lang-switch button.active{background:var(--navy);border-color:var(--navy);color:#fff}
+.nav-cta{flex:none;background:var(--blue);color:#fff;text-decoration:none;font-weight:700;font-size:.88rem;padding:.55rem 1rem;border-radius:9px;transition:transform .2s cubic-bezier(.22,1,.36,1),box-shadow .2s ease}
+.nav-cta:hover{transform:translateY(-1px);box-shadow:0 6px 18px rgba(37,99,235,.3)}
+@media (max-width:960px){.nav-links{display:none}}
+@media (max-width:700px){.nav-inner{gap:.7rem;padding:.55rem 1rem}.nav-cta{display:none}.lang-switch{margin-left:auto}.brand small{display:none}}
+
+/* ---------- hero ---------- */
+.hero{background:linear-gradient(180deg,var(--bg-soft),#fff 78%);padding:clamp(3.6rem,9vh,6.5rem) 0 clamp(2.6rem,6vh,4rem);border-bottom:1px solid var(--line)}
+.hero-badge{display:inline-flex;align-items:center;gap:.5rem;background:#fff;border:1px solid var(--line);border-radius:999px;padding:.42rem .95rem;font-size:.8rem;font-weight:700;color:var(--navy);margin-bottom:1.5rem;box-shadow:var(--shadow)}
+.hero-badge i{width:8px;height:8px;border-radius:50%;background:var(--green);display:inline-block}
+.hero h1{font-size:clamp(2.3rem,5.4vw,3.9rem);font-weight:800;letter-spacing:-.025em;max-width:19ch}
+.hero h1 em{font-style:normal;color:var(--blue)}
+.hero-sub{font-size:clamp(1.02rem,1.5vw,1.18rem);color:var(--ink-2);max-width:56ch;margin-bottom:1.9rem}
+.hero-btns{display:flex;gap:.8rem;flex-wrap:wrap;margin-bottom:2.4rem}
+.btn{display:inline-block;text-decoration:none;font-weight:700;font-size:.96rem;padding:.8rem 1.4rem;border-radius:10px;transition:transform .22s cubic-bezier(.22,1,.36,1),box-shadow .22s ease;border:0;cursor:pointer;font-family:var(--f-sans)}
+.btn-blue{background:var(--blue);color:#fff}
+.btn-blue:hover{transform:translateY(-2px);box-shadow:0 10px 24px rgba(37,99,235,.3)}
+.btn-line{border:1.5px solid var(--line);color:var(--ink);background:#fff}
+.btn-line:hover{border-color:var(--navy);transform:translateY(-2px)}
+.stage-pills{display:flex;gap:.7rem;flex-wrap:wrap}
+.stage-pill{display:flex;align-items:center;gap:.6rem;background:#fff;border:1px solid var(--line);border-radius:12px;padding:.75rem 1.05rem;font-size:.88rem;font-weight:600;color:var(--ink-2);box-shadow:var(--shadow);text-decoration:none;transition:transform .2s ease,border-color .2s ease}
+.stage-pill:hover{transform:translateY(-2px)}
+.stage-pill .n{font-family:var(--f-mono);font-weight:500;font-size:.72rem;color:#fff;width:22px;height:22px;border-radius:7px;display:grid;place-items:center;flex:none}
+.stage-pill.s1 .n{background:var(--blue)} .stage-pill.s1:hover{border-color:var(--blue-line)}
+.stage-pill.s2 .n{background:var(--green)} .stage-pill.s2:hover{border-color:var(--green-line)}
+.stage-pill.s3 .n{background:var(--amber)} .stage-pill.s3:hover{border-color:var(--amber-line)}
+
+/* ---------- sections ---------- */
+.sec{padding:clamp(3.4rem,8vw,6rem) 0}
+.sec-head{max-width:760px;margin-bottom:2.4rem}
+.sec-tag{display:inline-block;font-family:var(--f-mono);font-size:.72rem;letter-spacing:.12em;font-weight:500;border-radius:6px;padding:.3rem .6rem;margin-bottom:.9rem}
+.sec-head h2{font-size:clamp(1.7rem,3.4vw,2.5rem);letter-spacing:-.02em}
+.sec-head p{color:var(--ink-2);font-size:1.05rem;margin:0}
+.tag-navy{background:#E8EFF7;color:var(--navy)}
+.tag-blue{background:var(--blue-tint);color:var(--blue-deep)}
+.tag-green{background:var(--green-tint);color:var(--green-deep)}
+.tag-amber{background:var(--amber-tint);color:var(--amber-deep)}
+
+/* ---------- problems ---------- */
+.prob-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:1.1rem}
+.prob-card{border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;background:#fff;box-shadow:var(--shadow);transition:transform .25s ease}
+.prob-card:hover{transform:translateY(-3px)}
+.prob-top{padding:1.15rem 1.3rem;color:#fff}
+.prob-top .mono{font-size:.68rem;letter-spacing:.12em;opacity:.85;display:block;margin-bottom:.3rem}
+.prob-top h3{margin:0;font-size:1.12rem;color:#fff}
+.prob-card.c1 .prob-top{background:var(--blue)}
+.prob-card.c2 .prob-top{background:var(--green)}
+.prob-card.c3 .prob-top{background:var(--amber)}
+.prob-body{padding:1.15rem 1.3rem}
+.prob-body p{font-size:.93rem;color:var(--ink-2);margin:0 0 .9rem}
+.prob-fix{display:flex;gap:.6rem;align-items:flex-start;font-size:.9rem;font-weight:600;padding-top:.85rem;border-top:1px dashed var(--line)}
+.prob-fix svg{width:17px;height:17px;flex:none;margin-top:.15rem}
+.prob-card.c1 .prob-fix{color:var(--blue-deep)}
+.prob-card.c2 .prob-fix{color:var(--green-deep)}
+.prob-card.c3 .prob-fix{color:var(--amber-deep)}
+.hybrid-note{margin-top:2.2rem;background:var(--bg-soft);border:1px solid var(--line);border-radius:var(--radius);padding:1.15rem 1.4rem;display:flex;gap:.9rem;align-items:flex-start;max-width:860px}
+.hybrid-note svg{width:22px;height:22px;flex:none;margin-top:.2rem;color:var(--navy)}
+.hybrid-note p{margin:0;font-size:.95rem;color:var(--ink-2)}
+.hybrid-note b{color:var(--ink)}
+
+/* ---------- journey rail ---------- */
+.rail{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:1.1rem;counter-reset:none}
+.rail-step{border-radius:var(--radius);padding:1.4rem 1.5rem;border:1px solid var(--line);position:relative}
+.rail-step.s1{background:var(--blue-tint);border-color:var(--blue-line)}
+.rail-step.s2{background:var(--green-tint);border-color:var(--green-line)}
+.rail-step.s3{background:var(--amber-tint);border-color:var(--amber-line)}
+.rail-step .num{font-family:var(--f-mono);font-size:.75rem;color:#fff;border-radius:8px;width:26px;height:26px;display:grid;place-items:center;margin-bottom:.85rem}
+.rail-step.s1 .num{background:var(--blue)} .rail-step.s2 .num{background:var(--green)} .rail-step.s3 .num{background:var(--amber)}
+.rail-step h3{font-size:1.15rem;margin-bottom:.35rem}
+.rail-step p{font-size:.92rem;color:var(--ink-2);margin:0}
+.rail-step a{display:inline-block;margin-top:.8rem;font-size:.88rem;font-weight:700;text-decoration:none}
+.rail-step.s1 a{color:var(--blue-deep)} .rail-step.s2 a{color:var(--green-deep)} .rail-step.s3 a{color:var(--amber-deep)}
+
+/* ---------- stage sections ---------- */
+.sec-tint-blue{background:linear-gradient(180deg,#fff, var(--blue-tint) 22%, var(--blue-tint) 82%, #fff)}
+.sec-tint-green{background:linear-gradient(180deg,#fff, var(--green-tint) 22%, var(--green-tint) 82%, #fff)}
+.sec-tint-amber{background:linear-gradient(180deg,#fff, var(--amber-tint) 22%, var(--amber-tint) 82%, #fff)}
+.split{display:grid;grid-template-columns:.9fr 1.1fr;gap:2.6rem;align-items:start}
+.split.rev{grid-template-columns:1.1fr .9fr}
+@media (max-width:920px){.split,.split.rev{grid-template-columns:1fr}}
+.checklist{list-style:none;margin:1.2rem 0 0;padding:0}
+.checklist li{display:flex;gap:.65rem;align-items:flex-start;padding:.5rem 0;font-size:.95rem;color:var(--ink-2)}
+.checklist svg{width:18px;height:18px;flex:none;margin-top:.2rem}
+.checklist b{color:var(--ink)}
+
+/* panels (mock app windows) */
+.panel-card{background:#fff;border:1px solid var(--line);border-radius:14px;box-shadow:0 18px 44px rgba(23,33,46,.1);overflow:hidden}
+.panel-bar{display:flex;align-items:center;gap:.7rem;padding:.7rem 1.1rem;border-bottom:1px solid var(--line);background:var(--bg-soft)}
+.panel-bar .dots{display:flex;gap:.35rem}
+.panel-bar .dots i{width:9px;height:9px;border-radius:50%;background:var(--line);display:block}
+.panel-bar .t{font-family:var(--f-mono);font-size:.7rem;color:var(--ink-3);letter-spacing:.06em}
+.panel-body{padding:1.2rem 1.3rem;display:grid;gap:1rem}
+/* pipeline tracker */
+.pipe{display:grid;gap:.6rem}
+.pipe-row{display:grid;grid-template-columns:1fr auto;gap:.8rem;align-items:center;border:1px solid var(--line);border-radius:10px;padding:.75rem .95rem}
+.pipe-row .p-name{font-weight:700;font-size:.92rem}
+.pipe-row .p-sub{font-size:.78rem;color:var(--ink-3);font-family:var(--f-mono)}
+.chip{display:inline-flex;align-items:center;gap:.4rem;font-size:.74rem;font-weight:700;border-radius:999px;padding:.3rem .7rem;white-space:nowrap}
+.chip svg{width:11px;height:11px;flex:none}
+.chip.ok{color:var(--green-deep);background:var(--green-tint)}
+.chip.watch{color:var(--amber-deep);background:var(--amber-tint)}
+.chip.info{color:var(--blue-deep);background:var(--blue-tint)}
+.chip.bad{color:#9A3412;background:#FCEBE3}
+.steps-line{display:flex;gap:.4rem;flex-wrap:wrap;align-items:center;font-size:.78rem;font-weight:600;color:var(--ink-3)}
+.steps-line .st{display:inline-flex;align-items:center;gap:.4rem;background:var(--bg-soft);border:1px solid var(--line);border-radius:999px;padding:.32rem .75rem}
+.steps-line .st.done{background:var(--green-tint);border-color:var(--green-line);color:var(--green-deep)}
+.steps-line .st.now{background:var(--blue-tint);border-color:var(--blue-line);color:var(--blue-deep)}
+.steps-line .arr{color:var(--ink-3)}
+
+/* ---------- dashboard ---------- */
+.dash{background:#fff;border:1px solid var(--line);border-radius:16px;box-shadow:0 22px 54px rgba(23,33,46,.12);overflow:hidden}
+.dash-top{display:flex;align-items:center;gap:1rem;flex-wrap:wrap;padding:1rem 1.3rem;border-bottom:1px solid var(--line)}
+.dash-top h3{margin:0;font-size:1.02rem}
+.dash-top .mono{font-size:.68rem;color:var(--ink-3)}
+.dash-filters{margin-left:auto;display:flex;gap:.6rem;flex-wrap:wrap}
+.dash-filters select{font:600 .82rem var(--f-sans);color:var(--ink);background:var(--bg-soft);border:1px solid var(--line);border-radius:8px;padding:.45rem .7rem;cursor:pointer}
+.dash-add{background:var(--green);color:#fff;font:700 .82rem var(--f-sans);border:0;border-radius:8px;padding:.5rem .85rem;cursor:pointer;display:inline-flex;align-items:center;gap:.4rem}
+.dash-add:hover{background:var(--green-deep)}
+.dash-body{padding:1.3rem;display:grid;gap:1.1rem}
+.tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(175px,1fr));gap:.9rem}
+.tile{background:var(--bg-soft);border:1px solid var(--line);border-radius:var(--radius);padding:1rem 1.1rem}
+.tile .lab{font-size:.76rem;font-weight:600;color:var(--ink-3);margin-bottom:.3rem}
+.tile .val{font-family:var(--f-mono);font-size:1.65rem;font-weight:500;letter-spacing:-.02em}
+.tile .sub{font-size:.74rem;color:var(--ink-3);margin-top:.25rem}
+.tile .sub.up{color:var(--green-deep);font-weight:600}
+.tile.hl{background:var(--green-tint);border-color:var(--green-line)}
+.dash-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:1.1rem}
+@media (max-width:880px){.dash-grid{grid-template-columns:1fr}}
+.chart{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:1.1rem 1.2rem}
+.chart h4{font-size:.95rem;margin:0 0 .15rem}
+.chart .chart-sub{font-size:.76rem;color:var(--ink-3);margin:0 0 1rem}
+.hbars{display:grid;gap:.55rem}
+.hbar{display:grid;grid-template-columns:96px 1fr 56px;gap:.8rem;align-items:center}
+.hbar .lab{font-size:.82rem;font-weight:600;color:var(--ink-2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.hbar .track{display:block;height:13px;background:var(--bg-soft);border-radius:4px;overflow:hidden}
+.hbar .fill{display:block;height:100%;background:var(--green);border-radius:0 4px 4px 0;width:0;transition:width .9s cubic-bezier(.22,1,.36,1)}
+.hbar:hover .fill{background:var(--green-deep)}
+.hbar .val{font-family:var(--f-mono);font-size:.74rem;color:var(--ink-2);text-align:right}
+.cols{display:flex;align-items:flex-end;gap:6px;height:150px;border-bottom:1px solid var(--line)}
+.col{flex:1;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;height:100%}
+.col .bar-v{width:100%;max-width:30px;background:var(--blue);border-radius:4px 4px 0 0;height:0;transition:height .8s cubic-bezier(.22,1,.36,1)}
+.col .bar-v:hover{background:var(--blue-deep)}
+.cols-x{display:flex;gap:6px;margin-top:.45rem}
+.cols-x span{flex:1;text-align:center;font-family:var(--f-mono);font-size:.6rem;color:var(--ink-3)}
+.cert-line{display:flex;justify-content:space-between;align-items:baseline;font-size:.8rem;color:var(--ink-2);margin-bottom:.4rem}
+.cert-line b{font-family:var(--f-mono);font-weight:500}
+.cert-track{height:12px;background:var(--bg-soft);border-radius:4px;overflow:hidden;margin-bottom:1rem}
+.cert-fill{height:100%;background:var(--amber);border-radius:0 4px 4px 0;width:0;transition:width .9s cubic-bezier(.22,1,.36,1)}
+#tip{position:fixed;z-index:var(--z-tip);background:var(--navy);color:#fff;font:500 .74rem/1.4 var(--f-mono);padding:.45rem .65rem;border-radius:7px;pointer-events:none;opacity:0;transition:opacity .15s ease;max-width:240px}
+#tip.on{opacity:1}
+
+/* ---------- payment table ---------- */
+.pay-table{width:100%;border-collapse:collapse;font-size:.88rem}
+.pay-table th{text-align:left;font-family:var(--f-mono);font-weight:500;font-size:.66rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3);padding:.55rem .75rem;border-bottom:1px solid var(--line)}
+.pay-table td{padding:.7rem .75rem;border-bottom:1px solid var(--bg-soft);color:var(--ink-2)}
+.pay-table td:first-child{color:var(--ink);font-weight:600}
+.pay-table .mono{font-size:.8rem}
+.pay-promise{display:flex;gap:.6rem;align-items:center;font-size:.88rem;font-weight:700;color:var(--amber-deep);margin-top:1rem}
+.pay-promise svg{width:18px;height:18px;flex:none}
+
+/* ---------- stakeholders ---------- */
+.stake-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.1rem}
+.stake-card{border:1px solid var(--line);border-radius:var(--radius);padding:1.5rem 1.5rem 1.3rem;background:#fff;box-shadow:var(--shadow)}
+.stake-card .who{display:inline-block;font-size:.72rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;border-radius:6px;padding:.3rem .6rem;margin-bottom:1rem}
+.stake-card.k1 .who{background:#E8EFF7;color:var(--navy)}
+.stake-card.k2 .who{background:var(--blue-tint);color:var(--blue-deep)}
+.stake-card.k3 .who{background:var(--green-tint);color:var(--green-deep)}
+.stake-card h3{font-size:1.2rem}
+.stake-card ul{list-style:none;margin:0;padding:0}
+.stake-card li{display:flex;gap:.6rem;padding:.42rem 0;font-size:.92rem;color:var(--ink-2);align-items:flex-start}
+.stake-card li svg{width:16px;height:16px;flex:none;margin-top:.25rem}
+.stake-card.k1 li svg{color:var(--navy)} .stake-card.k2 li svg{color:var(--blue)} .stake-card.k3 li svg{color:var(--green)}
+
+/* ---------- pmo strip / stats ---------- */
+.pmo-strip{background:var(--navy);color:#fff}
+.pmo-strip .wrap{display:grid;grid-template-columns:1.2fr .8fr;gap:2.5rem;align-items:center;padding-top:clamp(2.8rem,6vw,4.2rem);padding-bottom:clamp(2.8rem,6vw,4.2rem)}
+@media (max-width:860px){.pmo-strip .wrap{grid-template-columns:1fr}}
+.pmo-strip h2{color:#fff;font-size:clamp(1.5rem,3vw,2.1rem)}
+.pmo-strip p{color:#C7D6E8;font-size:.98rem}
+.stats{display:grid;grid-template-columns:repeat(2,1fr);gap:.9rem}
+.stat{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.16);border-radius:var(--radius);padding:1rem 1.15rem}
+.stat .n{font-family:var(--f-mono);font-size:1.7rem;color:#fff}
+.stat .l{font-size:.78rem;color:#B9CBDF;margin-top:.2rem}
+
+/* ---------- cta ---------- */
+.cta-banner{text-align:center;padding:clamp(3.4rem,8vw,5.5rem) var(--pad)}
+.cta-banner h2{font-size:clamp(1.7rem,3.6vw,2.5rem);max-width:22ch;margin:0 auto .7rem}
+.cta-banner p{color:var(--ink-2);max-width:52ch;margin:0 auto 1.8rem}
+.cta-banner .btns{display:flex;gap:.8rem;justify-content:center;flex-wrap:wrap}
+
+/* ---------- footer ---------- */
+footer{background:#0E2C4A;color:#fff}
+.footer-grid{max-width:1140px;margin:0 auto;padding:3rem var(--pad) 2.2rem;display:grid;grid-template-columns:1.3fr 1fr 1fr;gap:2.2rem}
+@media (max-width:820px){.footer-grid{grid-template-columns:1fr}}
+.footer-brand{display:flex;gap:.9rem;align-items:flex-start}
+.footer-brand h3{margin:0 0 .3rem;font-size:1.05rem;color:#fff}
+.footer-brand p{margin:0;font-size:.87rem;color:#A9BFD6;max-width:34ch}
+.footer-col h4{font-family:var(--f-mono);font-weight:500;font-size:.68rem;letter-spacing:.16em;text-transform:uppercase;color:#8FA9C4;margin:0 0 .9rem}
+.footer-col a{display:block;color:#C7D6E8;text-decoration:none;font-size:.9rem;padding:.26rem 0;transition:color .2s ease}
+.footer-col a:hover{color:#fff}
+.footer-col p{font-size:.9rem;color:#C7D6E8;margin:0 0 .5rem}
+.footer-copy{text-align:center;padding:1.1rem var(--pad);border-top:1px solid rgba(255,255,255,.12)}
+.footer-copy p{margin:0 auto;font-size:.78rem;color:#8FA9C4}
+.kobis-bar{height:.75in;display:flex;align-items:center;justify-content:center;background:#0A2138;border-top:1px solid rgba(255,255,255,.08)}
+.kobis-bar p{margin:0;font-size:.72rem;font-weight:300;color:rgba(255,255,255,.85);text-align:center;padding:0 1rem}
+.kobis-bar .kobis-link{color:rgba(255,255,255,.85);text-decoration:none;font-weight:500;transition:color .2s ease}
+.kobis-bar .kobis-link:hover{background:linear-gradient(135deg,var(--accent-lt),var(--accent),var(--accent-2));-webkit-background-clip:text;background-clip:text;color:transparent}
+
+/* ---------- reveal ---------- */
+.will-reveal{opacity:0;transform:translateY(18px);transition:opacity .6s cubic-bezier(.22,1,.36,1),transform .6s cubic-bezier(.22,1,.36,1)}
+.will-reveal.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){.will-reveal{opacity:1;transform:none;transition:none}}
+@media print{.will-reveal{opacity:1 !important;transform:none !important}.ticker-bar{display:none}}
+</style>
+</head>
+<body>
+
+<!-- TEMP: KOBIS Berhad placeholder credit ticker — replace wording with client's chosen text once payment is received, then remove KOBIS branding ticker -->
+<div class="ticker-bar" aria-hidden="true">
+  <div class="ticker-track" id="tickerTrack1"></div>
+</div>
+
+<a class="skip-link" href="#main" data-i18n="a11y.skip">Skip to content</a>
+
+<nav class="nav" aria-label="Main">
+  <div class="nav-inner">
+    <a class="brand" href="#top" aria-label="SBF BizFund2 home">
+      <svg class="brand-mark" viewBox="0 0 40 40" fill="none" aria-hidden="true">
+        <rect x="1.5" y="1.5" width="37" height="37" rx="10" fill="#123B63"/>
+        <path d="M12 26V15l8-4 8 4v11" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M16 26v-6h8v6" stroke="#5B8DF0" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      <span>SBF BizFund2<small data-i18n="nav.by">Hybrid Digital PMO</small></span>
+    </a>
+    <div class="nav-links">
+      <a href="#why" data-i18n="nav.why">Why hybrid</a>
+      <a href="#apply" data-i18n="nav.apply">Apply</a>
+      <a href="#dashboard" data-i18n="nav.dash">Dashboard</a>
+      <a href="#payment" data-i18n="nav.pay">Payment</a>
+      <a href="#stakeholders" data-i18n="nav.stake">Stakeholders</a>
+    </div>
+    <div class="lang-switch" role="group" aria-label="Language">
+      <button type="button" data-lang="en" class="active">EN</button>
+      <button type="button" data-lang="bm">BM</button>
+      <button type="button" data-lang="zh">中</button>
+      <button type="button" data-lang="ib">IB</button>
+    </div>
+    <a class="nav-cta" href="#apply" data-i18n="nav.cta">Apply as provider</a>
+  </div>
+</nav>
+
+<main id="main">
+
+<!-- ============ HERO ============ -->
+<header class="hero" id="top">
+  <div class="wrap">
+    <span class="hero-badge"><i aria-hidden="true"></i><span data-i18n="hero.badge">SBF × KOBIS Berhad · Programme Management Office</span></span>
+    <h1 data-i18n="hero.title">BizFund2, run the practical way: <em>digital only where it counts.</em></h1>
+    <p class="hero-sub" data-i18n="hero.sub">Most of BizFund2 stays human: trainers in rooms, learners at work, committees deciding. The PMO adds digital tools at the three points where paper actually breaks down, so applications move, training is visible, and providers get paid on time.</p>
+    <div class="hero-btns">
+      <a class="btn btn-blue" href="#dashboard" data-i18n="hero.cta1">See the live dashboard</a>
+      <a class="btn btn-line" href="#apply" data-i18n="hero.cta2">How providers apply</a>
+    </div>
+    <div class="stage-pills">
+      <a class="stage-pill s1" href="#apply"><span class="n">1</span><span data-i18n="hero.p1">Providers apply online</span></a>
+      <a class="stage-pill s2" href="#dashboard"><span class="n">2</span><span data-i18n="hero.p2">Training tracked on one dashboard</span></a>
+      <a class="stage-pill s3" href="#payment"><span class="n">3</span><span data-i18n="hero.p3">Payment flows to completion</span></a>
+    </div>
+  </div>
+</header>
+
+<!-- ============ WHY HYBRID ============ -->
+<section class="sec" id="why">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="sec-tag tag-navy" data-i18n="why.tag">THE REAL PROBLEMS</span>
+      <h2 data-i18n="why.title">Three points where funding programmes usually break</h2>
+      <p data-i18n="why.lede">We are not digitising everything. We are fixing the three bottlenecks that cost SBF time, trust and money, and leaving the rest to people who do it well.</p>
+    </div>
+    <div class="prob-grid">
+      <div class="prob-card c1">
+        <div class="prob-top"><span class="mono">PROBLEM 1</span><h3 data-i18n="why.pr1">Proposals arrive as paper and email</h3></div>
+        <div class="prob-body">
+          <p data-i18n="why.pr1p">Provider applications sit in inboxes, attachments go missing, and nobody can say where a proposal stands or why it stalled.</p>
+          <div class="prob-fix"><svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M3 10.5L8 15.5 17 5" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg><span data-i18n="why.fx1">Digital fix: one application form, one pipeline, visible status for every proposal.</span></div>
+        </div>
+      </div>
+      <div class="prob-card c2">
+        <div class="prob-top"><span class="mono">PROBLEM 2</span><h3 data-i18n="why.pr2">Nobody sees training as it happens</h3></div>
+        <div class="prob-body">
+          <p data-i18n="why.pr2p">Attendance lives in photocopied forms. Numbers arrive months late, so SBF reports old news and problems surface after the money is spent.</p>
+          <div class="prob-fix"><svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M3 10.5L8 15.5 17 5" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg><span data-i18n="why.fx2">Digital fix: one dashboard for locality, trainee numbers and certificates, updated per session.</span></div>
+        </div>
+      </div>
+      <div class="prob-card c3">
+        <div class="prob-top"><span class="mono">PROBLEM 3</span><h3 data-i18n="why.pr3">Providers wait too long to be paid</h3></div>
+        <div class="prob-body">
+          <p data-i18n="why.pr3p">Claims bounce between offices for missing evidence. Good trainers stop applying because payment feels like a lottery.</p>
+          <div class="prob-fix"><svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M3 10.5L8 15.5 17 5" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg><span data-i18n="why.fx3">Digital fix: claims with evidence attached, a tracked verification flow, payment inside 14 days.</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="hybrid-note">
+      <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 3l7 4v5c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V7l7-4z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M9 12l2 2 4-4.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <p data-i18n="why.note"><b>This is a hybrid PMO.</b> Committee decisions, site visits, coaching and relationships stay human, run by KOBIS Berhad together with the SBF secretariat. The platform only carries the three flows above, which is why it is simple enough to use from day one.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ JOURNEY RAIL ============ -->
+<section class="sec" id="journey" style="padding-top:0">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="sec-tag tag-navy" data-i18n="jr.tag">HOW IT WORKS</span>
+      <h2 data-i18n="jr.title">One programme, three stages, three colours</h2>
+    </div>
+    <div class="rail">
+      <div class="rail-step s1">
+        <span class="num">1</span>
+        <h3 data-i18n="jr.s1">Apply</h3>
+        <p data-i18n="jr.s1p">Training providers submit proposals online and follow their status through evaluation to approval.</p>
+        <a href="#apply" data-i18n="jr.s1a">See the application flow</a>
+      </div>
+      <div class="rail-step s2">
+        <span class="num">2</span>
+        <h3 data-i18n="jr.s2">Deliver</h3>
+        <p data-i18n="jr.s2p">Approved programmes run on the ground. Each session's attendance and certificates are keyed into the dashboard.</p>
+        <a href="#dashboard" data-i18n="jr.s2a">See the dashboard</a>
+      </div>
+      <div class="rail-step s3">
+        <span class="num">3</span>
+        <h3 data-i18n="jr.s3">Get paid</h3>
+        <p data-i18n="jr.s3p">Completed sessions become claims with evidence attached, verified by the PMO and paid on a committed clock.</p>
+        <a href="#payment" data-i18n="jr.s3a">See the payment flow</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ STAGE 1 · APPLY ============ -->
+<section class="sec sec-tint-blue" id="apply">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="sec-tag tag-blue" data-i18n="ap.tag">STAGE 1 · APPLICATIONS</span>
+      <h2 data-i18n="ap.title">Provider proposals, out of the inbox and into a pipeline</h2>
+    </div>
+    <div class="split">
+      <div>
+        <p class="muted" data-i18n="ap.p1">Every training provider applies through the same online form, attaching their programme outline, costing and track record. From that moment the proposal has a number, a stage and a visible status, for the provider and for the secretariat.</p>
+        <ul class="checklist">
+          <li><svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><circle cx="10" cy="10" r="8.4" stroke="#2563EB" stroke-width="1.7"/><path d="M6.5 10.4l2.3 2.3 4.7-5" stroke="#2563EB" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg><span data-i18n="ap.c1"><b>One form, one standard.</b> Programme outline, target learners, locality, costing and provider credentials.</span></li>
+          <li><svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><circle cx="10" cy="10" r="8.4" stroke="#2563EB" stroke-width="1.7"/><path d="M6.5 10.4l2.3 2.3 4.7-5" stroke="#2563EB" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg><span data-i18n="ap.c2"><b>Screening by the PMO.</b> Completeness and eligibility checked within 5 working days.</span></li>
+          <li><svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><circle cx="10" cy="10" r="8.4" stroke="#2563EB" stroke-width="1.7"/><path d="M6.5 10.4l2.3 2.3 4.7-5" stroke="#2563EB" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg><span data-i18n="ap.c3"><b>Panel evaluation stays human.</b> The SBF panel decides; the platform just gives them tidy papers and records the outcome.</span></li>
+          <li><svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><circle cx="10" cy="10" r="8.4" stroke="#2563EB" stroke-width="1.7"/><path d="M6.5 10.4l2.3 2.3 4.7-5" stroke="#2563EB" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg><span data-i18n="ap.c4"><b>Every applicant gets an answer.</b> Approved, revise and resubmit, or declined with a reason.</span></li>
+        </ul>
+      </div>
+      <div class="panel-card">
+        <div class="panel-bar"><span class="dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="t">bizfund2 · provider applications</span></div>
+        <div class="panel-body">
+          <div class="steps-line" aria-label="Application stages">
+            <span class="st done" data-i18n="ap.st1">Submitted</span><span class="arr">→</span>
+            <span class="st done" data-i18n="ap.st2">Screening</span><span class="arr">→</span>
+            <span class="st now" data-i18n="ap.st3">Panel evaluation</span><span class="arr">→</span>
+            <span class="st" data-i18n="ap.st4">Approved</span>
+          </div>
+          <div class="pipe">
+            <div class="pipe-row">
+              <div><div class="p-name">Digital Marketing for Rural SMEs</div><div class="p-sub">APP-2026-041 · Serumpun Skills · Kuching</div></div>
+              <span class="chip ok"><svg viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2 6.5L4.8 9 10 3.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><span data-i18n="ap.a1">Approved</span></span>
+            </div>
+            <div class="pipe-row">
+              <div><div class="p-name">Food Safety &amp; Halal Readiness</div><div class="p-sub">APP-2026-057 · Borneo Upskill · Sibu</div></div>
+              <span class="chip info"><svg viewBox="0 0 12 12" fill="none" aria-hidden="true"><circle cx="6" cy="6" r="4.6" stroke="currentColor" stroke-width="1.6"/><path d="M6 3.6v2.8l1.8 1.2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg><span data-i18n="ap.a2">Panel · 12 Aug</span></span>
+            </div>
+            <div class="pipe-row">
+              <div><div class="p-name">Basic Bookkeeping for Micro Business</div><div class="p-sub">APP-2026-063 · Miri LearnWorks · Miri</div></div>
+              <span class="chip watch"><svg viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M6 1.5v5.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><circle cx="6" cy="10" r="1.1" fill="currentColor"/></svg><span data-i18n="ap.a3">Revise costing</span></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ STAGE 2 · DASHBOARD ============ -->
+<section class="sec sec-tint-green" id="dashboard">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="sec-tag tag-green" data-i18n="db.tag">STAGE 2 · EXECUTION</span>
+      <h2 data-i18n="db.title">The training dashboard: who, where, how many, certified</h2>
+      <p data-i18n="db.lede">Providers key in each session's attendance. The dashboard turns it into the picture SBF has never had in real time: locality coverage, trainee numbers and certificates, per division and per programme.</p>
+    </div>
+
+    <div class="dash">
+      <div class="dash-top">
+        <div>
+          <h3 data-i18n="db.head">BizFund2 Execution Dashboard</h3>
+          <span class="mono" data-i18n="db.note">DEMO DATA · 2026 PROGRAMME YEAR</span>
+        </div>
+        <div class="dash-filters">
+          <label style="display:none" for="f-div">Division</label>
+          <select id="f-div" aria-label="Filter by division"><option data-i18n="db.f1">All divisions</option><option>Kuching</option><option>Miri</option><option>Sibu</option><option>Bintulu</option></select>
+          <select aria-label="Filter by quarter"><option data-i18n="db.f2">Q3 2026</option><option>Q2 2026</option><option>Q1 2026</option></select>
+          <button class="dash-add" type="button"><svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M6 1v10M1 6h10" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg><span data-i18n="db.add">Key in session data</span></button>
+        </div>
+      </div>
+      <div class="dash-body">
+        <div class="tiles">
+          <div class="tile hl"><div class="lab" data-i18n="db.k1">Trainees enrolled</div><div class="val"><span class="count" data-to="4820">0</span></div><div class="sub up" data-i18n="db.k1s">+312 this month</div></div>
+          <div class="tile"><div class="lab" data-i18n="db.k2">Certificates issued</div><div class="val"><span class="count" data-to="3905">0</span></div><div class="sub" data-i18n="db.k2s">81% of enrolled</div></div>
+          <div class="tile"><div class="lab" data-i18n="db.k3">Programmes running</div><div class="val"><span class="count" data-to="74">0</span></div><div class="sub" data-i18n="db.k3s">of 96 approved</div></div>
+          <div class="tile"><div class="lab" data-i18n="db.k4">Active providers</div><div class="val"><span class="count" data-to="38">0</span></div><div class="sub" data-i18n="db.k4s">across 12 divisions</div></div>
+        </div>
+        <div class="dash-grid">
+          <div class="chart">
+            <h4 data-i18n="db.c1h">Trainees by division</h4>
+            <p class="chart-sub" data-i18n="db.c1s">All 12 divisions of Sarawak active</p>
+            <div class="hbars" id="divBars"></div>
+          </div>
+          <div style="display:grid;gap:1.1rem">
+            <div class="chart">
+              <h4 data-i18n="db.c2h">Certificates against target</h4>
+              <p class="chart-sub" data-i18n="db.c2s">2026 target: 4,800 certified learners</p>
+              <div class="cert-line"><span data-i18n="db.c2l">Issued to date</span><b>3,905 / 4,800</b></div>
+              <div class="cert-track"><div class="cert-fill" data-w="81" data-tip="3,905 certificates · 81% of the 2026 target"></div></div>
+            </div>
+            <div class="chart">
+              <h4 data-i18n="db.c3h">New trainees per month</h4>
+              <p class="chart-sub" data-i18n="db.c3s">Keyed in by providers, per session</p>
+              <div class="cols" id="monthCols" role="img" aria-label="Bar chart: monthly enrolment rises from 120 in January to a peak of 560 in September"></div>
+              <div class="cols-x" id="monthLabels" aria-hidden="true"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ STAGE 3 · PAYMENT ============ -->
+<section class="sec sec-tint-amber" id="payment">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="sec-tag tag-amber" data-i18n="py.tag">STAGE 3 · PAYMENT</span>
+      <h2 data-i18n="py.title">A payment flow providers can actually see</h2>
+    </div>
+    <div class="split rev">
+      <div class="panel-card">
+        <div class="panel-bar"><span class="dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="t">bizfund2 · claims &amp; payments</span></div>
+        <div class="panel-body" style="overflow-x:auto">
+          <div class="steps-line" aria-label="Claim stages">
+            <span class="st done" data-i18n="py.st1">Claim submitted</span><span class="arr">→</span>
+            <span class="st done" data-i18n="py.st2">PMO verifies</span><span class="arr">→</span>
+            <span class="st now" data-i18n="py.st3">SBF approves</span><span class="arr">→</span>
+            <span class="st" data-i18n="py.st4">Paid</span>
+          </div>
+          <table class="pay-table">
+            <thead><tr><th data-i18n="py.th1">Claim</th><th data-i18n="py.th2">Amount</th><th data-i18n="py.th3">Days in</th><th data-i18n="py.th4">Status</th></tr></thead>
+            <tbody>
+              <tr><td>CLM-2026-118 · Serumpun Skills</td><td class="mono">RM 84,000</td><td class="mono">8</td><td><span class="chip ok"><svg viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2 6.5L4.8 9 10 3.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><span data-i18n="py.a1">Paid</span></span></td></tr>
+              <tr><td>CLM-2026-121 · Borneo Upskill</td><td class="mono">RM 61,500</td><td class="mono">4</td><td><span class="chip info"><svg viewBox="0 0 12 12" fill="none" aria-hidden="true"><circle cx="6" cy="6" r="4.6" stroke="currentColor" stroke-width="1.6"/><path d="M6 3.6v2.8l1.8 1.2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg><span data-i18n="py.a2">In verification</span></span></td></tr>
+              <tr><td>CLM-2026-124 · Miri LearnWorks</td><td class="mono">RM 47,200</td><td class="mono">2</td><td><span class="chip watch"><svg viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M6 1.5v5.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><circle cx="6" cy="10" r="1.1" fill="currentColor"/></svg><span data-i18n="py.a3">Evidence requested</span></span></td></tr>
+            </tbody>
+          </table>
+          <div class="pay-promise"><svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><circle cx="10" cy="10" r="8.4" stroke="currentColor" stroke-width="1.7"/><path d="M10 5.5V10l3 2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><span data-i18n="py.promise">Commitment: verified claims paid within 14 days.</span></div>
+        </div>
+      </div>
+      <div>
+        <p class="muted" data-i18n="py.p1">When a programme's sessions are complete in the dashboard, the claim almost writes itself: attendance, certificates and photos are already attached as evidence. The provider submits, then watches the same four steps the PMO watches.</p>
+        <ul class="checklist">
+          <li><svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><circle cx="10" cy="10" r="8.4" stroke="#B45309" stroke-width="1.7"/><path d="M6.5 10.4l2.3 2.3 4.7-5" stroke="#B45309" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg><span data-i18n="py.c1"><b>Evidence travels with the claim.</b> No more chasing attendance sheets after the fact.</span></li>
+          <li><svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><circle cx="10" cy="10" r="8.4" stroke="#B45309" stroke-width="1.7"/><path d="M6.5 10.4l2.3 2.3 4.7-5" stroke="#B45309" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg><span data-i18n="py.c2"><b>One clock, visible to all.</b> Every claim shows its age; nothing sits quietly in a drawer.</span></li>
+          <li><svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><circle cx="10" cy="10" r="8.4" stroke="#B45309" stroke-width="1.7"/><path d="M6.5 10.4l2.3 2.3 4.7-5" stroke="#B45309" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg><span data-i18n="py.c3"><b>SBF keeps the final say.</b> Approval stays with the secretariat and committee; the platform just makes it fast.</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ STAKEHOLDERS ============ -->
+<section class="sec" id="stakeholders">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="sec-tag tag-navy" data-i18n="sk.tag">WHO GETS WHAT</span>
+      <h2 data-i18n="sk.title">Three stakeholders, one shared picture</h2>
+    </div>
+    <div class="stake-grid">
+      <div class="stake-card k1">
+        <span class="who" data-i18n="sk.w1">Client · SBF</span>
+        <h3 data-i18n="sk.t1">Answers without asking</h3>
+        <ul>
+          <li><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M6.4 12L2.4 8l1.4-1.4 2.6 2.6 6-6L13.8 4.6z"/></svg><span data-i18n="sk.c1a">Live view of every division, programme and ringgit</span></li>
+          <li><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M6.4 12L2.4 8l1.4-1.4 2.6 2.6 6-6L13.8 4.6z"/></svg><span data-i18n="sk.c1b">Committee papers prepared from real data, not memory</span></li>
+          <li><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M6.4 12L2.4 8l1.4-1.4 2.6 2.6 6-6L13.8 4.6z"/></svg><span data-i18n="sk.c1c">A defensible record for every decision and payment</span></li>
+        </ul>
+      </div>
+      <div class="stake-card k2">
+        <span class="who" data-i18n="sk.w2">Executor · Training providers</span>
+        <h3 data-i18n="sk.t2">Less admin, faster money</h3>
+        <ul>
+          <li><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M6.4 12L2.4 8l1.4-1.4 2.6 2.6 6-6L13.8 4.6z"/></svg><span data-i18n="sk.c2a">Apply once, track status, no chasing the secretariat</span></li>
+          <li><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M6.4 12L2.4 8l1.4-1.4 2.6 2.6 6-6L13.8 4.6z"/></svg><span data-i18n="sk.c2b">Key in attendance once; it becomes report and claim evidence</span></li>
+          <li><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M6.4 12L2.4 8l1.4-1.4 2.6 2.6 6-6L13.8 4.6z"/></svg><span data-i18n="sk.c2c">Payment on a visible 14-day clock after verification</span></li>
+        </ul>
+      </div>
+      <div class="stake-card k3">
+        <span class="who" data-i18n="sk.w3">Learners · Trainees</span>
+        <h3 data-i18n="sk.t3">Training that shows up on paper</h3>
+        <ul>
+          <li><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M6.4 12L2.4 8l1.4-1.4 2.6 2.6 6-6L13.8 4.6z"/></svg><span data-i18n="sk.c3a">Simple registration through their chosen provider</span></li>
+          <li><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M6.4 12L2.4 8l1.4-1.4 2.6 2.6 6-6L13.8 4.6z"/></svg><span data-i18n="sk.c3b">Attendance recorded properly, so completion counts</span></li>
+          <li><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M6.4 12L2.4 8l1.4-1.4 2.6 2.6 6-6L13.8 4.6z"/></svg><span data-i18n="sk.c3c">A certificate on record they can show an employer or bank</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PMO STRIP ============ -->
+<section class="pmo-strip" id="pmo">
+  <div class="wrap">
+    <div>
+      <h2 data-i18n="pmo.title">The PMO behind it: KOBIS Berhad with the SBF secretariat</h2>
+      <p data-i18n="pmo.p">The platform does not run the programme; people do. KOBIS Berhad staffs the PMO together with the SBF secretariat: screening proposals, visiting training sites, verifying claims and preparing committee papers. The dashboard is simply where our work becomes visible to everyone.</p>
+    </div>
+    <div class="stats">
+      <div class="stat"><div class="n"><span class="count" data-to="96">0</span></div><div class="l" data-i18n="pmo.s1">programmes approved</div></div>
+      <div class="stat"><div class="n"><span class="count" data-to="12">0</span></div><div class="l" data-i18n="pmo.s2">divisions covered</div></div>
+      <div class="stat"><div class="n"><span class="count" data-to="4820">0</span></div><div class="l" data-i18n="pmo.s3">trainees enrolled</div></div>
+      <div class="stat"><div class="n"><span class="count" data-to="14">0</span></div><div class="l" data-i18n="pmo.s4">day payment commitment</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- TEMP: KOBIS Berhad placeholder credit ticker — replace wording with client's chosen text once payment is received, then remove KOBIS branding ticker -->
+<div class="ticker-bar ticker-static" aria-hidden="true">
+  <div class="ticker-track" id="tickerTrack2"></div>
+</div>
+
+<!-- ============ CTA ============ -->
+<section class="cta-banner" id="contact">
+  <h2 data-i18n="cta.title">Ready to run BizFund2 the practical way?</h2>
+  <p data-i18n="cta.p">Request a walkthrough for the SBF committee, or register interest as a training provider. The demo above is exactly what your team would use.</p>
+  <div class="btns">
+    <a class="btn btn-blue" href="mailto:hello@kobisberhad.com?subject=BizFund2%20PMO%20walkthrough" data-i18n="cta.b1">Request a walkthrough</a>
+    <a class="btn btn-line" href="mailto:hello@kobisberhad.com?subject=Training%20provider%20interest" data-i18n="cta.b2">Register as a provider</a>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <svg class="brand-mark" viewBox="0 0 40 40" fill="none" aria-hidden="true" width="40" height="40">
+        <rect x="1.5" y="1.5" width="37" height="37" rx="10" fill="#fff" fill-opacity=".08" stroke="#5B8DF0" stroke-width="1.5"/>
+        <path d="M12 26V15l8-4 8 4v11" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M16 26v-6h8v6" stroke="#5B8DF0" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      <div>
+        <h3>SBF BizFund2 · Hybrid Digital PMO</h3>
+        <p data-i18n="footer.tagline">Run by KOBIS Berhad with the SBF secretariat: digital where it solves real problems, human everywhere else.</p>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4 data-i18n="footer.h1">The platform</h4>
+      <a href="#why" data-i18n="footer.l1">Why hybrid</a>
+      <a href="#apply" data-i18n="footer.l2">Provider applications</a>
+      <a href="#dashboard" data-i18n="footer.l3">Execution dashboard</a>
+      <a href="#payment" data-i18n="footer.l4">Payment flow</a>
+    </div>
+    <div class="footer-col">
+      <h4 data-i18n="footer.h2">Contact</h4>
+      <p>KOBIS Berhad</p>
+      <p data-i18n="footer.c1">Kuching, Sarawak, Malaysia</p>
+      <a href="https://www.kobisberhad.com" target="_blank" rel="noopener">www.kobisberhad.com</a>
+    </div>
+  </div>
+  <div class="footer-copy">
+    <p data-i18n="footer.rights">© 2026 KOBIS Berhad. All rights reserved. Prototype prepared for the Sarawak Business Federation with illustrative demonstration data.</p>
+  </div>
+  <div class="kobis-bar">
+    <p>This Digital Experience is Part of the <a class="kobis-link" href="https://www.kobisberhad.com" target="_blank" rel="noopener">KOBIS Berhad</a> Innovation Ecosystem</p>
+  </div>
+</footer>
+
+<div id="tip" role="presentation"></div>
+
+<script>
+(function(){
+"use strict";
+var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+/* ---------- ticker ---------- */
+var sparkle = '<svg class="ticker-icon" viewBox="0 0 14 14" fill="currentColor" aria-hidden="true"><path d="M7 0l1.6 4.2L13 5.8 8.6 7.4 7 11.6 5.4 7.4 1 5.8l4.4-1.6z"/><circle cx="12" cy="12" r="1.3"/></svg>';
+function fillTicker(id){
+  var t = document.getElementById(id); if(!t) return;
+  var item = '<span class="ticker-item">'+sparkle+'This website is built by KOBIS Berhad</span>';
+  var half = item.repeat(8);
+  t.innerHTML = half + half;
+}
+fillTicker("tickerTrack1"); fillTicker("tickerTrack2");
+
+/* ---------- i18n ---------- */
+var I18N = {
+bm:{
+"a11y.skip":"Langkau ke kandungan",
+"nav.by":"PMO Digital Hibrid","nav.why":"Kenapa hibrid","nav.apply":"Mohon","nav.dash":"Papan Pemuka","nav.pay":"Bayaran","nav.stake":"Pemegang Taruh","nav.cta":"Mohon sebagai penyedia",
+"hero.badge":"SBF × KOBIS Berhad · Pejabat Pengurusan Program",
+"hero.title":"BizFund2, dijalankan secara praktikal: <em>digital hanya di tempat yang penting.</em>",
+"hero.sub":"Sebahagian besar BizFund2 kekal dijalankan manusia: jurulatih di bilik latihan, pelatih di tempat kerja, jawatankuasa membuat keputusan. PMO menambah alat digital pada tiga titik di mana kertas benar-benar gagal, supaya permohonan bergerak, latihan kelihatan dan penyedia dibayar tepat pada masa.",
+"hero.cta1":"Lihat papan pemuka","hero.cta2":"Cara penyedia memohon",
+"hero.p1":"Penyedia mohon dalam talian","hero.p2":"Latihan dijejak pada satu papan pemuka","hero.p3":"Bayaran mengalir hingga selesai",
+"why.tag":"MASALAH SEBENAR","why.title":"Tiga titik di mana program dana biasanya gagal",
+"why.lede":"Kami tidak mendigitalkan segala-galanya. Kami membaiki tiga kesesakan yang merugikan masa, kepercayaan dan wang SBF, dan menyerahkan yang lain kepada manusia yang melakukannya dengan baik.",
+"why.pr1":"Cadangan tiba sebagai kertas dan e-mel","why.pr1p":"Permohonan penyedia terperap dalam peti masuk, lampiran hilang, dan tiada siapa tahu di mana sesuatu cadangan berada atau kenapa ia tersekat.",
+"why.fx1":"Penyelesaian digital: satu borang permohonan, satu saluran, status jelas untuk setiap cadangan.",
+"why.pr2":"Tiada siapa nampak latihan semasa ia berlangsung","why.pr2p":"Kehadiran tersimpan dalam borang fotokopi. Angka tiba berbulan lewat, jadi SBF melaporkan berita lama dan masalah muncul selepas wang dibelanjakan.",
+"why.fx2":"Penyelesaian digital: satu papan pemuka untuk lokaliti, bilangan pelatih dan sijil, dikemas kini setiap sesi.",
+"why.pr3":"Penyedia menunggu terlalu lama untuk dibayar","why.pr3p":"Tuntutan berulang-alik antara pejabat kerana bukti tidak lengkap. Jurulatih yang baik berhenti memohon kerana bayaran terasa seperti loteri.",
+"why.fx3":"Penyelesaian digital: tuntutan dengan bukti dilampirkan, aliran pengesahan dijejak, bayaran dalam 14 hari.",
+"why.note":"<b>Ini PMO hibrid.</b> Keputusan jawatankuasa, lawatan tapak, bimbingan dan hubungan kekal manusia, dikendalikan KOBIS Berhad bersama sekretariat SBF. Platform hanya membawa tiga aliran di atas, sebab itu ia cukup mudah digunakan dari hari pertama.",
+"jr.tag":"CARA IA BERFUNGSI","jr.title":"Satu program, tiga peringkat, tiga warna",
+"jr.s1":"Mohon","jr.s1p":"Penyedia latihan menghantar cadangan dalam talian dan mengikuti statusnya melalui penilaian hingga kelulusan.","jr.s1a":"Lihat aliran permohonan",
+"jr.s2":"Laksana","jr.s2p":"Program yang diluluskan berjalan di lapangan. Kehadiran dan sijil setiap sesi dimasukkan ke papan pemuka.","jr.s2a":"Lihat papan pemuka",
+"jr.s3":"Terima bayaran","jr.s3p":"Sesi yang selesai menjadi tuntutan dengan bukti dilampirkan, disahkan PMO dan dibayar mengikut jam yang dijanjikan.","jr.s3a":"Lihat aliran bayaran",
+"ap.tag":"PERINGKAT 1 · PERMOHONAN","ap.title":"Cadangan penyedia, keluar dari peti masuk ke dalam saluran",
+"ap.p1":"Setiap penyedia latihan memohon melalui borang dalam talian yang sama, melampirkan rangka program, kos dan rekod prestasi. Dari saat itu cadangan ada nombor, peringkat dan status yang jelas, untuk penyedia dan sekretariat.",
+"ap.c1":"<b>Satu borang, satu piawaian.</b> Rangka program, sasaran pelatih, lokaliti, kos dan kelayakan penyedia.",
+"ap.c2":"<b>Saringan oleh PMO.</b> Kelengkapan dan kelayakan disemak dalam 5 hari bekerja.",
+"ap.c3":"<b>Penilaian panel kekal manusia.</b> Panel SBF yang memutuskan; platform hanya menyediakan kertas kemas dan merekod keputusan.",
+"ap.c4":"<b>Setiap pemohon dapat jawapan.</b> Lulus, pinda dan hantar semula, atau ditolak dengan sebab.",
+"ap.st1":"Dihantar","ap.st2":"Saringan","ap.st3":"Penilaian panel","ap.st4":"Diluluskan",
+"ap.a1":"Diluluskan","ap.a2":"Panel · 12 Ogo","ap.a3":"Pinda kos",
+"db.tag":"PERINGKAT 2 · PELAKSANAAN","db.title":"Papan pemuka latihan: siapa, di mana, berapa, bersijil",
+"db.lede":"Penyedia memasukkan kehadiran setiap sesi. Papan pemuka mengubahnya menjadi gambaran yang SBF tidak pernah ada secara masa nyata: liputan lokaliti, bilangan pelatih dan sijil, mengikut bahagian dan program.",
+"db.head":"Papan Pemuka Pelaksanaan BizFund2","db.note":"DATA DEMO · TAHUN PROGRAM 2026",
+"db.f1":"Semua bahagian","db.f2":"S3 2026","db.add":"Masukkan data sesi",
+"db.k1":"Pelatih mendaftar","db.k1s":"+312 bulan ini","db.k2":"Sijil dikeluarkan","db.k2s":"81% daripada pendaftaran",
+"db.k3":"Program berjalan","db.k3s":"daripada 96 diluluskan","db.k4":"Penyedia aktif","db.k4s":"merentas 12 bahagian",
+"db.c1h":"Pelatih mengikut bahagian","db.c1s":"Kesemua 12 bahagian Sarawak aktif",
+"db.c2h":"Sijil berbanding sasaran","db.c2s":"Sasaran 2026: 4,800 pelatih bersijil","db.c2l":"Dikeluarkan setakat ini",
+"db.c3h":"Pelatih baharu setiap bulan","db.c3s":"Dimasukkan oleh penyedia, setiap sesi",
+"py.tag":"PERINGKAT 3 · BAYARAN","py.title":"Aliran bayaran yang benar-benar boleh dilihat penyedia",
+"py.p1":"Apabila sesi sesebuah program selesai dalam papan pemuka, tuntutan hampir menulis dirinya sendiri: kehadiran, sijil dan gambar sudah dilampirkan sebagai bukti. Penyedia menghantar, kemudian memerhati empat langkah yang sama seperti PMO.",
+"py.c1":"<b>Bukti bergerak bersama tuntutan.</b> Tiada lagi mengejar borang kehadiran selepas itu.",
+"py.c2":"<b>Satu jam, dilihat semua.</b> Setiap tuntutan menunjukkan usianya; tiada yang terperap senyap dalam laci.",
+"py.c3":"<b>SBF pegang kata putus.</b> Kelulusan kekal dengan sekretariat dan jawatankuasa; platform hanya mempercepatkannya.",
+"py.st1":"Tuntutan dihantar","py.st2":"PMO mengesah","py.st3":"SBF meluluskan","py.st4":"Dibayar",
+"py.th1":"Tuntutan","py.th2":"Jumlah","py.th3":"Hari","py.th4":"Status",
+"py.a1":"Dibayar","py.a2":"Dalam pengesahan","py.a3":"Bukti diminta",
+"py.promise":"Komitmen: tuntutan yang disahkan dibayar dalam 14 hari.",
+"sk.tag":"SIAPA DAPAT APA","sk.title":"Tiga pemegang taruh, satu gambaran dikongsi",
+"sk.w1":"Klien · SBF","sk.t1":"Jawapan tanpa perlu bertanya",
+"sk.c1a":"Paparan langsung setiap bahagian, program dan ringgit","sk.c1b":"Kertas jawatankuasa disediakan daripada data sebenar, bukan ingatan","sk.c1c":"Rekod yang boleh dipertahankan untuk setiap keputusan dan bayaran",
+"sk.w2":"Pelaksana · Penyedia latihan","sk.t2":"Kurang kerja pentadbiran, wang lebih cepat",
+"sk.c2a":"Mohon sekali, jejak status, tak perlu mengejar sekretariat","sk.c2b":"Masukkan kehadiran sekali; ia menjadi laporan dan bukti tuntutan","sk.c2c":"Bayaran atas jam 14 hari yang jelas selepas pengesahan",
+"sk.w3":"Pelatih · Peserta","sk.t3":"Latihan yang terbukti atas kertas",
+"sk.c3a":"Pendaftaran mudah melalui penyedia pilihan mereka","sk.c3b":"Kehadiran direkod dengan betul, jadi tamat latihan diiktiraf","sk.c3c":"Sijil dalam rekod yang boleh ditunjukkan kepada majikan atau bank",
+"pmo.title":"PMO di sebaliknya: KOBIS Berhad bersama sekretariat SBF",
+"pmo.p":"Platform tidak menjalankan program; manusia yang menjalankannya. KOBIS Berhad menganggotai PMO bersama sekretariat SBF: menyaring cadangan, melawat tapak latihan, mengesahkan tuntutan dan menyediakan kertas jawatankuasa. Papan pemuka hanyalah tempat kerja kami kelihatan kepada semua.",
+"pmo.s1":"program diluluskan","pmo.s2":"bahagian diliputi","pmo.s3":"pelatih mendaftar","pmo.s4":"hari komitmen bayaran",
+"cta.title":"Sedia menjalankan BizFund2 secara praktikal?",
+"cta.p":"Mohon sesi demonstrasi untuk jawatankuasa SBF, atau daftar minat sebagai penyedia latihan. Demo di atas ialah apa yang pasukan anda akan gunakan.",
+"cta.b1":"Mohon sesi demonstrasi","cta.b2":"Daftar sebagai penyedia",
+"footer.tagline":"Dikendalikan KOBIS Berhad bersama sekretariat SBF: digital di tempat yang menyelesaikan masalah sebenar, manusia di tempat lain.",
+"footer.h1":"Platform","footer.l1":"Kenapa hibrid","footer.l2":"Permohonan penyedia","footer.l3":"Papan pemuka pelaksanaan","footer.l4":"Aliran bayaran",
+"footer.h2":"Hubungi","footer.c1":"Kuching, Sarawak, Malaysia",
+"footer.rights":"© 2026 KOBIS Berhad. Hak cipta terpelihara. Prototaip disediakan untuk Sarawak Business Federation dengan data demonstrasi ilustratif."
+},
+zh:{
+"a11y.skip":"跳至内容",
+"nav.by":"混合数字 PMO","nav.why":"为何混合","nav.apply":"申请","nav.dash":"仪表盘","nav.pay":"付款","nav.stake":"相关方","nav.cta":"以机构身份申请",
+"hero.badge":"SBF × KOBIS Berhad · 项目管理办公室",
+"hero.title":"BizFund2，务实地运作：<em>只在关键处数字化。</em>",
+"hero.sub":"BizFund2 的大部分仍由人来完成：培训师在课室，学员在岗位，委员会做决策。PMO 只在纸张真正失灵的三个环节加上数字工具，让申请流动、培训可见、机构准时收款。",
+"hero.cta1":"查看仪表盘","hero.cta2":"机构如何申请",
+"hero.p1":"机构在线申请","hero.p2":"培训在一个仪表盘上跟踪","hero.p3":"付款一路走到完成",
+"why.tag":"真实的问题","why.title":"资助项目通常在三个环节出问题",
+"why.lede":"我们不把一切数字化。我们只修复让 SBF 损失时间、信任与资金的三个瓶颈，其余交给擅长的人来做。",
+"why.pr1":"提案以纸张和邮件送达","why.pr1p":"机构申请躺在收件箱里，附件丢失，没人说得清一份提案到了哪一步、为何卡住。",
+"why.fx1":"数字方案：一份申请表、一条流水线，每份提案状态可见。",
+"why.pr2":"培训进行时无人看得见","why.pr2p":"出席记录躺在复印表格里。数字几个月后才到，SBF 汇报的是旧闻，问题在钱花完后才浮现。",
+"why.fx2":"数字方案：一个仪表盘呈现地区、学员人数与证书，每场课后更新。",
+"why.pr3":"机构等待付款太久","why.pr3p":"报销因证据缺失在各办公室之间来回。优秀的培训机构不再申请，因为收款像抽奖。",
+"why.fx3":"数字方案：报销随附证据、核验流程全程跟踪、14 天内付款。",
+"why.note":"<b>这是混合型 PMO。</b>委员会决策、实地走访、辅导与关系维系仍由人来做，由 KOBIS Berhad 与 SBF 秘书处共同执行。平台只承载上述三条流程，所以第一天就能上手。",
+"jr.tag":"运作方式","jr.title":"一个项目、三个阶段、三种颜色",
+"jr.s1":"申请","jr.s1p":"培训机构在线提交提案，从评审到批准全程跟踪状态。","jr.s1a":"查看申请流程",
+"jr.s2":"执行","jr.s2p":"获批项目落地开课。每场课的出席与证书录入仪表盘。","jr.s2a":"查看仪表盘",
+"jr.s3":"收款","jr.s3p":"完成的课程自动带证据生成报销，由 PMO 核验并按承诺时限付款。","jr.s3a":"查看付款流程",
+"ap.tag":"阶段 1 · 申请","ap.title":"机构提案：走出收件箱，进入流水线",
+"ap.p1":"每家培训机构通过同一份在线表格申请，附上课程大纲、费用与过往记录。从那一刻起，提案就有编号、有阶段、有状态，机构和秘书处都看得见。",
+"ap.c1":"<b>一份表格，一个标准。</b>课程大纲、目标学员、地区、费用与机构资质。",
+"ap.c2":"<b>PMO 初筛。</b>完整性与资格在 5 个工作日内核查。",
+"ap.c3":"<b>评审仍由人来做。</b>SBF 评审组决策；平台只负责整理材料、记录结果。",
+"ap.c4":"<b>每位申请者都有答复。</b>批准、修改重交，或说明理由的婉拒。",
+"ap.st1":"已提交","ap.st2":"初筛","ap.st3":"评审中","ap.st4":"已批准",
+"ap.a1":"已批准","ap.a2":"评审 · 8月12日","ap.a3":"修改费用",
+"db.tag":"阶段 2 · 执行","db.title":"培训仪表盘：谁、在哪、多少人、多少证书",
+"db.lede":"机构逐场录入出席记录。仪表盘把它变成 SBF 从未实时拥有过的全景：地区覆盖、学员人数与证书，按省份、按项目呈现。",
+"db.head":"BizFund2 执行仪表盘","db.note":"演示数据 · 2026 项目年度",
+"db.f1":"全部省份","db.f2":"2026 第三季","db.add":"录入课程数据",
+"db.k1":"已报名学员","db.k1s":"本月 +312","db.k2":"已发证书","db.k2s":"占报名 81%",
+"db.k3":"进行中项目","db.k3s":"共批准 96 个","db.k4":"活跃机构","db.k4s":"覆盖 12 个省份",
+"db.c1h":"各省份学员数","db.c1s":"砂拉越 12 个省份全部活跃",
+"db.c2h":"证书对照目标","db.c2s":"2026 目标：4,800 名持证学员","db.c2l":"迄今已发",
+"db.c3h":"每月新增学员","db.c3s":"由机构逐场录入",
+"py.tag":"阶段 3 · 付款","py.title":"机构真正看得见的付款流程",
+"py.p1":"当项目课程在仪表盘中全部完成，报销几乎自动成形：出席、证书与照片已作为证据附上。机构提交后，看到的正是 PMO 看到的同样四步。",
+"py.c1":"<b>证据随报销同行。</b>不再事后追讨出席表。",
+"py.c2":"<b>一个时钟，人人可见。</b>每笔报销显示天数，没有什么能安静地躺在抽屉里。",
+"py.c3":"<b>最终决定权在 SBF。</b>批准仍属秘书处与委员会；平台只是让它更快。",
+"py.st1":"报销已提交","py.st2":"PMO 核验","py.st3":"SBF 批准","py.st4":"已付款",
+"py.th1":"报销","py.th2":"金额","py.th3":"天数","py.th4":"状态",
+"py.a1":"已付款","py.a2":"核验中","py.a3":"待补证据",
+"py.promise":"承诺：核验通过的报销 14 天内付款。",
+"sk.tag":"各得其所","sk.title":"三方相关者，一个共享全景",
+"sk.w1":"客户 · SBF","sk.t1":"不用追问就有答案",
+"sk.c1a":"实时看到每个省份、项目与每一令吉","sk.c1b":"委员会材料出自真实数据，而非记忆","sk.c1c":"每项决定与付款都有可查证的记录",
+"sk.w2":"执行方 · 培训机构","sk.t2":"更少行政，更快回款",
+"sk.c2a":"申请一次、跟踪状态，无需追问秘书处","sk.c2b":"出席录一次，自动成为报告与报销证据","sk.c2c":"核验后按可见的 14 天时钟付款",
+"sk.w3":"学员 · 受训者","sk.t3":"写得进履历的培训",
+"sk.c3a":"通过所选机构轻松报名","sk.c3b":"出席被规范记录，结业才算数","sk.c3c":"证书在册，可出示给雇主或银行",
+"pmo.title":"背后的 PMO：KOBIS Berhad 携手 SBF 秘书处",
+"pmo.p":"平台不运营项目，人才是。KOBIS Berhad 与 SBF 秘书处共同组成 PMO：筛选提案、走访培训现场、核验报销、准备委员会材料。仪表盘只是让我们的工作对所有人可见的地方。",
+"pmo.s1":"个项目获批","pmo.s2":"个省份覆盖","pmo.s3":"名学员报名","pmo.s4":"天付款承诺",
+"cta.title":"准备好务实地运作 BizFund2 了吗？",
+"cta.p":"为 SBF 委员会预约一次演示讲解，或以培训机构身份登记意向。上面的演示就是您的团队将来使用的界面。",
+"cta.b1":"预约演示讲解","cta.b2":"登记为培训机构",
+"footer.tagline":"由 KOBIS Berhad 与 SBF 秘书处共同运营：在解决真问题的地方数字化，其余交给人。",
+"footer.h1":"平台","footer.l1":"为何混合","footer.l2":"机构申请","footer.l3":"执行仪表盘","footer.l4":"付款流程",
+"footer.h2":"联系","footer.c1":"马来西亚砂拉越古晋",
+"footer.rights":"© 2026 KOBIS Berhad 版权所有。本原型为砂拉越商业联合会编制，使用示意性演示数据。"
+},
+ib:{
+"a11y.skip":"Lompat ngagai isi",
+"nav.by":"PMO Digital Hibrid","nav.why":"Nama kebuah hibrid","nav.apply":"Mohon","nav.dash":"Dashboard","nav.pay":"Bayar","nav.stake":"Raban","nav.cta":"Mohon nyadi penyedia",
+"hero.badge":"SBF × KOBIS Berhad · Opis Pengelola Program",
+"hero.title":"BizFund2, dipejalai chara praktikal: <em>digital semina ba endur ti beguna.</em>",
+"hero.sub":"Mayuh agi BizFund2 agi dipejalai mensia: pengajar ba bilik, murid ba endur pengawa, jawatankuasa mutus ka penemu. PMO nambah ka alat digital ba tiga endur alai kertas amat enda ulih, ngambika permohon bejalai, latih ulih dipeda lalu penyedia dibayar tepat maya.",
+"hero.cta1":"Peda dashboard","hero.cta2":"Chara penyedia mohon",
+"hero.p1":"Penyedia mohon online","hero.p2":"Latih ditansang ba siti dashboard","hero.p3":"Bayar bejalai nyentuk tembu",
+"why.tag":"PENANGGUL AMAT","why.title":"Tiga endur alai program dana suah enda ulih",
+"why.lede":"Kami ukai ngaga semua utai nyadi digital. Kami semina meruan tiga penanggul ti ngerugi ka jam, pengarap enggau duit SBF, lalu nejuka ti bukai dipejalai mensia ti landik.",
+"why.pr1":"Cadangan datai baka kertas enggau e-mel","why.pr1p":"Permohon penyedia diau dalam peti e-mel, lampiran lenyau, lalu nadai orang nemu dini cadangan lalu nama kebuah iya tesekat.",
+"why.fx1":"Chara digital: siti borang, siti saluran, status terang ke genap cadangan.",
+"why.pr2":"Nadai orang meda latih lebuh iya bejalai","why.pr2p":"Penatai disimpan dalam borang fotokopi. Nombor datai berbulan lambat, nya alai SBF ngelapur berita lama lalu penanggul pegari udah duit abis.",
+"why.fx2":"Chara digital: siti dashboard ke endur, penyampau murid enggau sijil, dikemansang genap sesi.",
+"why.pr3":"Penyedia lama bendar nganti dibayar","why.pr3p":"Tuntut pulai-mansang entara opis laban bukti enda chukup. Pengajar ti manah badu mohon laban bayar baka loteri.",
+"why.fx3":"Chara digital: tuntut enggau bukti dilampir, aliran peresa ditansang, bayar dalam 14 hari.",
+"why.note":"<b>Tu PMO hibrid.</b> Pemutus jawatankuasa, lawat endur, ajar enggau kaul agi dipejalai mensia, dikemudi KOBIS Berhad enggau sekretariat SBF. Platform semina mai tiga aliran di atas, nya kebuah iya mudah dikena ari hari keterubah.",
+"jr.tag":"CHARA IYA BEJALAI","jr.title":"Siti program, tiga tikas, tiga chura",
+"jr.s1":"Mohon","jr.s1p":"Penyedia latih ngirum cadangan online lalu nitih ka status ari penilai nyentuk kelulus.","jr.s1a":"Peda aliran permohon",
+"jr.s2":"Laksana","jr.s2p":"Program ti dikelulus bejalai ba endur. Penatai enggau sijil genap sesi diengkah ka dalam dashboard.","jr.s2a":"Peda dashboard",
+"jr.s3":"Nerima bayar","jr.s3p":"Sesi ti tembu nyadi tuntut enggau bukti, diperesa PMO lalu dibayar nitih ka jam ti disemaya.","jr.s3a":"Peda aliran bayar",
+"ap.tag":"TIKAS 1 · PERMOHON","ap.title":"Cadangan penyedia, pansut ari peti e-mel tama ngagai saluran",
+"ap.p1":"Genap penyedia latih mohon nengah borang online ti sebaka, ngelampir ka rangka program, rega enggau rekod pengawa. Ari nya cadangan bisi nombor, tikas enggau status ti terang, ke penyedia enggau sekretariat.",
+"ap.c1":"<b>Siti borang, siti standard.</b> Rangka program, murid ditagang, endur, rega enggau kelayak penyedia.",
+"ap.c2":"<b>Saring ulih PMO.</b> Pemenuh enggau kelayak diperesa dalam 5 hari begawai.",
+"ap.c3":"<b>Penilai panel agi mensia.</b> Panel SBF ti mutus; platform semina nyedia ka surat kemas lalu ngerekod pemutus.",
+"ap.c4":"<b>Genap pemohon bulih saut.</b> Lulus, pinda lalu ngirum baru, tauka ditulak enggau kebuah.",
+"ap.st1":"Udah dikirum","ap.st2":"Saring","ap.st3":"Penilai panel","ap.st4":"Dikelulus",
+"ap.a1":"Dikelulus","ap.a2":"Panel · 12 Ogo","ap.a3":"Pinda rega",
+"db.tag":"TIKAS 2 · PELAKSANA","db.title":"Dashboard latih: sapa, dini, berapa, besijil",
+"db.lede":"Penyedia ngengkah ka penatai genap sesi. Dashboard ngubah nya nyadi gambar ti SBF nadai kala bisi ba jam nya empu: liput endur, penyampau murid enggau sijil, nitih ka bagi menua enggau program.",
+"db.head":"Dashboard Pelaksana BizFund2","db.note":"DATA DEMO · TAUN PROGRAM 2026",
+"db.f1":"Semua bagi menua","db.f2":"S3 2026","db.add":"Engkah ka data sesi",
+"db.k1":"Murid bedaftar","db.k1s":"+312 bulan tu","db.k2":"Sijil dikeluar","db.k2s":"81% ari bedaftar",
+"db.k3":"Program bejalai","db.k3s":"ari 96 dikelulus","db.k4":"Penyedia aktif","db.k4s":"ngagai 12 bagi menua",
+"db.c1h":"Murid nitih ka bagi menua","db.c1s":"Semua 12 bagi menua Sarawak aktif",
+"db.c2h":"Sijil ditansang enggau tuju","db.c2s":"Tuju 2026: 4,800 murid besijil","db.c2l":"Udah dikeluar",
+"db.c3h":"Murid baru tiap bulan","db.c3s":"Diengkah penyedia, genap sesi",
+"py.tag":"TIKAS 3 · BAYAR","py.title":"Aliran bayar ti amat ulih dipeda penyedia",
+"py.p1":"Lebuh sesi program tembu dalam dashboard, tuntut nyau baka nulis diri empu: penatai, sijil enggau gambar udah dilampir nyadi bukti. Penyedia ngirum, lalu meda empat langkah ti sebaka enggau PMO.",
+"py.c1":"<b>Bukti bejalai enggau tuntut.</b> Nadai agi ngiga borang penatai udah nya.",
+"py.c2":"<b>Siti jam, dipeda semua.</b> Genap tuntut mandang ka umur iya; nadai utai diau senyap dalam laci.",
+"py.c3":"<b>SBF megai pemutus pengabis.</b> Kelulus agi enggau sekretariat enggau jawatankuasa; platform semina ngaga iya jampat.",
+"py.st1":"Tuntut dikirum","py.st2":"PMO meresa","py.st3":"SBF ngelulus","py.st4":"Dibayar",
+"py.th1":"Tuntut","py.th2":"Penyampau","py.th3":"Hari","py.th4":"Status",
+"py.a1":"Dibayar","py.a2":"Benung diperesa","py.a3":"Bukti dipinta",
+"py.promise":"Semaya: tuntut ti udah diperesa dibayar dalam 14 hari.",
+"sk.tag":"SAPA BULIH NAMA","sk.title":"Tiga raban, siti gambar dikongsi",
+"sk.w1":"Klien · SBF","sk.t1":"Saut nadai ibuh nanya",
+"sk.c1a":"Peda idup genap bagi menua, program enggau ringgit","sk.c1b":"Surat jawatankuasa digaga ari data amat, ukai ari ingat","sk.c1c":"Rekod ti ulih dikemata ke genap pemutus enggau bayar",
+"sk.w2":"Pelaksana · Penyedia latih","sk.t2":"Kurang pengawa opis, duit jampat agi",
+"sk.c2a":"Mohon sekali, tansang status, enda ibuh ngiga sekretariat","sk.c2b":"Engkah penatai sekali; iya nyadi laporan enggau bukti tuntut","sk.c2c":"Bayar nitih ka jam 14 hari ti terang udah diperesa",
+"sk.w3":"Murid · Peserta","sk.t3":"Latih ti pegari ba kertas",
+"sk.c3a":"Daftar mudah nengah penyedia dipilih sida","sk.c3b":"Penatai direkod betul, nya alai tembu latih diketan","sk.c3c":"Sijil dalam rekod ti ulih dipandang ka tuan pengawa tauka bank",
+"pmo.title":"PMO di belakang: KOBIS Berhad enggau sekretariat SBF",
+"pmo.p":"Platform enda ngemudi ka program; mensia ti ngemudi. KOBIS Berhad begulai enggau sekretariat SBF nyadi PMO: nyaring cadangan, ngabas endur latih, meresa tuntut lalu nyedia ka surat jawatankuasa. Dashboard semina endur alai pengawa kami ulih dipeda semua.",
+"pmo.s1":"program dikelulus","pmo.s2":"bagi menua diliput","pmo.s3":"murid bedaftar","pmo.s4":"hari semaya bayar",
+"cta.title":"Sedia ngemudi ka BizFund2 chara praktikal?",
+"cta.p":"Minta sesi penerang ke jawatankuasa SBF, tauka daftar minat nyadi penyedia latih. Demo di atas nya utai ti deka dikena bala kita.",
+"cta.b1":"Minta sesi penerang","cta.b2":"Daftar nyadi penyedia",
+"footer.tagline":"Dikemudi KOBIS Berhad enggau sekretariat SBF: digital ba endur ti mutar ka penanggul amat, mensia ba endur bukai.",
+"footer.h1":"Platform","footer.l1":"Nama kebuah hibrid","footer.l2":"Permohon penyedia","footer.l3":"Dashboard pelaksana","footer.l4":"Aliran bayar",
+"footer.h2":"Kaul","footer.c1":"Kuching, Sarawak, Malaysia",
+"footer.rights":"© 2026 KOBIS Berhad. Semua hak disimpan. Prototaip disedia ke Sarawak Business Federation ngena data chunto ke pandang aja."
+}
+};
+
+var JS_STR = {
+en:{trainees:"trainees"},
+bm:{trainees:"pelatih"},
+zh:{trainees:"名学员"},
+ib:{trainees:"murid"}
+};
+
+var lang = "en";
+function applyLanguage(l){
+  lang = (I18N[l] || l === "en") ? l : "en";
+  document.querySelectorAll("[data-i18n]").forEach(function(el){
+    if(el.dataset.orig === undefined) el.dataset.orig = el.innerHTML;
+    var str = lang === "en" ? el.dataset.orig : (I18N[lang][el.dataset.i18n] || el.dataset.orig);
+    if(/[<&]/.test(str)) el.innerHTML = str; else el.textContent = str;
+  });
+  document.documentElement.lang = lang === "zh" ? "zh" : (lang === "bm" ? "ms" : (lang === "ib" ? "iba" : "en"));
+  document.querySelectorAll(".lang-switch button").forEach(function(b){ b.classList.toggle("active", b.dataset.lang === lang); });
+  try{ localStorage.setItem("sbfbizfund2-lang", lang); }catch(e){}
+  renderDivisions();
+}
+document.querySelectorAll(".lang-switch button").forEach(function(b){
+  b.addEventListener("click", function(){ applyLanguage(b.dataset.lang); });
+});
+
+/* ---------- charts ---------- */
+var MONTHS = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+var MONTH_N = [120,210,340,380,420,460,510,540,560,480,450,350];
+var DIVS = [["Kuching",980],["Miri",620],["Sibu",540],["Bintulu",470],["Samarahan",410],["Serian",330],["Sri Aman",290],["Betong",250],["Sarikei",240],["Mukah",240],["Kapit",230],["Limbang",220]];
+
+function renderMonths(){
+  var cols = document.getElementById("monthCols"), labs = document.getElementById("monthLabels");
+  if(!cols) return;
+  var ch = "", lh = "";
+  MONTH_N.forEach(function(v, i){
+    ch += '<div class="col"><div class="bar-v" data-h="' + Math.round(v / 600 * 100) + '" data-tip="' + MONTHS[i] + ' · ' + v.toLocaleString("en-US") + '"></div></div>';
+    lh += "<span>" + MONTHS[i].charAt(0) + "</span>";
+  });
+  cols.innerHTML = ch; labs.innerHTML = lh;
+}
+function renderDivisions(){
+  var box = document.getElementById("divBars"); if(!box) return;
+  var max = DIVS[0][1], h = "";
+  DIVS.forEach(function(d){
+    var pct = Math.round(d[1] / 4820 * 100);
+    h += '<div class="hbar"><span class="lab">' + d[0] + '</span>' +
+      '<span class="track"><span class="fill" data-w="' + Math.round(d[1] / max * 100) + '" data-tip="' + d[0] + ' · ' + d[1].toLocaleString("en-US") + ' ' + (JS_STR[lang]||JS_STR.en).trainees + ' (' + pct + '%)"></span></span>' +
+      '<span class="val">' + d[1].toLocaleString("en-US") + '</span></div>';
+  });
+  box.innerHTML = h;
+  animateIn(box);
+}
+function animateIn(scope){
+  (scope || document).querySelectorAll("[data-w]").forEach(function(el){
+    requestAnimationFrame(function(){ requestAnimationFrame(function(){ el.style.width = el.dataset.w + "%"; }); });
+  });
+  (scope || document).querySelectorAll("[data-h]").forEach(function(el){
+    requestAnimationFrame(function(){ requestAnimationFrame(function(){ el.style.height = el.dataset.h + "%"; }); });
+  });
+}
+renderMonths();
+
+/* ---------- tooltip ---------- */
+var tip = document.getElementById("tip");
+document.addEventListener("mouseover", function(e){
+  var t = e.target.closest && e.target.closest("[data-tip]");
+  if(t){ tip.textContent = t.dataset.tip; tip.classList.add("on"); }
+});
+document.addEventListener("mousemove", function(e){
+  if(!tip.classList.contains("on")) return;
+  var x = Math.min(e.clientX + 14, window.innerWidth - tip.offsetWidth - 10);
+  var y = e.clientY - tip.offsetHeight - 12;
+  if(y < 40) y = e.clientY + 18;
+  tip.style.left = x + "px"; tip.style.top = y + "px";
+});
+document.addEventListener("mouseout", function(e){
+  if(e.target.closest && e.target.closest("[data-tip]")) tip.classList.remove("on");
+});
+
+/* ---------- count-up ---------- */
+function countUp(el){
+  var to = parseFloat(el.dataset.to), dur = 1100, t0 = null;
+  if(reduceMotion){ el.textContent = to.toLocaleString("en-US"); return; }
+  function step(t){
+    if(!t0) t0 = t;
+    var p = Math.min((t - t0) / dur, 1);
+    p = 1 - Math.pow(1 - p, 4);
+    el.textContent = Math.round(to * p).toLocaleString("en-US");
+    if(p < 1) requestAnimationFrame(step);
+  }
+  requestAnimationFrame(step);
+}
+
+/* ---------- reveals + chart triggers ---------- */
+var revealSel = ".sec-head,.prob-card,.hybrid-note,.rail-step,.checklist li,.panel-card,.stake-card,.stat,.dash";
+if("IntersectionObserver" in window){
+  document.querySelectorAll(revealSel).forEach(function(el, i){
+    el.classList.add("will-reveal");
+    el.style.transitionDelay = (i % 4) * 60 + "ms";
+  });
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(en){
+      if(!en.isIntersecting) return;
+      en.target.classList.add("in");
+      io.unobserve(en.target);
+    });
+  }, {threshold:.12, rootMargin:"0px 0px -5% 0px"});
+  document.querySelectorAll(".will-reveal").forEach(function(el){ io.observe(el); });
+
+  var fired = {};
+  var io2 = new IntersectionObserver(function(entries){
+    entries.forEach(function(en){
+      if(!en.isIntersecting) return;
+      var id = en.target.id || "x";
+      if(fired[id]) return;
+      fired[id] = true;
+      animateIn(en.target);
+      en.target.querySelectorAll(".count").forEach(countUp);
+      io2.unobserve(en.target);
+    });
+  }, {threshold:.2});
+  document.querySelectorAll("#dashboard, #pmo").forEach(function(el){ io2.observe(el); });
+}else{
+  animateIn(document);
+  document.querySelectorAll(".count").forEach(function(el){ el.textContent = parseFloat(el.dataset.to).toLocaleString("en-US"); });
+}
+
+/* ---------- boot language ---------- */
+var saved = null;
+try{ saved = localStorage.getItem("sbfbizfund2-lang"); }catch(e){}
+if(!saved){
+  var nv = (navigator.language || "en").toLowerCase();
+  if(nv.indexOf("ms") === 0) saved = "bm";
+  else if(nv.indexOf("zh") === 0) saved = "zh";
+}
+applyLanguage(saved && (saved === "en" || I18N[saved]) ? saved : "en");
+})();
+</script>
+
+</body>
+</html>

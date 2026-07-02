@@ -240,15 +240,15 @@ p{margin:0 0 1em;max-width:68ch;text-wrap:pretty}
 .hbars{display:grid;gap:.65rem}
 .hbar{display:grid;grid-template-columns:110px 1fr 64px;gap:.9rem;align-items:center}
 .hbar .lab{font-size:.82rem;color:var(--ink-2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.hbar .track{height:14px;background:var(--bg-3);border-radius:4px;overflow:hidden}
-.hbar .fill{height:100%;background:var(--gold-deep);border-radius:0 4px 4px 0;width:0;transition:width .9s cubic-bezier(.22,1,.36,1)}
+.hbar .track{display:block;height:14px;background:var(--bg-3);border-radius:4px;overflow:hidden}
+.hbar .fill{display:block;height:100%;background:var(--gold-deep);border-radius:0 4px 4px 0;width:0;transition:width .9s cubic-bezier(.22,1,.36,1)}
 .hbar:hover .fill{background:var(--gold)}
 .hbar .val{font-family:var(--f-mono);font-size:.74rem;color:var(--ink-2);text-align:right}
 /* budget bullet bars */
 .bullet{display:grid;grid-template-columns:150px 1fr 120px;gap:.9rem;align-items:center;padding:.45rem 0}
 .bullet .lab{font-size:.85rem;color:var(--ink-2)}
-.bullet .track{height:18px;background:var(--bg-3);border:1px solid var(--line);border-radius:5px;overflow:hidden}
-.bullet .fill{height:100%;background:var(--cyan-deep);border-radius:0 4px 4px 0;width:0;transition:width .9s cubic-bezier(.22,1,.36,1)}
+.bullet .track{display:block;height:18px;background:var(--bg-3);border:1px solid var(--line);border-radius:5px;overflow:hidden}
+.bullet .fill{display:block;height:100%;background:var(--cyan-deep);border-radius:0 4px 4px 0;width:0;transition:width .9s cubic-bezier(.22,1,.36,1)}
 .bullet:hover .fill{background:var(--cyan)}
 .bullet .val{font-family:var(--f-mono);font-size:.74rem;color:var(--ink-2);text-align:right}
 @media (max-width:640px){.bullet{grid-template-columns:110px 1fr 90px}.hbar{grid-template-columns:88px 1fr 56px}}
