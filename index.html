@@ -1,0 +1,1688 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BizFund2 Programme Management Office · Digital PMO Prototype by KOBIS Berhad</title>
+<meta name="description" content="The BizFund2 Digital Programme Management Office prototype: structured execution, transparent governance and live programme intelligence for the Sarawak Business Federation, by KOBIS Berhad.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800&family=Marcellus&family=Spline+Sans+Mono:wght@400;500&display=swap" rel="stylesheet">
+<!-- Critical CSS: ticker bars must render as a single clean line on first paint, before the main styles load. Literal values only. -->
+<style>
+*{box-sizing:border-box}
+.ticker-bar{position:sticky;top:0;z-index:200;height:32px;overflow:hidden;background:#060A12;color:#C9A44A;display:flex;align-items:center;white-space:nowrap}
+.ticker-bar.ticker-static{position:static;opacity:.35}
+.ticker-track{display:inline-flex;align-items:center;gap:2.5rem;padding-left:1rem;animation:ticker-scroll 22s linear infinite;will-change:transform}
+.ticker-item{display:inline-flex;align-items:center;gap:.45rem;font-size:.72rem;letter-spacing:.08em;flex:none}
+.ticker-icon{width:14px;height:14px;vertical-align:-2px;margin-right:2px;flex:none}
+@keyframes ticker-scroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+@media (prefers-reduced-motion:reduce){.ticker-track{animation:none}}
+</style>
+<style>
+/* ============ BizFund2 Digital PMO · KOBIS Berhad ============ */
+:root{
+  /* surfaces: deep indigo command-centre, seed hue 230 */
+  --bg:#0A0F1A;
+  --bg-1:#0E1524;
+  --bg-2:#131C31;
+  --bg-3:#1A2540;
+  --line:#26324E;
+  --line-soft:rgba(148,170,215,.14);
+  /* ink */
+  --ink:#EEF3FC;
+  --ink-2:#B3C0DB;
+  --ink-3:#8494B4;
+  /* brand */
+  --gold:#E8B64C;
+  --gold-deep:#B8841F;     /* validated chart series 1 */
+  --gold-soft:rgba(232,182,76,.12);
+  --cyan:#5BC3E8;
+  --cyan-deep:#2E9CC3;     /* validated chart series 2 */
+  --violet:#9573F2;        /* validated chart series 3 */
+  /* status (never reused as series) */
+  --good:#5CBE82;
+  --warn:#E5A83B;
+  --bad:#E0685C;
+  /* kobis credit bar gradient hover */
+  --accent-lt:#F3CE7E; --accent:#E8B64C; --accent-2:#5BC3E8;
+  /* type */
+  --f-sans:'Archivo',system-ui,sans-serif;
+  --f-serif:'Marcellus',serif;
+  --f-mono:'Spline Sans Mono',ui-monospace,monospace;
+  /* z scale: dropdown < sticky-nav < ticker < tooltip */
+  --z-nav:180; --z-ticker:200; --z-tip:300;
+  --radius:10px;
+  --pad:clamp(1.25rem,4vw,2.5rem);
+}
+html{scroll-behavior:smooth}
+[id]{scroll-margin-top:104px}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{
+  margin:0;background:var(--bg);color:var(--ink);
+  font-family:var(--f-sans);font-size:1.0625rem;line-height:1.65;
+  -webkit-font-smoothing:antialiased;
+}
+img,svg,canvas{max-width:100%}
+a{color:var(--gold)}
+a:focus-visible,button:focus-visible,[tabindex]:focus-visible{outline:2px solid var(--cyan);outline-offset:3px;border-radius:4px}
+.skip-link{position:absolute;left:-999px;top:8px;background:var(--gold);color:#141005;padding:.55rem 1rem;font-weight:700;z-index:var(--z-tip);border-radius:6px}
+.skip-link:focus{left:8px}
+h1,h2,h3,h4{margin:0 0 .6em;font-weight:700;line-height:1.12;letter-spacing:-.018em;text-wrap:balance}
+p{margin:0 0 1em;max-width:68ch;text-wrap:pretty}
+.wrap{max-width:1180px;margin:0 auto;padding:0 var(--pad)}
+.wrap-wide{max-width:1320px;margin:0 auto;padding:0 var(--pad)}
+.mono{font-family:var(--f-mono)}
+.muted{color:var(--ink-2)}
+
+/* ---------- ticker refinements ---------- */
+.ticker-bar{border-bottom:1px solid rgba(232,182,76,.15)}
+.ticker-bar.ticker-static{border-top:1px solid var(--line-soft);border-bottom:1px solid var(--line-soft)}
+
+/* ---------- nav ---------- */
+.nav{
+  position:sticky;top:32px;z-index:var(--z-nav);
+  background:rgba(10,15,26,.88);backdrop-filter:blur(14px);
+  border-bottom:1px solid var(--line-soft);
+}
+.nav-inner{max-width:1320px;margin:0 auto;padding:.7rem var(--pad);display:flex;align-items:center;gap:1.4rem}
+.brand{display:flex;align-items:center;gap:.65rem;text-decoration:none;color:var(--ink);font-weight:700;letter-spacing:-.01em;flex:none}
+.brand-mark{width:34px;height:34px;flex:none}
+.brand small{display:block;font-weight:500;font-size:.66rem;color:var(--ink-3);letter-spacing:.14em;text-transform:uppercase}
+.nav-links{display:flex;gap:1.35rem;margin-left:auto;align-items:center}
+.nav-links a{color:var(--ink-2);text-decoration:none;font-size:.9rem;font-weight:500;transition:color .2s ease}
+.nav-links a:hover{color:var(--gold)}
+.lang-switch{display:flex;gap:.3rem;margin-left:1rem;flex:none}
+.lang-switch button{
+  font:600 .72rem/1 var(--f-mono);letter-spacing:.05em;color:var(--ink-2);
+  background:transparent;border:1px solid var(--line);border-radius:999px;
+  padding:.42rem .66rem;cursor:pointer;transition:all .2s ease;
+}
+.lang-switch button:hover{border-color:var(--gold);color:var(--gold)}
+.lang-switch button.active{background:var(--gold);border-color:var(--gold);color:#181205}
+.nav-cta{flex:none;background:var(--gold);color:#181205;text-decoration:none;font-weight:700;font-size:.88rem;padding:.55rem 1.05rem;border-radius:8px;transition:transform .2s cubic-bezier(.22,1,.36,1),box-shadow .2s ease}
+.nav-cta:hover{transform:translateY(-1px);box-shadow:0 6px 22px rgba(232,182,76,.35)}
+@media (max-width:960px){.nav-links{display:none}}
+@media (max-width:700px){
+  .nav-inner{gap:.7rem;padding:.55rem 1rem}
+  .nav-cta{display:none}
+  .lang-switch{margin-left:auto}
+  .brand small{display:none}
+}
+
+/* ---------- hero ---------- */
+.hero{position:relative;overflow:hidden;padding:clamp(5rem,12vh,9rem) 0 clamp(3.5rem,8vh,6rem);
+  background:
+    radial-gradient(1100px 520px at 78% -10%, rgba(46,156,195,.16), transparent 60%),
+    radial-gradient(900px 480px at 12% 110%, rgba(232,182,76,.10), transparent 62%),
+    var(--bg);
+}
+#stars{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;opacity:.9}
+.hero .wrap{position:relative}
+.hero-issuer{font-family:var(--f-mono);font-size:.78rem;letter-spacing:.12em;color:var(--cyan);margin:0 0 1.6rem;text-transform:uppercase}
+.hero h1{font-size:clamp(2.55rem,6vw,4.9rem);font-weight:800;letter-spacing:-.03em;max-width:15ch;margin-bottom:.5em}
+.hero h1 em{font-style:normal;color:var(--gold)}
+.hero-sub{font-size:clamp(1.05rem,1.6vw,1.25rem);color:var(--ink-2);max-width:56ch;margin-bottom:2.2rem}
+.hero-ctas{display:flex;gap:.9rem;flex-wrap:wrap;margin-bottom:3.2rem}
+.btn{display:inline-block;text-decoration:none;font-weight:700;font-size:.98rem;padding:.85rem 1.5rem;border-radius:9px;transition:transform .22s cubic-bezier(.22,1,.36,1),box-shadow .22s ease,background .2s ease}
+.btn-gold{background:var(--gold);color:#181205}
+.btn-gold:hover{transform:translateY(-2px);box-shadow:0 10px 30px rgba(232,182,76,.32)}
+.btn-ghost{border:1px solid var(--line);color:var(--ink)}
+.btn-ghost:hover{border-color:var(--cyan);color:var(--cyan);transform:translateY(-2px)}
+.hero-console{
+  font-family:var(--f-mono);font-size:.8rem;color:var(--ink-2);
+  border:1px solid var(--line);border-radius:var(--radius);
+  background:rgba(14,21,36,.75);padding:.9rem 1.2rem;
+  display:flex;flex-wrap:wrap;gap:.4rem 1.8rem;align-items:center;max-width:900px;
+}
+.hero-console .dot{width:8px;height:8px;border-radius:50%;background:var(--good);display:inline-block;margin-right:.5rem;animation:pulse 2.4s ease-in-out infinite}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(92,190,130,.5)}50%{box-shadow:0 0 0 6px rgba(92,190,130,0)}}
+@media (prefers-reduced-motion:reduce){.hero-console .dot{animation:none}}
+.hero-console b{color:var(--gold);font-weight:500}
+.demo-note{font-size:.72rem;color:var(--ink-3);margin-top:.7rem;font-family:var(--f-mono)}
+
+/* ---------- section grammar: proposal clauses ---------- */
+.sec{padding:clamp(4rem,9vw,7.5rem) 0}
+.sec-alt{background:var(--bg-1)}
+.sec-head{border-top:1px solid var(--line);padding-top:1.3rem;display:flex;gap:1.6rem;align-items:baseline;flex-wrap:wrap;margin-bottom:2.6rem}
+.sec-ref{font-family:var(--f-mono);font-size:.8rem;color:var(--gold);letter-spacing:.1em;flex:none}
+.sec-head h2{font-size:clamp(1.85rem,3.6vw,2.7rem);margin:0;max-width:22ch}
+.sec-lede{font-size:1.1rem;color:var(--ink-2);max-width:62ch;margin:-1.4rem 0 2.6rem}
+.vision{font-family:var(--f-serif);font-size:clamp(1.7rem,3.4vw,2.6rem);line-height:1.3;color:var(--gold);max-width:24ch;margin:0 0 2.4rem}
+
+/* ---------- ledger rows (mandate, why-pmo, responsibilities) ---------- */
+.ledger{border-top:1px solid var(--line)}
+.ledger-row{display:grid;grid-template-columns:minmax(180px,240px) 1fr;gap:1.2rem 2.4rem;padding:1.35rem 0;border-bottom:1px solid var(--line-soft)}
+.ledger-row h3{font-size:1.06rem;margin:0}
+.ledger-row p{margin:0;color:var(--ink-2);font-size:.98rem}
+@media (max-width:680px){.ledger-row{grid-template-columns:1fr;gap:.3rem}}
+.grid-2{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:0 3.5rem}
+
+/* compact module ledger (12 responsibilities) */
+.modules{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:0 3rem;border-top:1px solid var(--line)}
+.module{padding:1.1rem 0;border-bottom:1px solid var(--line-soft)}
+.module h3{font-size:1rem;margin:0 0 .2rem}
+.module p{margin:0;font-size:.9rem;color:var(--ink-3)}
+.module .mono{color:var(--cyan);font-size:.72rem;letter-spacing:.08em;display:block;margin-bottom:.35rem}
+
+/* ---------- governance chain ---------- */
+.chain{max-width:620px;margin:0 auto;position:relative}
+.chain-node{position:relative;background:var(--bg-2);border:1px solid var(--line);border-radius:var(--radius);padding:1.05rem 1.4rem;margin:0 auto;text-align:center;transition:border-color .25s ease,transform .25s ease}
+.chain-node+.chain-node{margin-top:2.2rem}
+.chain-node::before{content:"";position:absolute;left:50%;top:-2.2rem;height:2.2rem;width:1px;background:linear-gradient(var(--line),var(--gold-deep))}
+.chain-node:first-child::before{display:none}
+.chain-node h3{margin:0;font-size:1.05rem}
+.chain-node p{margin:.25rem 0 0;font-size:.85rem;color:var(--ink-3)}
+.chain-node:hover{border-color:var(--gold);transform:translateY(-2px)}
+.chain-node.hub{background:linear-gradient(160deg,var(--bg-3),var(--bg-2));border:1px solid var(--gold);box-shadow:0 0 44px rgba(232,182,76,.12)}
+.chain-node.hub h3{color:var(--gold)}
+.chain-node.hub p{color:var(--ink-2)}
+.chain-tag{position:absolute;right:-1rem;top:50%;transform:translate(100%,-50%);font-family:var(--f-mono);font-size:.7rem;color:var(--cyan);white-space:nowrap}
+@media (max-width:900px){.chain-tag{display:none}}
+
+/* ---------- lifecycle ---------- */
+.phase{margin-bottom:2.8rem}
+.phase-name{display:flex;align-items:center;gap:1rem;font-family:var(--f-mono);font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;color:var(--cyan);margin-bottom:1.1rem}
+.phase-name::after{content:"";height:1px;flex:1;background:var(--line-soft)}
+.stages{display:grid;grid-template-columns:repeat(auto-fit,minmax(215px,1fr));gap:.8rem}
+.stage{background:var(--bg-2);border:1px solid var(--line);border-radius:var(--radius);padding:1rem 1.1rem;transition:border-color .25s ease,transform .25s ease}
+.stage:hover{border-color:var(--gold);transform:translateY(-2px)}
+.stage .num{font-family:var(--f-mono);font-size:.74rem;color:var(--gold);display:block;margin-bottom:.4rem}
+.stage h3{font-size:.98rem;margin:0}
+.stage p{font-size:.84rem;color:var(--ink-3);margin:.3rem 0 0}
+
+/* ---------- stakeholder hub ---------- */
+.hub-wrap{display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:center}
+@media (max-width:900px){.hub-wrap{grid-template-columns:1fr}}
+.hub-svg text{font-family:var(--f-sans);fill:var(--ink)}
+.hub-svg .spoke-line{stroke:var(--line);stroke-width:1.5}
+.hub-flows{border-top:1px solid var(--line)}
+.hub-flow{display:flex;gap:1rem;padding:1rem 0;border-bottom:1px solid var(--line-soft);align-items:baseline}
+.hub-flow .who{font-family:var(--f-mono);font-size:.74rem;color:var(--cyan);min-width:11.5rem;letter-spacing:.04em}
+.hub-flow p{margin:0;font-size:.93rem;color:var(--ink-2)}
+
+/* ---------- command centre ---------- */
+.command{background:
+  radial-gradient(900px 460px at 90% 0%, rgba(46,156,195,.12), transparent 60%),
+  var(--bg-1)}
+.console{background:var(--bg-2);border:1px solid var(--line);border-radius:16px;overflow:hidden;box-shadow:0 30px 80px rgba(3,6,14,.55)}
+.console-bar{display:flex;align-items:center;gap:1rem;padding:.85rem 1.3rem;border-bottom:1px solid var(--line);background:var(--bg-3);flex-wrap:wrap}
+.console-bar .win{display:flex;gap:.4rem}
+.console-bar .win i{width:10px;height:10px;border-radius:50%;background:var(--line);display:block}
+.console-title{font-family:var(--f-mono);font-size:.78rem;color:var(--ink-2);letter-spacing:.08em}
+.live-chip{margin-left:auto;font-family:var(--f-mono);font-size:.68rem;color:var(--good);border:1px solid rgba(92,190,130,.4);border-radius:999px;padding:.25rem .7rem;display:inline-flex;align-items:center;gap:.4rem}
+.live-chip::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--good)}
+.tabs{display:flex;gap:.25rem;padding:.7rem 1.1rem 0;border-bottom:1px solid var(--line);flex-wrap:wrap}
+.tab{font:600 .85rem var(--f-sans);color:var(--ink-2);background:transparent;border:0;border-bottom:2px solid transparent;padding:.6rem .95rem;cursor:pointer;transition:color .2s ease}
+.tab:hover{color:var(--ink)}
+.tab[aria-selected="true"]{color:var(--gold);border-bottom-color:var(--gold)}
+.panel{padding:1.6rem;display:grid;gap:1.5rem}
+.panel[hidden]{display:none}
+/* stat tiles */
+.tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:.9rem}
+.tile{background:var(--bg-1);border:1px solid var(--line);border-radius:var(--radius);padding:1rem 1.15rem}
+.tile .lab{font-size:.76rem;color:var(--ink-3);letter-spacing:.03em;margin-bottom:.35rem}
+.tile .val{font-family:var(--f-mono);font-size:1.7rem;font-weight:500;color:var(--ink);letter-spacing:-.02em}
+.tile .val small{font-size:.9rem;color:var(--ink-3)}
+.tile .sub{font-size:.74rem;color:var(--ink-3);margin-top:.3rem}
+.tile .sub.up{color:var(--good)}
+/* charts */
+.chart{background:var(--bg-1);border:1px solid var(--line);border-radius:var(--radius);padding:1.15rem 1.25rem}
+.chart h3{font-size:.95rem;margin:0 0 .2rem}
+.chart .chart-sub{font-size:.76rem;color:var(--ink-3);margin:0 0 1.1rem}
+.cols{display:flex;align-items:flex-end;gap:6px;height:180px;border-bottom:1px solid var(--line);padding-bottom:0}
+.col{flex:1;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;gap:.45rem;min-width:0;height:100%}
+.col .bar-v{width:100%;max-width:34px;background:var(--gold-deep);border-radius:4px 4px 0 0;transition:height .8s cubic-bezier(.22,1,.36,1);cursor:default}
+.col .bar-v:hover{background:var(--gold)}
+.cols-x{display:flex;gap:6px;margin-top:.5rem}
+.cols-x span{flex:1;text-align:center;font-family:var(--f-mono);font-size:.62rem;color:var(--ink-3)}
+/* horizontal bars */
+.hbars{display:grid;gap:.65rem}
+.hbar{display:grid;grid-template-columns:110px 1fr 64px;gap:.9rem;align-items:center}
+.hbar .lab{font-size:.82rem;color:var(--ink-2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.hbar .track{height:14px;background:var(--bg-3);border-radius:4px;overflow:hidden}
+.hbar .fill{height:100%;background:var(--gold-deep);border-radius:0 4px 4px 0;width:0;transition:width .9s cubic-bezier(.22,1,.36,1)}
+.hbar:hover .fill{background:var(--gold)}
+.hbar .val{font-family:var(--f-mono);font-size:.74rem;color:var(--ink-2);text-align:right}
+/* budget bullet bars */
+.bullet{display:grid;grid-template-columns:150px 1fr 120px;gap:.9rem;align-items:center;padding:.45rem 0}
+.bullet .lab{font-size:.85rem;color:var(--ink-2)}
+.bullet .track{height:18px;background:var(--bg-3);border:1px solid var(--line);border-radius:5px;overflow:hidden}
+.bullet .fill{height:100%;background:var(--cyan-deep);border-radius:0 4px 4px 0;width:0;transition:width .9s cubic-bezier(.22,1,.36,1)}
+.bullet:hover .fill{background:var(--cyan)}
+.bullet .val{font-family:var(--f-mono);font-size:.74rem;color:var(--ink-2);text-align:right}
+@media (max-width:640px){.bullet{grid-template-columns:110px 1fr 90px}.hbar{grid-template-columns:88px 1fr 56px}}
+.legend{display:flex;gap:1.4rem;font-size:.74rem;color:var(--ink-3);margin-top:.9rem;flex-wrap:wrap}
+.legend i{display:inline-block;width:12px;height:12px;border-radius:3px;margin-right:.4rem;vertical-align:-2px}
+/* kpi table */
+.kpi-table{width:100%;border-collapse:collapse;font-size:.9rem}
+.kpi-table th{text-align:left;font-family:var(--f-mono);font-weight:500;font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3);padding:.6rem .8rem;border-bottom:1px solid var(--line)}
+.kpi-table td{padding:.75rem .8rem;border-bottom:1px solid var(--line-soft);color:var(--ink-2)}
+.kpi-table td:first-child{color:var(--ink);font-weight:500}
+.kpi-table .mono{font-size:.8rem}
+.chip{display:inline-flex;align-items:center;gap:.4rem;font-size:.74rem;font-weight:600;border-radius:999px;padding:.28rem .7rem;white-space:nowrap}
+.chip svg{width:11px;height:11px;flex:none}
+.chip.ok{color:var(--good);background:rgba(92,190,130,.12)}
+.chip.watch{color:var(--warn);background:rgba(229,168,59,.12)}
+.chip.behind{color:var(--bad);background:rgba(224,104,92,.13)}
+/* chart tooltip */
+#tip{position:fixed;z-index:var(--z-tip);background:var(--bg-3);border:1px solid var(--gold-deep);color:var(--ink);font:500 .74rem/1.4 var(--f-mono);padding:.45rem .65rem;border-radius:7px;pointer-events:none;opacity:0;transition:opacity .15s ease;max-width:240px}
+#tip.on{opacity:1}
+
+/* ---------- digital layer ---------- */
+.values-intro{display:grid;grid-template-columns:1.1fr .9fr;gap:3rem;align-items:start}
+@media (max-width:900px){.values-intro{grid-template-columns:1fr}}
+.value-block{margin-top:4.5rem;display:grid;grid-template-columns:minmax(280px,.9fr) 1.1fr;gap:2.6rem;align-items:center}
+.value-block.flip{grid-template-columns:1.1fr minmax(280px,.9fr)}
+.value-block.flip .value-copy{order:2}
+@media (max-width:920px){.value-block,.value-block.flip{grid-template-columns:1fr}.value-block.flip .value-copy{order:0}}
+.value-copy .vref{font-family:var(--f-mono);font-size:.74rem;color:var(--cyan);letter-spacing:.12em;display:block;margin-bottom:.7rem}
+.value-copy h3{font-size:clamp(1.35rem,2.4vw,1.8rem)}
+.value-copy p{color:var(--ink-2);font-size:.98rem}
+.value-copy ul{margin:.9rem 0 0;padding:0;list-style:none;columns:2;gap:2rem;font-size:.9rem;color:var(--ink-2)}
+.value-copy ul li{padding:.32rem 0;border-bottom:1px solid var(--line-soft);break-inside:avoid}
+@media (max-width:560px){.value-copy ul{columns:1}}
+/* device frames */
+.frame{background:var(--bg-2);border:1px solid var(--line);border-radius:14px;overflow:hidden;box-shadow:0 22px 60px rgba(3,6,14,.5)}
+.frame-bar{display:flex;align-items:center;gap:.55rem;background:var(--bg-3);border-bottom:1px solid var(--line);padding:.6rem .95rem;font-family:var(--f-mono);font-size:.68rem;color:var(--ink-3)}
+.frame-bar i{width:9px;height:9px;border-radius:50%;background:var(--line);display:block}
+.frame-body{padding:1.1rem 1.2rem;display:grid;gap:.8rem;overflow-x:auto}
+.mini-table{width:100%;border-collapse:collapse;font-size:.8rem}
+.mini-table th{font-family:var(--f-mono);font-size:.62rem;letter-spacing:.09em;text-transform:uppercase;color:var(--ink-3);text-align:left;padding:.4rem .5rem;border-bottom:1px solid var(--line)}
+.mini-table td{padding:.5rem;border-bottom:1px solid var(--line-soft);color:var(--ink-2)}
+.mini-table td:first-child{color:var(--ink)}
+.frame-row{display:flex;justify-content:space-between;gap:1rem;font-size:.8rem;color:var(--ink-2);border-bottom:1px solid var(--line-soft);padding:.5rem .1rem}
+.frame-row b{color:var(--ink);font-weight:600}
+/* phone */
+.phone{width:min(300px,88%);margin:0 auto;background:var(--bg-2);border:1px solid var(--line);border-radius:30px;padding:.8rem;box-shadow:0 26px 70px rgba(3,6,14,.55)}
+.phone-screen{background:var(--bg-1);border-radius:22px;overflow:hidden;border:1px solid var(--line-soft)}
+.phone-head{padding:1rem 1.1rem .6rem;border-bottom:1px solid var(--line-soft)}
+.phone-head .mono{font-size:.62rem;color:var(--ink-3);letter-spacing:.1em}
+.phone-head h4{margin:.25rem 0 0;font-size:1rem}
+.phone-body{padding:1rem 1.1rem 1.3rem;display:grid;gap:.8rem;justify-items:center}
+.qr{width:132px;height:132px;border-radius:10px;background:#fff;padding:10px}
+.qr svg{width:100%;height:100%;display:block}
+.phone-cta{width:100%;text-align:center;background:var(--gold);color:#181205;font-weight:700;font-size:.85rem;border:0;border-radius:9px;padding:.7rem;cursor:pointer}
+.badge-line{display:flex;align-items:center;gap:.6rem;font-size:.78rem;color:var(--ink-2);width:100%}
+.badge-dot{width:26px;height:26px;border-radius:50%;background:linear-gradient(140deg,var(--gold),var(--gold-deep));display:grid;place-items:center;color:#181205;flex:none}
+.badge-dot svg{width:13px;height:13px}
+.journey{width:100%}
+.journey .lab{display:flex;justify-content:space-between;font-family:var(--f-mono);font-size:.62rem;color:var(--ink-3);margin-bottom:.35rem}
+.journey .track{height:8px;background:var(--bg-3);border-radius:4px;overflow:hidden}
+.journey .fill{height:100%;width:0;background:var(--cyan-deep);border-radius:0 4px 4px 0;transition:width .9s cubic-bezier(.22,1,.36,1)}
+/* media wall */
+.media-wall{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:.8rem}
+.media-tile{background:var(--bg-2);border:1px solid var(--line);border-radius:var(--radius);padding:1rem;transition:border-color .25s ease,transform .25s ease}
+.media-tile:hover{border-color:var(--cyan);transform:translateY(-2px)}
+.media-tile .net{font-family:var(--f-mono);font-size:.68rem;letter-spacing:.1em;color:var(--cyan);text-transform:uppercase}
+.media-tile .n{font-family:var(--f-mono);font-size:1.35rem;color:var(--ink);margin:.35rem 0 .1rem}
+.media-tile .d{font-size:.72rem;color:var(--ink-3)}
+.post-card{grid-column:1/-1;background:var(--bg-2);border:1px solid var(--line);border-radius:var(--radius);padding:1.1rem 1.2rem;display:flex;gap:1rem;align-items:flex-start}
+.post-card .avatar{width:38px;height:38px;border-radius:50%;background:linear-gradient(140deg,var(--gold),var(--gold-deep));flex:none;display:grid;place-items:center;color:#181205;font-weight:800;font-size:.8rem}
+.post-card p{margin:0;font-size:.88rem;color:var(--ink-2)}
+.post-card .meta{font-family:var(--f-mono);font-size:.66rem;color:var(--ink-3);margin-top:.45rem}
+/* analytics small multiples */
+.splits{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:1rem}
+.split{background:var(--bg-2);border:1px solid var(--line);border-radius:var(--radius);padding:1rem 1.1rem}
+.split h4{font-size:.82rem;margin:0 0 .8rem;color:var(--ink-2)}
+.split .hbar{grid-template-columns:74px 1fr 44px}
+/* AI card */
+.ai-card{background:linear-gradient(160deg,var(--bg-3),var(--bg-2));border:1px solid var(--gold-deep);border-radius:14px;padding:1.4rem 1.5rem;box-shadow:0 24px 66px rgba(3,6,14,.5)}
+.ai-card .ai-head{display:flex;align-items:center;gap:.7rem;font-family:var(--f-mono);font-size:.72rem;color:var(--gold);letter-spacing:.1em;margin-bottom:1rem}
+.ai-card .ai-head svg{width:16px;height:16px}
+.ai-text{font-size:.98rem;color:var(--ink);min-height:7.5em;margin:0}
+.ai-text .caret{display:inline-block;width:8px;height:1.05em;background:var(--gold);vertical-align:-2px;animation:blink 1s steps(1) infinite}
+@keyframes blink{50%{opacity:0}}
+@media (prefers-reduced-motion:reduce){.ai-text .caret{animation:none}}
+.roadmap{border-top:1px solid var(--line);margin-top:1.2rem}
+.roadmap li{list-style:none;display:flex;gap:1.1rem;padding:.6rem 0;border-bottom:1px solid var(--line-soft);font-size:.88rem;color:var(--ink-2)}
+.roadmap{padding:0}
+.roadmap .yr{font-family:var(--f-mono);color:var(--cyan);font-size:.74rem;min-width:3.4rem;padding-top:.15rem}
+
+/* ---------- team ---------- */
+.org{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:.9rem;margin-top:1rem}
+.org-card{background:var(--bg-2);border:1px solid var(--line);border-radius:var(--radius);padding:1.05rem 1.15rem;transition:border-color .25s ease,transform .25s ease}
+.org-card:hover{border-color:var(--gold);transform:translateY(-2px)}
+.org-card.lead{grid-column:1/-1;background:linear-gradient(160deg,var(--bg-3),var(--bg-2));border-color:var(--gold-deep)}
+.org-card .role{font-size:1rem;font-weight:700;margin:0}
+.org-card .duty{font-size:.83rem;color:var(--ink-3);margin:.3rem 0 0}
+.org-card .mono{font-size:.66rem;color:var(--cyan);letter-spacing:.1em;display:block;margin-bottom:.4rem}
+
+/* ---------- closing ---------- */
+.closing{background:
+  radial-gradient(800px 400px at 50% 0%, rgba(232,182,76,.10), transparent 65%),
+  var(--bg-1);text-align:center}
+.closing .vision{margin:0 auto 1.4rem;max-width:26ch}
+.closing-tri{font-family:var(--f-mono);font-size:.8rem;letter-spacing:.24em;color:var(--cyan);text-transform:uppercase;margin-bottom:2rem}
+.closing p.creed{margin:0 auto 2.6rem;color:var(--ink-2);max-width:52ch}
+.contact-form{max-width:560px;margin:0 auto;display:grid;gap:.8rem;text-align:left}
+.contact-form label{font-size:.78rem;color:var(--ink-2);font-weight:600;display:grid;gap:.35rem}
+.contact-form input,.contact-form textarea{
+  background:var(--bg-2);border:1px solid var(--line);border-radius:8px;color:var(--ink);
+  font:400 .95rem var(--f-sans);padding:.75rem .9rem;width:100%;transition:border-color .2s ease}
+.contact-form input:focus,.contact-form textarea:focus{outline:none;border-color:var(--gold)}
+.contact-form button{margin-top:.4rem;border:0;cursor:pointer;font-family:var(--f-sans)}
+
+/* ---------- footer ---------- */
+footer{background:#070B13;border-top:1px solid var(--line-soft)}
+.footer-main{max-width:1180px;margin:0 auto;padding:3.5rem var(--pad) 2.5rem;display:grid;grid-template-columns:1.3fr 1fr 1fr;gap:2.5rem}
+@media (max-width:820px){.footer-main{grid-template-columns:1fr}}
+.footer-brand{display:flex;gap:.9rem;align-items:flex-start}
+.footer-brand .brand-mark{width:40px;height:40px}
+.footer-brand h3{margin:0 0 .3rem;font-size:1.1rem}
+.footer-brand p{margin:0;font-size:.88rem;color:var(--ink-3);max-width:34ch}
+.footer-col h4{font-family:var(--f-mono);font-weight:500;font-size:.7rem;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-3);margin:0 0 1rem}
+.footer-col a{display:block;color:var(--ink-2);text-decoration:none;font-size:.9rem;padding:.28rem 0;transition:color .2s ease}
+.footer-col a:hover{color:var(--gold)}
+.footer-col p{font-size:.9rem;color:var(--ink-2);margin:0 0 .5rem}
+.footer-copy{text-align:center;padding:1.2rem var(--pad);border-top:1px solid var(--line-soft)}
+.footer-copy p{margin:0 auto;font-size:.78rem;color:var(--ink-3)}
+.kobis-bar{height:.75in;display:flex;align-items:center;justify-content:center;background:#04070D;border-top:1px solid rgba(232,182,76,.12)}
+.kobis-bar p{margin:0;font-size:.72rem;font-weight:300;color:rgba(255,255,255,.85);text-align:center;padding:0 1rem}
+.kobis-bar .kobis-link{color:rgba(255,255,255,.85);text-decoration:none;font-weight:500;transition:color .2s ease}
+.kobis-bar .kobis-link:hover{
+  background:linear-gradient(135deg,var(--accent-lt),var(--accent),var(--accent-2));
+  -webkit-background-clip:text;background-clip:text;color:transparent}
+
+/* ---------- reveal motion (JS adds .will-reveal; content visible without JS) ---------- */
+.will-reveal{opacity:0;transform:translateY(22px);transition:opacity .7s cubic-bezier(.22,1,.36,1),transform .7s cubic-bezier(.22,1,.36,1)}
+.will-reveal.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){.will-reveal{opacity:1;transform:none;transition:none}}
+@media print{.will-reveal{opacity:1 !important;transform:none !important}.ticker-bar{display:none}#stars{display:none}}
+</style>
+</head>
+<body>
+
+<!-- TEMP: KOBIS Berhad placeholder credit ticker — replace wording with client's chosen text once payment is received, then remove KOBIS branding ticker -->
+<div class="ticker-bar" aria-hidden="true">
+  <div class="ticker-track" id="tickerTrack1"></div>
+</div>
+
+<a class="skip-link" href="#main" data-i18n="a11y.skip">Skip to content</a>
+
+<nav class="nav" aria-label="Main">
+  <div class="nav-inner">
+    <a class="brand" href="#top" aria-label="BizFund2 Digital PMO home">
+      <svg class="brand-mark" viewBox="0 0 40 40" fill="none" aria-hidden="true">
+        <rect x="1.5" y="1.5" width="37" height="37" rx="9" stroke="#E8B64C" stroke-width="2"/>
+        <path d="M20 8l2.9 8.1L31 19l-8.1 2.9L20 30l-2.9-8.1L9 19l8.1-2.9L20 8z" fill="#E8B64C"/>
+      </svg>
+      <span>BizFund2 PMO<small data-i18n="nav.by">by KOBIS Berhad</small></span>
+    </a>
+    <div class="nav-links">
+      <a href="#governance" data-i18n="nav.governance">Governance</a>
+      <a href="#lifecycle" data-i18n="nav.lifecycle">Lifecycle</a>
+      <a href="#command" data-i18n="nav.command">Command Centre</a>
+      <a href="#platform" data-i18n="nav.platform">Digital Layer</a>
+      <a href="#team" data-i18n="nav.team">Team</a>
+    </div>
+    <div class="lang-switch" role="group" aria-label="Language">
+      <button type="button" data-lang="en" class="active">EN</button>
+      <button type="button" data-lang="bm">BM</button>
+      <button type="button" data-lang="zh">中</button>
+      <button type="button" data-lang="ib">IB</button>
+    </div>
+    <a class="nav-cta" href="#closing" data-i18n="nav.cta">Request briefing</a>
+  </div>
+</nav>
+
+<main id="main">
+
+<!-- ============ HERO ============ -->
+<header class="hero" id="top">
+  <canvas id="stars" aria-hidden="true"></canvas>
+  <div class="wrap">
+    <p class="hero-issuer" data-i18n="hero.issuer">Prepared by KOBIS Berhad · for the Sarawak Business Federation</p>
+    <h1 data-i18n="hero.title">The BizFund2 Programme Office, <em>already running.</em></h1>
+    <p class="hero-sub" data-i18n="hero.sub">This is not a slide deck. It is a working prototype of the Digital Programme Management Office KOBIS Berhad will operate for BizFund2: structured execution, transparent governance and live intelligence, from the Premier Office down to every entrepreneur across all twelve divisions of Sarawak.</p>
+    <div class="hero-ctas">
+      <a class="btn btn-gold" href="#command" data-i18n="hero.cta1">Enter the command centre</a>
+      <a class="btn btn-ghost" href="#governance" data-i18n="hero.cta2">See the governance framework</a>
+    </div>
+    <div class="hero-console" role="presentation">
+      <span><span class="dot" aria-hidden="true"></span>BIZFUND2</span>
+      <span data-i18n="hero.c1">FUND · RM 30.0M</span>
+      <span data-i18n="hero.c2">DIVISIONS · <b>12 / 12</b></span>
+      <span data-i18n="hero.c3">PROGRAMMES · <b>96</b></span>
+      <span data-i18n="hero.c4">ENTREPRENEURS · <b>4,820</b></span>
+    </div>
+    <p class="demo-note" data-i18n="hero.note">Prototype with illustrative demonstration data.</p>
+  </div>
+</header>
+
+<!-- ============ 01 MANDATE ============ -->
+<section class="sec" id="mandate">
+  <div class="wrap">
+    <div class="sec-head will-observe">
+      <span class="sec-ref">PMO / 01</span>
+      <h2 data-i18n="mandate.title">KOBIS Berhad as the Programme Management Office</h2>
+    </div>
+    <p class="vision" data-i18n="mandate.vision">“Sparkling Sarawak’s Future, Toward 2030 and Beyond.”</p>
+    <div class="grid-2">
+      <p class="muted" data-i18n="mandate.p1">BizFund2 will move public money through dozens of providers to thousands of entrepreneurs. That demands more than administration: it demands an office that plans, verifies, reports and answers for every ringgit and every session. KOBIS Berhad proposes to be that office.</p>
+      <p class="muted" data-i18n="mandate.p2">Our commitment to SBF rests on four disciplines, and every screen in this prototype exists to prove one of them.</p>
+    </div>
+    <div class="ledger" style="margin-top:1.6rem">
+      <div class="ledger-row">
+        <h3 data-i18n="mandate.d1">Structured programme management</h3>
+        <p data-i18n="mandate.d1p">One lifecycle, fourteen controlled stages, applied identically to every programme in the portfolio.</p>
+      </div>
+      <div class="ledger-row">
+        <h3 data-i18n="mandate.d2">Transparent governance</h3>
+        <p data-i18n="mandate.d2p">Every decision traceable along the chain from Premier Office to participant, with nothing moving off the record.</p>
+      </div>
+      <div class="ledger-row">
+        <h3 data-i18n="mandate.d3">Data-driven execution</h3>
+        <p data-i18n="mandate.d3p">Budgets, attendance, claims and outcomes captured once, verified, and visible to stakeholders in real time.</p>
+      </div>
+      <div class="ledger-row">
+        <h3 data-i18n="mandate.d4">Stakeholder collaboration</h3>
+        <p data-i18n="mandate.d4p">Secretariat, ministries, providers and entrepreneurs working inside one system instead of around it.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 02 WHY A PMO ============ -->
+<section class="sec sec-alt" id="why">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="sec-ref">PMO / 02</span>
+      <h2 data-i18n="why.title">Why BizFund2 needs a Programme Management Office</h2>
+    </div>
+    <p class="sec-lede" data-i18n="why.lede">Without a central office, a multi-provider fund fragments into spreadsheets, chat groups and unanswered claims. The PMO is the single point where coordination, control and accountability live.</p>
+    <div class="modules">
+      <div class="module"><span class="mono">F·01</span><h3 data-i18n="why.f1">Central coordination</h3><p data-i18n="why.f1p">One hub for every programme, provider and district.</p></div>
+      <div class="module"><span class="mono">F·02</span><h3 data-i18n="why.f2">Better governance</h3><p data-i18n="why.f2p">Clear authority, clear escalation, full audit trail.</p></div>
+      <div class="module"><span class="mono">F·03</span><h3 data-i18n="why.f3">Risk management</h3><p data-i18n="why.f3p">Risks logged, owned and acted on before they grow.</p></div>
+      <div class="module"><span class="mono">F·04</span><h3 data-i18n="why.f4">Standard operating procedures</h3><p data-i18n="why.f4p">Every provider works to the same written playbook.</p></div>
+      <div class="module"><span class="mono">F·05</span><h3 data-i18n="why.f5">Timeline monitoring</h3><p data-i18n="why.f5p">Milestones tracked weekly against the master calendar.</p></div>
+      <div class="module"><span class="mono">F·06</span><h3 data-i18n="why.f6">Financial monitoring</h3><p data-i18n="why.f6p">Budget, claims and payments reconciled continuously.</p></div>
+      <div class="module"><span class="mono">F·07</span><h3 data-i18n="why.f7">Quality assurance</h3><p data-i18n="why.f7p">Delivery inspected against standards, not assumptions.</p></div>
+      <div class="module"><span class="mono">F·08</span><h3 data-i18n="why.f8">Communication management</h3><p data-i18n="why.f8p">Stakeholders informed on schedule, not on request.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 03 GOVERNANCE ============ -->
+<section class="sec" id="governance">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="sec-ref">PMO / 03</span>
+      <h2 data-i18n="gov.title">Governance framework</h2>
+    </div>
+    <p class="sec-lede" data-i18n="gov.lede">Authority flows down. Evidence flows up. The PMO sits at the centre of the chain as the coordination hub between every stakeholder.</p>
+    <div class="chain">
+      <div class="chain-node"><h3 data-i18n="gov.n1">Premier Office</h3><p data-i18n="gov.n1p">Strategic direction for Sarawak</p></div>
+      <div class="chain-node"><h3>MINTRED</h3><p data-i18n="gov.n2p">Ministry oversight and policy</p></div>
+      <div class="chain-node"><h3 data-i18n="gov.n3">Sarawak Business Federation</h3><p data-i18n="gov.n3p">Programme owner and steward of BizFund2</p></div>
+      <div class="chain-node hub"><h3 data-i18n="gov.n4">Programme Management Office</h3><p data-i18n="gov.n4p">KOBIS Berhad · the coordination hub: planning, monitoring, finance, quality and reporting</p><span class="chain-tag" data-i18n="gov.hub">◄ coordination hub</span></div>
+      <div class="chain-node"><h3 data-i18n="gov.n5">Training Providers</h3><p data-i18n="gov.n5p">Approved specialists delivering programmes</p></div>
+      <div class="chain-node"><h3 data-i18n="gov.n6">Entrepreneurs</h3><p data-i18n="gov.n6p">Sarawakian businesses being built up</p></div>
+      <div class="chain-node"><h3 data-i18n="gov.n7">Programme Outcomes</h3><p data-i18n="gov.n7p">Measured impact, reported back up the chain</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 04 LIFECYCLE ============ -->
+<section class="sec sec-alt" id="lifecycle">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="sec-ref">PMO / 04</span>
+      <h2 data-i18n="lc.title">One lifecycle, fourteen controlled stages</h2>
+    </div>
+    <p class="sec-lede" data-i18n="lc.lede">Every BizFund2 programme moves through the same numbered sequence. No stage is skipped, and no payment is released before its evidence exists.</p>
+
+    <div class="phase">
+      <div class="phase-name" data-i18n="lc.pA">Phase A · Design and approve</div>
+      <div class="stages">
+        <div class="stage"><span class="num">01</span><h3 data-i18n="lc.s1">Planning</h3><p data-i18n="lc.s1p">Annual portfolio and budget frame</p></div>
+        <div class="stage"><span class="num">02</span><h3 data-i18n="lc.s2">Programme design</h3><p data-i18n="lc.s2p">Outcomes, syllabus and cost per programme</p></div>
+        <div class="stage"><span class="num">03</span><h3 data-i18n="lc.s3">Provider selection</h3><p data-i18n="lc.s3p">Transparent evaluation and appointment</p></div>
+        <div class="stage"><span class="num">04</span><h3 data-i18n="lc.s4">Programme approval</h3><p data-i18n="lc.s4p">Committee sign-off recorded in the system</p></div>
+      </div>
+    </div>
+
+    <div class="phase">
+      <div class="phase-name" data-i18n="lc.pB">Phase B · Mobilise</div>
+      <div class="stages">
+        <div class="stage"><span class="num">05</span><h3 data-i18n="lc.s5">Marketing and promotion</h3><p data-i18n="lc.s5p">Coordinated outreach across districts</p></div>
+        <div class="stage"><span class="num">06</span><h3 data-i18n="lc.s6">Participant registration</h3><p data-i18n="lc.s6p">Online registration with eligibility checks</p></div>
+      </div>
+    </div>
+
+    <div class="phase">
+      <div class="phase-name" data-i18n="lc.pC">Phase C · Deliver and verify</div>
+      <div class="stages">
+        <div class="stage"><span class="num">07</span><h3 data-i18n="lc.s7">Programme delivery</h3><p data-i18n="lc.s7p">Sessions run to the approved plan</p></div>
+        <div class="stage"><span class="num">08</span><h3 data-i18n="lc.s8">Attendance verification</h3><p data-i18n="lc.s8p">QR check-in, verified per session</p></div>
+        <div class="stage"><span class="num">09</span><h3 data-i18n="lc.s9">Monitoring</h3><p data-i18n="lc.s9p">Site visits and live progress tracking</p></div>
+      </div>
+    </div>
+
+    <div class="phase">
+      <div class="phase-name" data-i18n="lc.pD">Phase D · Account and improve</div>
+      <div class="stages">
+        <div class="stage"><span class="num">10</span><h3 data-i18n="lc.s10">Reporting</h3><p data-i18n="lc.s10p">Provider reports filed on schedule</p></div>
+        <div class="stage"><span class="num">11</span><h3 data-i18n="lc.s11">Claims</h3><p data-i18n="lc.s11p">Claims submitted with evidence attached</p></div>
+        <div class="stage"><span class="num">12</span><h3 data-i18n="lc.s12">Payment processing</h3><p data-i18n="lc.s12p">Verified claims paid within target days</p></div>
+        <div class="stage"><span class="num">13</span><h3 data-i18n="lc.s13">Programme evaluation</h3><p data-i18n="lc.s13p">Quality and satisfaction reviewed</p></div>
+        <div class="stage"><span class="num">14</span><h3 data-i18n="lc.s14">Impact measurement</h3><p data-i18n="lc.s14p">Business outcomes tracked over time</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 05 RESPONSIBILITIES ============ -->
+<section class="sec" id="responsibilities">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="sec-ref">PMO / 05</span>
+      <h2 data-i18n="resp.title">Twelve standing responsibilities</h2>
+    </div>
+    <p class="sec-lede" data-i18n="resp.lede">These modules run continuously for the life of BizFund2, regardless of how many programmes are in flight.</p>
+    <div class="modules">
+      <div class="module"><span class="mono">R·01</span><h3 data-i18n="resp.r1">Programme planning</h3><p data-i18n="resp.r1p">Portfolio, calendar and budget frame</p></div>
+      <div class="module"><span class="mono">R·02</span><h3 data-i18n="resp.r2">Secretariat management</h3><p data-i18n="resp.r2p">Meetings, minutes and follow-through</p></div>
+      <div class="module"><span class="mono">R·03</span><h3 data-i18n="resp.r3">Timeline coordination</h3><p data-i18n="resp.r3p">Master schedule across all providers</p></div>
+      <div class="module"><span class="mono">R·04</span><h3 data-i18n="resp.r4">Provider coordination</h3><p data-i18n="resp.r4p">Onboarding, SOP and daily liaison</p></div>
+      <div class="module"><span class="mono">R·05</span><h3 data-i18n="resp.r5">Budget monitoring</h3><p data-i18n="resp.r5p">Utilisation tracked against allocation</p></div>
+      <div class="module"><span class="mono">R·06</span><h3 data-i18n="resp.r6">Quality assurance</h3><p data-i18n="resp.r6p">Standards inspected in the field</p></div>
+      <div class="module"><span class="mono">R·07</span><h3 data-i18n="resp.r7">Risk monitoring</h3><p data-i18n="resp.r7p">Register maintained, alerts escalated</p></div>
+      <div class="module"><span class="mono">R·08</span><h3 data-i18n="resp.r8">Documentation</h3><p data-i18n="resp.r8p">Every artefact filed and retrievable</p></div>
+      <div class="module"><span class="mono">R·09</span><h3 data-i18n="resp.r9">Reporting</h3><p data-i18n="resp.r9p">Monthly packs for every stakeholder tier</p></div>
+      <div class="module"><span class="mono">R·10</span><h3 data-i18n="resp.r10">Compliance</h3><p data-i18n="resp.r10p">Procedures aligned to funding conditions</p></div>
+      <div class="module"><span class="mono">R·11</span><h3 data-i18n="resp.r11">Communication</h3><p data-i18n="resp.r11p">Structured updates across the chain</p></div>
+      <div class="module"><span class="mono">R·12</span><h3 data-i18n="resp.r12">Continuous improvement</h3><p data-i18n="resp.r12p">Lessons folded back into the SOP</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 06 STAKEHOLDER COMMUNICATION ============ -->
+<section class="sec sec-alt" id="communication">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="sec-ref">PMO / 06</span>
+      <h2 data-i18n="comm.title">Stakeholder communication</h2>
+    </div>
+    <p class="sec-lede" data-i18n="comm.lede">Information moves on a fixed rhythm, in both directions. The PMO is the switchboard, so no stakeholder ever has to chase another for the facts.</p>
+    <div class="hub-wrap">
+      <svg class="hub-svg" viewBox="0 0 440 400" role="img" aria-label="Communication diagram: the PMO at the centre, connected to SBF Secretariat, Government, Training Providers and Entrepreneurs">
+        <line class="spoke-line" x1="220" y1="200" x2="220" y2="58"/>
+        <line class="spoke-line" x1="220" y1="200" x2="220" y2="342"/>
+        <line class="spoke-line" x1="220" y1="200" x2="66" y2="200"/>
+        <line class="spoke-line" x1="220" y1="200" x2="374" y2="200"/>
+        <g>
+          <rect x="150" y="20" width="140" height="42" rx="9" fill="#131C31" stroke="#26324E"/>
+          <text x="220" y="46" text-anchor="middle" font-size="13" data-i18n="comm.gov">Government</text>
+        </g>
+        <g>
+          <rect x="8" y="179" width="120" height="42" rx="9" fill="#131C31" stroke="#26324E"/>
+          <text x="68" y="205" text-anchor="middle" font-size="12" data-i18n="comm.sbf">SBF Secretariat</text>
+        </g>
+        <g>
+          <rect x="312" y="179" width="122" height="42" rx="9" fill="#131C31" stroke="#26324E"/>
+          <text x="373" y="205" text-anchor="middle" font-size="12" data-i18n="comm.prov">Providers</text>
+        </g>
+        <g>
+          <rect x="145" y="338" width="150" height="42" rx="9" fill="#131C31" stroke="#26324E"/>
+          <text x="220" y="364" text-anchor="middle" font-size="13" data-i18n="comm.ent">Entrepreneurs</text>
+        </g>
+        <g>
+          <circle cx="220" cy="200" r="52" fill="#1A2540" stroke="#E8B64C" stroke-width="1.5"/>
+          <text x="220" y="196" text-anchor="middle" font-size="14" font-weight="700" fill="#E8B64C">PMO</text>
+          <text x="220" y="214" text-anchor="middle" font-size="9" fill="#B3C0DB">KOBIS Berhad</text>
+        </g>
+      </svg>
+      <div class="hub-flows">
+        <div class="hub-flow"><span class="who" data-i18n="comm.f1w">PMO → Government</span><p data-i18n="comm.f1">Monthly executive packs, KPI status and budget position.</p></div>
+        <div class="hub-flow"><span class="who" data-i18n="comm.f2w">PMO ↔ SBF Secretariat</span><p data-i18n="comm.f2">Weekly operations rhythm, committee papers and decisions.</p></div>
+        <div class="hub-flow"><span class="who" data-i18n="comm.f3w">PMO ↔ Providers</span><p data-i18n="comm.f3">Schedules, SOP, report and claim turnaround, field support.</p></div>
+        <div class="hub-flow"><span class="who" data-i18n="comm.f4w">PMO ↔ Entrepreneurs</span><p data-i18n="comm.f4">Registration, reminders, feedback and certification.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 07 COMMAND CENTRE ============ -->
+<section class="sec command" id="command">
+  <div class="wrap-wide">
+    <div class="sec-head">
+      <span class="sec-ref">PMO / 07</span>
+      <h2 data-i18n="cc.title">The BizFund2 Command Centre</h2>
+    </div>
+    <p class="sec-lede" data-i18n="cc.lede">Monitoring and reporting, delivered as a live executive dashboard for the Premier Office, MINTRED and the SBF Committee. This is a working preview: switch the views below.</p>
+
+    <div class="console">
+      <div class="console-bar">
+        <span class="win" aria-hidden="true"><i></i><i></i><i></i></span>
+        <span class="console-title">bizfund2.sarawak · command-centre</span>
+        <span class="live-chip" data-i18n="cc.live">LIVE · DEMO DATA</span>
+      </div>
+      <div class="tabs" role="tablist" aria-label="Command centre views">
+        <button class="tab" role="tab" id="tab-ov" aria-selected="true" aria-controls="panel-ov" data-i18n="cc.t1">Overview</button>
+        <button class="tab" role="tab" id="tab-bu" aria-selected="false" aria-controls="panel-bu" tabindex="-1" data-i18n="cc.t2">Budget</button>
+        <button class="tab" role="tab" id="tab-di" aria-selected="false" aria-controls="panel-di" tabindex="-1" data-i18n="cc.t3">Divisions</button>
+        <button class="tab" role="tab" id="tab-kp" aria-selected="false" aria-controls="panel-kp" tabindex="-1" data-i18n="cc.t4">KPI Register</button>
+      </div>
+
+      <div class="panel" id="panel-ov" role="tabpanel" aria-labelledby="tab-ov">
+        <div class="tiles">
+          <div class="tile"><div class="lab" data-i18n="cc.k1">Budget utilised</div><div class="val"><span class="count" data-to="61" data-dec="0">0</span><small>%</small></div><div class="sub" data-i18n="cc.k1s">RM 18.4M of RM 30.0M</div></div>
+          <div class="tile"><div class="lab" data-i18n="cc.k2">Programmes on track</div><div class="val"><span class="count" data-to="74">0</span><small>/96</small></div><div class="sub up" data-i18n="cc.k2s">+6 this month</div></div>
+          <div class="tile"><div class="lab" data-i18n="cc.k3">Entrepreneurs enrolled</div><div class="val"><span class="count" data-to="4820">0</span></div><div class="sub" data-i18n="cc.k3s">across 12 divisions</div></div>
+          <div class="tile"><div class="lab" data-i18n="cc.k4">Completion rate</div><div class="val"><span class="count" data-to="87">0</span><small>%</small></div><div class="sub up" data-i18n="cc.k4s">satisfaction 4.6 / 5</div></div>
+        </div>
+        <div class="chart">
+          <h3 data-i18n="cc.ovh">Entrepreneurs onboarded per month</h3>
+          <p class="chart-sub" data-i18n="cc.ovs">2026 programme year, all divisions</p>
+          <div class="cols" id="monthCols" role="img" aria-label="Bar chart: monthly onboarding rises from 120 in January to a peak of 560 in September, easing to 350 by December"></div>
+          <div class="cols-x" id="monthLabels" aria-hidden="true"></div>
+        </div>
+      </div>
+
+      <div class="panel" id="panel-bu" role="tabpanel" aria-labelledby="tab-bu" hidden>
+        <div class="chart">
+          <h3 data-i18n="cc.buh">Budget utilisation by pillar</h3>
+          <p class="chart-sub" data-i18n="cc.bus">RM utilised against RM allocated · total RM 18.4M of RM 30.0M</p>
+          <div id="budgetBars"></div>
+          <div class="legend"><span><i style="background:var(--cyan-deep)"></i><span data-i18n="cc.lg1">Utilised</span></span><span><i style="background:var(--bg-3);border:1px solid var(--line)"></i><span data-i18n="cc.lg2">Allocated</span></span></div>
+        </div>
+      </div>
+
+      <div class="panel" id="panel-di" role="tabpanel" aria-labelledby="tab-di" hidden>
+        <div class="chart">
+          <h3 data-i18n="cc.dih">Participation by division</h3>
+          <p class="chart-sub" data-i18n="cc.dis">Enrolled entrepreneurs · all 12 divisions of Sarawak active</p>
+          <div class="hbars" id="divBars"></div>
+        </div>
+      </div>
+
+      <div class="panel" id="panel-kp" role="tabpanel" aria-labelledby="tab-kp" hidden>
+        <div class="chart" style="overflow-x:auto">
+          <h3 data-i18n="cc.kph">KPI register · Q3 2026</h3>
+          <p class="chart-sub" data-i18n="cc.kps">Every indicator has an owner, a target and a status</p>
+          <table class="kpi-table">
+            <thead><tr><th data-i18n="cc.th1">Indicator</th><th data-i18n="cc.th2">Actual</th><th data-i18n="cc.th3">Target</th><th data-i18n="cc.th4">Status</th></tr></thead>
+            <tbody id="kpiBody"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TEMP: KOBIS Berhad placeholder credit ticker — replace wording with client's chosen text once payment is received, then remove KOBIS branding ticker -->
+<div class="ticker-bar ticker-static" aria-hidden="true">
+  <div class="ticker-track" id="tickerTrack2"></div>
+</div>
+
+<!-- ============ 08 DIGITAL LAYER ============ -->
+<section class="sec" id="platform">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="sec-ref">PMO / 08</span>
+      <h2 data-i18n="dl.title">Beyond the mandate: the KOBIS digital layer</h2>
+    </div>
+    <div class="values-intro">
+      <div>
+        <p class="muted" data-i18n="dl.p1">A conventional PMO runs on spreadsheets, email chains and fragmented chat groups. KOBIS replaces that with one digital ecosystem: a single platform where every programme, provider, participant, claim and photograph lives in the same place.</p>
+        <p class="muted" data-i18n="dl.p2">Seven value additions come with our appointment at no change to the PMO scope. Together they make BizFund2 a benchmark Digital PMO ecosystem for Sarawak.</p>
+      </div>
+      <div class="frame">
+        <div class="frame-bar"><i></i><i></i><i></i><span>platform.bizfund2 · one ecosystem</span></div>
+        <div class="frame-body">
+          <div class="frame-row"><span data-i18n="dl.e1">Digital platform</span><b data-i18n="dl.e1v">replaces manual spreadsheets</b></div>
+          <div class="frame-row"><span data-i18n="dl.e2">Executive dashboard</span><b data-i18n="dl.e2v">live for three stakeholder tiers</b></div>
+          <div class="frame-row"><span data-i18n="dl.e3">Provider portal</span><b data-i18n="dl.e3v">38 providers, one workflow</b></div>
+          <div class="frame-row"><span data-i18n="dl.e4">Entrepreneur portal</span><b data-i18n="dl.e4v">4,820 personal journeys</b></div>
+          <div class="frame-row"><span data-i18n="dl.e5">Media engine</span><b data-i18n="dl.e5v">every programme becomes visibility</b></div>
+          <div class="frame-row"><span data-i18n="dl.e6">Analytics</span><b data-i18n="dl.e6v">data becomes executive insight</b></div>
+          <div class="frame-row" style="border-bottom:0"><span data-i18n="dl.e7">AI modules</span><b data-i18n="dl.e7v">future-ready from day one</b></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Value 3: provider portal -->
+    <div class="value-block">
+      <div class="frame">
+        <div class="frame-bar"><i></i><i></i><i></i><span>provider.bizfund2 · Serumpun Skills Sdn Bhd</span></div>
+        <div class="frame-body">
+          <table class="mini-table">
+            <thead><tr><th data-i18n="pp.th1">Programme</th><th data-i18n="pp.th2">Division</th><th data-i18n="pp.th3">Claim</th><th data-i18n="pp.th4">Status</th></tr></thead>
+            <tbody>
+              <tr><td>Digital Marketing Bootcamp</td><td>Kuching</td><td class="mono">RM 84,000</td><td><span class="chip ok"><svg viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2 6.5L4.8 9 10 3.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><span data-i18n="st.paid">Paid</span></span></td></tr>
+              <tr><td>Halal Certification Lab</td><td>Sibu</td><td class="mono">RM 61,500</td><td><span class="chip watch"><svg viewBox="0 0 12 12" fill="none" aria-hidden="true"><circle cx="6" cy="6" r="4.6" stroke="currentColor" stroke-width="1.6"/><path d="M6 3.6v2.8l1.8 1.2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg><span data-i18n="st.review">In review</span></span></td></tr>
+              <tr><td>E-Commerce Onboarding</td><td>Miri</td><td class="mono">RM 47,200</td><td><span class="chip ok"><svg viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2 6.5L4.8 9 10 3.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><span data-i18n="st.verified">Verified</span></span></td></tr>
+            </tbody>
+          </table>
+          <div class="frame-row"><span data-i18n="pp.r1">Attendance uploaded · Session 8 of 10</span><b class="mono">98.2%</b></div>
+          <div class="frame-row" style="border-bottom:0"><span data-i18n="pp.r2">Next report due</span><b class="mono">12 Aug 2026</b></div>
+        </div>
+      </div>
+      <div class="value-copy">
+        <span class="vref" data-i18n="pp.ref">VALUE 1 + 3 · DIGITAL PLATFORM &amp; PROVIDER PORTAL</span>
+        <h3 data-i18n="pp.title">Every approved provider works inside one portal</h3>
+        <p data-i18n="pp.p">Calendar, SOP, templates, attendance, photo upload, report submission, claim submission and payment tracking, in a single login. Claims stop living in email attachments, and payment status stops being a phone call.</p>
+        <ul>
+          <li data-i18n="pp.l1">Programme calendar and SOP</li>
+          <li data-i18n="pp.l2">Attendance and photo upload</li>
+          <li data-i18n="pp.l3">Report and claim submission</li>
+          <li data-i18n="pp.l4">Payment and progress tracking</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Value 4: entrepreneur portal -->
+    <div class="value-block flip">
+      <div class="value-copy">
+        <span class="vref" data-i18n="ep.ref">VALUE 4 · ENTREPRENEUR EXPERIENCE PORTAL</span>
+        <h3 data-i18n="ep.title">A personal learning journey for every entrepreneur</h3>
+        <p data-i18n="ep.p">From registration to certificate, each participant carries the programme in their pocket: QR attendance at the door, materials after each session, feedback in one tap and a digital badge they can actually show a bank.</p>
+        <ul>
+          <li data-i18n="ep.l1">Registration and schedule</li>
+          <li data-i18n="ep.l2">QR attendance check-in</li>
+          <li data-i18n="ep.l3">Learning materials and feedback</li>
+          <li data-i18n="ep.l4">Certificate and digital badge</li>
+        </ul>
+      </div>
+      <div class="phone">
+        <div class="phone-screen">
+          <div class="phone-head">
+            <span class="mono">BIZFUND2 · MY JOURNEY</span>
+            <h4>Nurul A. · Kuching</h4>
+          </div>
+          <div class="phone-body">
+            <div class="qr" aria-hidden="true">
+              <svg viewBox="0 0 29 29" shape-rendering="crispEdges">
+                <rect width="29" height="29" fill="#fff"/>
+                <path fill="#0A0F1A" d="M0 0h7v7H0zM2 2h3v3H2zM22 0h7v7h-7zM24 2h3v3h-3zM0 22h7v7H0zM2 24h3v3H2zM9 0h2v2H9zM13 1h2v3h-2zM17 0h2v2h-2zM10 4h3v2h-3zM16 4h2v3h-2zM9 8h2v2H9zM0 9h2v2H0zM3 9h3v2H3zM12 8h3v3h-3zM19 9h2v2h-2zM23 9h3v2h-3zM27 8h2v3h-2zM1 13h3v2H1zM6 12h2v3H6zM10 13h3v3h-3zM15 12h2v2h-2zM18 13h3v2h-3zM23 13h2v2h-2zM26 12h3v2h-3zM0 17h2v3H0zM4 16h2v2H4zM8 17h3v2H8zM13 17h2v3h-2zM17 16h2v3h-2zM21 17h3v2h-3zM26 16h2v2h-2zM9 22h2v3H9zM12 21h3v2h-3zM16 22h3v3h-3zM21 21h2v3h-2zM24 22h3v2h-3zM10 26h3v3h-3zM15 26h2v2h-2zM19 26h3v3h-3zM24 26h2v2h-2zM27 24h2v3h-2z"/>
+              </svg>
+            </div>
+            <button class="phone-cta" type="button" data-i18n="ep.cta">Check in · Session 9</button>
+            <div class="badge-line">
+              <span class="badge-dot" aria-hidden="true"><svg viewBox="0 0 12 12" fill="none"><path d="M6 1l1.4 3 3.3.3-2.5 2.2.8 3.2L6 8l-3 1.7.8-3.2L1.3 4.3l3.3-.3z" fill="currentColor"/></svg></span>
+              <span data-i18n="ep.badge">Digital badge earned: E-Commerce Foundations</span>
+            </div>
+            <div class="journey">
+              <div class="lab"><span data-i18n="ep.jr">JOURNEY</span><span>82%</span></div>
+              <div class="track"><div class="fill" data-w="82"></div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Value 5: media -->
+    <div class="value-block flip">
+      <div class="value-copy">
+        <span class="vref" data-i18n="md.ref">VALUE 5 · MEDIA &amp; VISIBILITY MANAGEMENT</span>
+        <h3 data-i18n="md.title">Every programme automatically becomes public proof</h3>
+        <p data-i18n="md.p">Photos, success stories and testimonials flow from the field into a managed archive and out to Facebook, Instagram, TikTok, LinkedIn and the press. BizFund2's impact stays visible without any provider lifting a finger.</p>
+      </div>
+      <div class="media-wall">
+        <div class="media-tile"><div class="net">Facebook</div><div class="n">214</div><div class="d" data-i18n="md.posts">posts published</div></div>
+        <div class="media-tile"><div class="net">Instagram</div><div class="n">186</div><div class="d" data-i18n="md.posts2">posts published</div></div>
+        <div class="media-tile"><div class="net">TikTok</div><div class="n">92</div><div class="d" data-i18n="md.videos">videos published</div></div>
+        <div class="media-tile"><div class="net">LinkedIn</div><div class="n">64</div><div class="d" data-i18n="md.stories">stories published</div></div>
+        <div class="post-card">
+          <span class="avatar" aria-hidden="true">B2</span>
+          <div>
+            <p data-i18n="md.post">“From a kampung kitchen to 400 online orders a month: Aina's sambal business completed the E-Commerce Onboarding programme in Betong this week.” 📍 Betong · #BizFund2 #SarawakMaju</p>
+            <p class="meta" data-i18n="md.meta">AUTO-DRAFTED FROM FIELD REPORT · PENDING SECRETARIAT APPROVAL</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Value 6: analytics -->
+    <div class="value-block flip">
+      <div class="value-copy">
+        <span class="vref" data-i18n="an.ref">VALUE 6 · DATA &amp; ANALYTICS</span>
+        <h3 data-i18n="an.title">Programme data becomes executive intelligence</h3>
+        <p data-i18n="an.p">Gender, age, district, industry, attendance, completion, satisfaction and repeat participation are captured as a by-product of operations, then read back as insight: who BizFund2 is reaching, and who it is not reaching yet.</p>
+      </div>
+      <div class="splits">
+        <div class="split">
+          <h4 data-i18n="an.s1">Participants by gender</h4>
+          <div class="hbars">
+            <div class="hbar"><span class="lab" data-i18n="an.g1">Women</span><span class="track"><span class="fill" data-w="58" data-tip="Women · 2,796 (58%)"></span></span><span class="val">58%</span></div>
+            <div class="hbar"><span class="lab" data-i18n="an.g2">Men</span><span class="track"><span class="fill" data-w="42" data-tip="Men · 2,024 (42%)"></span></span><span class="val">42%</span></div>
+          </div>
+        </div>
+        <div class="split">
+          <h4 data-i18n="an.s2">Participants by age</h4>
+          <div class="hbars">
+            <div class="hbar"><span class="lab">18–30</span><span class="track"><span class="fill" data-w="34" data-tip="18–30 · 1,639 (34%)"></span></span><span class="val">34%</span></div>
+            <div class="hbar"><span class="lab">31–45</span><span class="track"><span class="fill" data-w="46" data-tip="31–45 · 2,217 (46%)"></span></span><span class="val">46%</span></div>
+            <div class="hbar"><span class="lab">46+</span><span class="track"><span class="fill" data-w="20" data-tip="46+ · 964 (20%)"></span></span><span class="val">20%</span></div>
+          </div>
+        </div>
+        <div class="split">
+          <h4 data-i18n="an.s3">Top industries</h4>
+          <div class="hbars">
+            <div class="hbar"><span class="lab" data-i18n="an.i1">Food &amp; agro</span><span class="track"><span class="fill" data-w="31" data-tip="Food & agro-processing · 31%"></span></span><span class="val">31%</span></div>
+            <div class="hbar"><span class="lab" data-i18n="an.i2">Retail &amp; e-com</span><span class="track"><span class="fill" data-w="27" data-tip="Retail & e-commerce · 27%"></span></span><span class="val">27%</span></div>
+            <div class="hbar"><span class="lab" data-i18n="an.i3">Services</span><span class="track"><span class="fill" data-w="22" data-tip="Services · 22%"></span></span><span class="val">22%</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Value 7: AI -->
+    <div class="value-block">
+      <div class="ai-card">
+        <div class="ai-head">
+          <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M8 1l1.8 4.2L14 7l-4.2 1.8L8 13l-1.8-4.2L2 7l4.2-1.8z" fill="#E8B64C"/><circle cx="13" cy="13" r="1.6" fill="#5BC3E8"/></svg>
+          <span data-i18n="ai.head">AI EXECUTIVE SUMMARY · GENERATED MON 09:00</span>
+        </div>
+        <p class="ai-text" id="aiText">All twelve divisions are active this quarter. Budget utilisation stands at 61 percent, tracking plan. Provider report compliance in Kapit and Mukah is below the 95 percent threshold: a secretariat follow-up is recommended this week. Projected year-end participation: 6,400 entrepreneurs.</p>
+      </div>
+      <div class="value-copy">
+        <span class="vref" data-i18n="ai.ref">VALUE 7 · FUTURE AI &amp; DIGITAL INNOVATION</span>
+        <h3 data-i18n="ai.title">Future-ready from the first day</h3>
+        <p data-i18n="ai.p">The platform is built to grow into the next decade of BizFund2, positioning it as the benchmark Digital PMO ecosystem for Sarawak.</p>
+        <ul class="roadmap">
+          <li><span class="yr">2026</span><span data-i18n="ai.r1">AI executive summaries and risk alerts</span></li>
+          <li><span class="yr">2027</span><span data-i18n="ai.r2">Predictive analytics and programme recommendations</span></li>
+          <li><span class="yr">2028</span><span data-i18n="ai.r3">Division comparison and funding utilisation insight</span></li>
+          <li><span class="yr">2030</span><span data-i18n="ai.r4">Long-term impact measurement, toward 2030 and beyond</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 09 TEAM ============ -->
+<section class="sec sec-alt" id="team">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="sec-ref">PMO / 09</span>
+      <h2 data-i18n="team.title">The PMO core team</h2>
+    </div>
+    <p class="sec-lede" data-i18n="team.lede">A dedicated structure with named accountability for operations, finance, quality, communications and the digital platform.</p>
+    <div class="org">
+      <div class="org-card lead"><span class="mono">T·01</span><p class="role" data-i18n="team.r1">Programme Director</p><p class="duty" data-i18n="team.r1d">Single point of accountability to the SBF Committee</p></div>
+      <div class="org-card"><span class="mono">T·02</span><p class="role" data-i18n="team.r2">Operations Lead</p><p class="duty" data-i18n="team.r2d">Lifecycle execution across all programmes</p></div>
+      <div class="org-card"><span class="mono">T·03</span><p class="role" data-i18n="team.r3">Finance Lead</p><p class="duty" data-i18n="team.r3d">Budget, claims verification and payments</p></div>
+      <div class="org-card"><span class="mono">T·04</span><p class="role" data-i18n="team.r4">Programme Coordinators</p><p class="duty" data-i18n="team.r4d">Provider and district coordination in the field</p></div>
+      <div class="org-card"><span class="mono">T·05</span><p class="role" data-i18n="team.r5">Quality Assurance</p><p class="duty" data-i18n="team.r5d">Standards, site inspections and evaluation</p></div>
+      <div class="org-card"><span class="mono">T·06</span><p class="role" data-i18n="team.r6">Communications</p><p class="duty" data-i18n="team.r6d">Stakeholder reporting and media visibility</p></div>
+      <div class="org-card"><span class="mono">T·07</span><p class="role" data-i18n="team.r7">Digital Support</p><p class="duty" data-i18n="team.r7d">Platform, portals, data and helpdesk</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 10 CLOSING ============ -->
+<section class="sec closing" id="closing">
+  <div class="wrap">
+    <p class="vision" data-i18n="close.vision">KOBIS Berhad, ready to serve BizFund2.</p>
+    <p class="closing-tri" data-i18n="close.tri">Management · Investment · Consultancy</p>
+    <p class="creed" data-i18n="close.creed">Empowering communities through structured execution, data-driven intelligence and uncompromised ethical governance.</p>
+    <form class="contact-form" action="#" onsubmit="return false">
+      <label><span data-i18n="form.name">Name</span><input type="text" name="name" autocomplete="name" required></label>
+      <label><span data-i18n="form.org">Organisation</span><input type="text" name="organisation" autocomplete="organization"></label>
+      <label><span data-i18n="form.email">Email or phone</span><input type="text" name="contact" autocomplete="email" required></label>
+      <label><span data-i18n="form.msg">Message</span><textarea name="message" rows="4"></textarea></label>
+      <button class="btn btn-gold" type="submit" data-i18n="form.send">Request the full proposal</button>
+    </form>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="footer-main">
+    <div class="footer-brand">
+      <svg class="brand-mark" viewBox="0 0 40 40" fill="none" aria-hidden="true">
+        <rect x="1.5" y="1.5" width="37" height="37" rx="9" stroke="#E8B64C" stroke-width="2"/>
+        <path d="M20 8l2.9 8.1L31 19l-8.1 2.9L20 30l-2.9-8.1L9 19l8.1-2.9L20 8z" fill="#E8B64C"/>
+      </svg>
+      <div>
+        <h3>KOBIS Berhad</h3>
+        <p data-i18n="footer.tagline">Programme Management Office for BizFund2: structured execution, transparent governance and digital intelligence for Sarawak's entrepreneurs.</p>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4 data-i18n="footer.h1">Proposal</h4>
+      <a href="#mandate" data-i18n="footer.l1">Mandate</a>
+      <a href="#governance" data-i18n="footer.l2">Governance framework</a>
+      <a href="#lifecycle" data-i18n="footer.l3">Programme lifecycle</a>
+      <a href="#command" data-i18n="footer.l4">Command centre</a>
+      <a href="#platform" data-i18n="footer.l5">Digital layer</a>
+    </div>
+    <div class="footer-col">
+      <h4 data-i18n="footer.h2">Contact</h4>
+      <p>KOBIS Berhad</p>
+      <p data-i18n="footer.c1">Kuching, Sarawak, Malaysia</p>
+      <a href="https://www.kobisberhad.com" target="_blank" rel="noopener">www.kobisberhad.com</a>
+    </div>
+  </div>
+  <div class="footer-copy">
+    <p data-i18n="footer.rights">© 2026 KOBIS Berhad. All rights reserved. Prototype prepared for the Sarawak Business Federation with illustrative demonstration data.</p>
+  </div>
+  <div class="kobis-bar">
+    <p>This Digital Experience is Part of the <a class="kobis-link" href="https://www.kobisberhad.com" target="_blank" rel="noopener">KOBIS Berhad</a> Innovation Ecosystem</p>
+  </div>
+</footer>
+
+<div id="tip" role="presentation"></div>
+
+<script>
+(function(){
+"use strict";
+var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+/* ---------- ticker bars ---------- */
+var sparkle = '<svg class="ticker-icon" viewBox="0 0 14 14" fill="currentColor" aria-hidden="true"><path d="M7 0l1.6 4.2L13 5.8 8.6 7.4 7 11.6 5.4 7.4 1 5.8l4.4-1.6z"/><circle cx="12" cy="12" r="1.3"/></svg>';
+function fillTicker(id){
+  var t = document.getElementById(id); if(!t) return;
+  var item = '<span class="ticker-item">'+sparkle+'This website is built by KOBIS Berhad</span>';
+  var half = item.repeat(8);
+  t.innerHTML = half + half; /* duplicated for seamless -50% loop */
+}
+fillTicker("tickerTrack1"); fillTicker("tickerTrack2");
+
+/* ---------- i18n ---------- */
+var I18N = {
+bm:{
+"a11y.skip":"Langkau ke kandungan",
+"nav.by":"oleh KOBIS Berhad","nav.governance":"Tadbir Urus","nav.lifecycle":"Kitaran Hayat","nav.command":"Pusat Kawalan","nav.platform":"Lapisan Digital","nav.team":"Pasukan","nav.cta":"Mohon taklimat",
+"hero.issuer":"Disediakan oleh KOBIS Berhad · untuk Sarawak Business Federation",
+"hero.title":"Pejabat Program BizFund2, <em>sudah beroperasi.</em>",
+"hero.sub":"Ini bukan slaid pembentangan. Ini prototaip berfungsi Pejabat Pengurusan Program Digital yang akan dikendalikan KOBIS Berhad untuk BizFund2: pelaksanaan berstruktur, tadbir urus telus dan data langsung, dari Pejabat Premier hingga ke setiap usahawan di kesemua dua belas bahagian Sarawak.",
+"hero.cta1":"Masuk ke pusat kawalan","hero.cta2":"Lihat rangka tadbir urus",
+"hero.c1":"DANA · RM 30.0M","hero.c2":"BAHAGIAN · <b>12 / 12</b>","hero.c3":"PROGRAM · <b>96</b>","hero.c4":"USAHAWAN · <b>4,820</b>",
+"hero.note":"Prototaip dengan data demonstrasi ilustratif.",
+"mandate.title":"KOBIS Berhad sebagai Pejabat Pengurusan Program",
+"mandate.vision":"“Sparkling Sarawak’s Future, Toward 2030 and Beyond.”",
+"mandate.p1":"BizFund2 akan menyalurkan dana awam melalui puluhan penyedia kepada ribuan usahawan. Ia menuntut lebih daripada pentadbiran: ia menuntut sebuah pejabat yang merancang, mengesah, melapor dan bertanggungjawab atas setiap ringgit dan setiap sesi. KOBIS Berhad menawarkan diri sebagai pejabat itu.",
+"mandate.p2":"Komitmen kami kepada SBF berpaksikan empat disiplin, dan setiap skrin dalam prototaip ini wujud untuk membuktikan salah satu daripadanya.",
+"mandate.d1":"Pengurusan program berstruktur","mandate.d1p":"Satu kitaran hayat, empat belas peringkat terkawal, diguna pakai secara seragam untuk setiap program dalam portfolio.",
+"mandate.d2":"Tadbir urus telus","mandate.d2p":"Setiap keputusan boleh dijejak di sepanjang rantaian dari Pejabat Premier hingga peserta, tanpa apa-apa bergerak di luar rekod.",
+"mandate.d3":"Pelaksanaan berpandukan data","mandate.d3p":"Bajet, kehadiran, tuntutan dan hasil direkod sekali, disahkan, dan boleh dilihat pemegang taruh secara masa nyata.",
+"mandate.d4":"Kolaborasi pemegang taruh","mandate.d4p":"Sekretariat, kementerian, penyedia dan usahawan bekerja dalam satu sistem, bukan di sekelilingnya.",
+"why.title":"Mengapa BizFund2 memerlukan Pejabat Pengurusan Program",
+"why.lede":"Tanpa pejabat pusat, dana pelbagai penyedia berpecah menjadi hamparan data, kumpulan sembang dan tuntutan tidak berjawab. PMO ialah titik tunggal tempat penyelarasan, kawalan dan akauntabiliti bernaung.",
+"why.f1":"Penyelarasan pusat","why.f1p":"Satu hab untuk setiap program, penyedia dan bahagian.",
+"why.f2":"Tadbir urus lebih baik","why.f2p":"Autoriti jelas, eskalasi jelas, jejak audit penuh.",
+"why.f3":"Pengurusan risiko","why.f3p":"Risiko direkod, dimiliki dan ditangani sebelum membesar.",
+"why.f4":"Prosedur operasi standard","why.f4p":"Setiap penyedia bekerja mengikut buku panduan bertulis yang sama.",
+"why.f5":"Pemantauan garis masa","why.f5p":"Pencapaian dijejak mingguan berbanding kalendar induk.",
+"why.f6":"Pemantauan kewangan","why.f6p":"Bajet, tuntutan dan bayaran diselaraskan berterusan.",
+"why.f7":"Jaminan kualiti","why.f7p":"Penyampaian diperiksa mengikut piawaian, bukan andaian.",
+"why.f8":"Pengurusan komunikasi","why.f8p":"Pemegang taruh dimaklumkan mengikut jadual, bukan atas permintaan.",
+"gov.title":"Rangka tadbir urus",
+"gov.lede":"Autoriti mengalir ke bawah. Bukti mengalir ke atas. PMO berada di tengah rantaian sebagai hab penyelarasan antara setiap pemegang taruh.",
+"gov.n1":"Pejabat Premier","gov.n1p":"Hala tuju strategik Sarawak","gov.n2p":"Pengawasan kementerian dan dasar",
+"gov.n3":"Sarawak Business Federation","gov.n3p":"Pemilik program dan penjaga BizFund2",
+"gov.n4":"Pejabat Pengurusan Program","gov.n4p":"KOBIS Berhad · hab penyelarasan: perancangan, pemantauan, kewangan, kualiti dan pelaporan","gov.hub":"◄ hab penyelarasan",
+"gov.n5":"Penyedia Latihan","gov.n5p":"Pakar dilantik yang menyampaikan program",
+"gov.n6":"Usahawan","gov.n6p":"Perniagaan Sarawak yang sedang dibangunkan",
+"gov.n7":"Hasil Program","gov.n7p":"Impak diukur, dilaporkan semula ke atas rantaian",
+"lc.title":"Satu kitaran hayat, empat belas peringkat terkawal",
+"lc.lede":"Setiap program BizFund2 melalui urutan bernombor yang sama. Tiada peringkat dilangkau, dan tiada bayaran dilepaskan sebelum buktinya wujud.",
+"lc.pA":"Fasa A · Reka bentuk dan lulus","lc.pB":"Fasa B · Gerakkan","lc.pC":"Fasa C · Sampaikan dan sahkan","lc.pD":"Fasa D · Perakaunan dan penambahbaikan",
+"lc.s1":"Perancangan","lc.s1p":"Portfolio tahunan dan rangka bajet",
+"lc.s2":"Reka bentuk program","lc.s2p":"Hasil, silibus dan kos setiap program",
+"lc.s3":"Pemilihan penyedia","lc.s3p":"Penilaian dan pelantikan telus",
+"lc.s4":"Kelulusan program","lc.s4p":"Kelulusan jawatankuasa direkod dalam sistem",
+"lc.s5":"Pemasaran dan promosi","lc.s5p":"Jangkauan diselaras merentas bahagian",
+"lc.s6":"Pendaftaran peserta","lc.s6p":"Pendaftaran dalam talian dengan semakan kelayakan",
+"lc.s7":"Penyampaian program","lc.s7p":"Sesi dijalankan mengikut pelan diluluskan",
+"lc.s8":"Pengesahan kehadiran","lc.s8p":"Daftar masuk QR, disahkan setiap sesi",
+"lc.s9":"Pemantauan","lc.s9p":"Lawatan tapak dan penjejakan kemajuan langsung",
+"lc.s10":"Pelaporan","lc.s10p":"Laporan penyedia difailkan mengikut jadual",
+"lc.s11":"Tuntutan","lc.s11p":"Tuntutan dikemukakan bersama bukti",
+"lc.s12":"Pemprosesan bayaran","lc.s12p":"Tuntutan sah dibayar dalam sasaran hari",
+"lc.s13":"Penilaian program","lc.s13p":"Kualiti dan kepuasan disemak",
+"lc.s14":"Pengukuran impak","lc.s14p":"Hasil perniagaan dijejak dari semasa ke semasa",
+"resp.title":"Dua belas tanggungjawab tetap",
+"resp.lede":"Modul ini berjalan berterusan sepanjang hayat BizFund2, tidak kira berapa banyak program yang sedang berlangsung.",
+"resp.r1":"Perancangan program","resp.r1p":"Portfolio, kalendar dan rangka bajet",
+"resp.r2":"Pengurusan sekretariat","resp.r2p":"Mesyuarat, minit dan tindakan susulan",
+"resp.r3":"Penyelarasan garis masa","resp.r3p":"Jadual induk merentas semua penyedia",
+"resp.r4":"Penyelarasan penyedia","resp.r4p":"Onboarding, SOP dan perhubungan harian",
+"resp.r5":"Pemantauan bajet","resp.r5p":"Penggunaan dijejak berbanding peruntukan",
+"resp.r6":"Jaminan kualiti","resp.r6p":"Piawaian diperiksa di lapangan",
+"resp.r7":"Pemantauan risiko","resp.r7p":"Daftar diselenggara, amaran dieskalasi",
+"resp.r8":"Dokumentasi","resp.r8p":"Setiap artifak difailkan dan boleh dicapai",
+"resp.r9":"Pelaporan","resp.r9p":"Pek bulanan untuk setiap peringkat pemegang taruh",
+"resp.r10":"Pematuhan","resp.r10p":"Prosedur selari dengan syarat pembiayaan",
+"resp.r11":"Komunikasi","resp.r11p":"Kemas kini berstruktur di sepanjang rantaian",
+"resp.r12":"Penambahbaikan berterusan","resp.r12p":"Pengajaran diserap kembali ke dalam SOP",
+"comm.title":"Komunikasi pemegang taruh",
+"comm.lede":"Maklumat bergerak mengikut rentak tetap, dalam kedua-dua arah. PMO ialah papan suis, jadi tiada pemegang taruh perlu mengejar fakta daripada pihak lain.",
+"comm.gov":"Kerajaan","comm.sbf":"Sekretariat SBF","comm.prov":"Penyedia","comm.ent":"Usahawan",
+"comm.f1w":"PMO → Kerajaan","comm.f1":"Pek eksekutif bulanan, status KPI dan kedudukan bajet.",
+"comm.f2w":"PMO ↔ Sekretariat SBF","comm.f2":"Rentak operasi mingguan, kertas jawatankuasa dan keputusan.",
+"comm.f3w":"PMO ↔ Penyedia","comm.f3":"Jadual, SOP, pusingan laporan dan tuntutan, sokongan lapangan.",
+"comm.f4w":"PMO ↔ Usahawan","comm.f4":"Pendaftaran, peringatan, maklum balas dan pensijilan.",
+"cc.title":"Pusat Kawalan BizFund2",
+"cc.lede":"Pemantauan dan pelaporan, disampaikan sebagai papan pemuka eksekutif langsung untuk Pejabat Premier, MINTRED dan Jawatankuasa SBF. Ini pratonton berfungsi: tukar paparan di bawah.",
+"cc.live":"LANGSUNG · DATA DEMO",
+"cc.t1":"Ringkasan","cc.t2":"Bajet","cc.t3":"Bahagian","cc.t4":"Daftar KPI",
+"cc.k1":"Bajet digunakan","cc.k1s":"RM 18.4M daripada RM 30.0M",
+"cc.k2":"Program mengikut jadual","cc.k2s":"+6 bulan ini",
+"cc.k3":"Usahawan mendaftar","cc.k3s":"merentas 12 bahagian",
+"cc.k4":"Kadar penyiapan","cc.k4s":"kepuasan 4.6 / 5",
+"cc.ovh":"Usahawan diterima setiap bulan","cc.ovs":"Tahun program 2026, semua bahagian",
+"cc.buh":"Penggunaan bajet mengikut tonggak","cc.bus":"RM digunakan berbanding RM diperuntukkan · jumlah RM 18.4M daripada RM 30.0M",
+"cc.lg1":"Digunakan","cc.lg2":"Diperuntukkan",
+"cc.dih":"Penyertaan mengikut bahagian","cc.dis":"Usahawan berdaftar · kesemua 12 bahagian Sarawak aktif",
+"cc.kph":"Daftar KPI · S3 2026","cc.kps":"Setiap penunjuk ada pemilik, sasaran dan status",
+"cc.th1":"Penunjuk","cc.th2":"Sebenar","cc.th3":"Sasaran","cc.th4":"Status",
+"dl.title":"Melangkaui mandat: lapisan digital KOBIS",
+"dl.p1":"PMO konvensional berjalan atas hamparan data, rantaian e-mel dan kumpulan sembang berpecah. KOBIS menggantikannya dengan satu ekosistem digital: satu platform tempat setiap program, penyedia, peserta, tuntutan dan gambar berada di tempat yang sama.",
+"dl.p2":"Tujuh nilai tambah disertakan bersama pelantikan kami tanpa mengubah skop PMO. Bersama-sama, ia menjadikan BizFund2 penanda aras ekosistem PMO Digital untuk Sarawak.",
+"dl.e1":"Platform digital","dl.e1v":"menggantikan hamparan data manual",
+"dl.e2":"Papan pemuka eksekutif","dl.e2v":"langsung untuk tiga peringkat pemegang taruh",
+"dl.e3":"Portal penyedia","dl.e3v":"38 penyedia, satu aliran kerja",
+"dl.e4":"Portal usahawan","dl.e4v":"4,820 perjalanan peribadi",
+"dl.e5":"Enjin media","dl.e5v":"setiap program menjadi keterlihatan",
+"dl.e6":"Analitik","dl.e6v":"data menjadi wawasan eksekutif",
+"dl.e7":"Modul AI","dl.e7v":"sedia masa depan dari hari pertama",
+"pp.ref":"NILAI 1 + 3 · PLATFORM DIGITAL &amp; PORTAL PENYEDIA",
+"pp.title":"Setiap penyedia dilantik bekerja dalam satu portal",
+"pp.p":"Kalendar, SOP, templat, kehadiran, muat naik gambar, penghantaran laporan, tuntutan dan penjejakan bayaran, dalam satu log masuk. Tuntutan tidak lagi tinggal dalam lampiran e-mel, dan status bayaran tidak lagi memerlukan panggilan telefon.",
+"pp.l1":"Kalendar program dan SOP","pp.l2":"Kehadiran dan muat naik gambar","pp.l3":"Penghantaran laporan dan tuntutan","pp.l4":"Penjejakan bayaran dan kemajuan",
+"pp.th1":"Program","pp.th2":"Bahagian","pp.th3":"Tuntutan","pp.th4":"Status",
+"pp.r1":"Kehadiran dimuat naik · Sesi 8 daripada 10","pp.r2":"Laporan berikut perlu dihantar",
+"st.paid":"Dibayar","st.review":"Dalam semakan","st.verified":"Disahkan",
+"ep.ref":"NILAI 4 · PORTAL PENGALAMAN USAHAWAN",
+"ep.title":"Perjalanan pembelajaran peribadi untuk setiap usahawan",
+"ep.p":"Dari pendaftaran hingga sijil, setiap peserta membawa program dalam poket mereka: kehadiran QR di pintu, bahan selepas setiap sesi, maklum balas dengan satu ketukan dan lencana digital yang benar-benar boleh ditunjukkan kepada bank.",
+"ep.l1":"Pendaftaran dan jadual","ep.l2":"Daftar masuk kehadiran QR","ep.l3":"Bahan pembelajaran dan maklum balas","ep.l4":"Sijil dan lencana digital",
+"ep.cta":"Daftar masuk · Sesi 9","ep.badge":"Lencana digital diperoleh: Asas E-Dagang","ep.jr":"PERJALANAN",
+"md.ref":"NILAI 5 · PENGURUSAN MEDIA &amp; KETERLIHATAN",
+"md.title":"Setiap program secara automatik menjadi bukti awam",
+"md.p":"Gambar, kisah kejayaan dan testimoni mengalir dari lapangan ke arkib terurus dan keluar ke Facebook, Instagram, TikTok, LinkedIn dan media. Impak BizFund2 kekal kelihatan tanpa mana-mana penyedia perlu berusaha lebih.",
+"md.posts":"hantaran diterbitkan","md.posts2":"hantaran diterbitkan","md.videos":"video diterbitkan","md.stories":"kisah diterbitkan",
+"md.post":"“Dari dapur kampung ke 400 pesanan dalam talian sebulan: perniagaan sambal Aina menamatkan program E-Commerce Onboarding di Betong minggu ini.” 📍 Betong · #BizFund2 #SarawakMaju",
+"md.meta":"DRAF AUTOMATIK DARIPADA LAPORAN LAPANGAN · MENUNGGU KELULUSAN SEKRETARIAT",
+"an.ref":"NILAI 6 · DATA &amp; ANALITIK",
+"an.title":"Data program menjadi kecerdasan eksekutif",
+"an.p":"Jantina, umur, daerah, industri, kehadiran, penyiapan, kepuasan dan penyertaan berulang direkod sebagai hasil sampingan operasi, kemudian dibaca semula sebagai wawasan: siapa yang dicapai BizFund2, dan siapa yang belum dicapai.",
+"an.s1":"Peserta mengikut jantina","an.s2":"Peserta mengikut umur","an.s3":"Industri teratas",
+"an.g1":"Wanita","an.g2":"Lelaki","an.i1":"Makanan &amp; agro","an.i2":"Runcit &amp; e-dagang","an.i3":"Perkhidmatan",
+"ai.head":"RINGKASAN EKSEKUTIF AI · DIJANA ISNIN 09:00",
+"ai.ref":"NILAI 7 · AI MASA DEPAN &amp; INOVASI DIGITAL",
+"ai.title":"Sedia masa depan sejak hari pertama",
+"ai.p":"Platform ini dibina untuk berkembang ke dekad seterusnya BizFund2, meletakkannya sebagai penanda aras ekosistem PMO Digital untuk Sarawak.",
+"ai.r1":"Ringkasan eksekutif AI dan amaran risiko","ai.r2":"Analitik ramalan dan cadangan program","ai.r3":"Perbandingan bahagian dan wawasan penggunaan dana","ai.r4":"Pengukuran impak jangka panjang, menuju 2030 dan seterusnya",
+"team.title":"Pasukan teras PMO",
+"team.lede":"Struktur khusus dengan akauntabiliti bernama untuk operasi, kewangan, kualiti, komunikasi dan platform digital.",
+"team.r1":"Pengarah Program","team.r1d":"Titik akauntabiliti tunggal kepada Jawatankuasa SBF",
+"team.r2":"Ketua Operasi","team.r2d":"Pelaksanaan kitaran hayat merentas semua program",
+"team.r3":"Ketua Kewangan","team.r3d":"Bajet, pengesahan tuntutan dan bayaran",
+"team.r4":"Penyelaras Program","team.r4d":"Penyelarasan penyedia dan bahagian di lapangan",
+"team.r5":"Jaminan Kualiti","team.r5d":"Piawaian, pemeriksaan tapak dan penilaian",
+"team.r6":"Komunikasi","team.r6d":"Pelaporan pemegang taruh dan keterlihatan media",
+"team.r7":"Sokongan Digital","team.r7d":"Platform, portal, data dan meja bantuan",
+"close.vision":"KOBIS Berhad, sedia berkhidmat untuk BizFund2.",
+"close.tri":"Pengurusan · Pelaburan · Perundingan",
+"close.creed":"Memperkasa komuniti melalui pelaksanaan berstruktur, kecerdasan berpandukan data dan tadbir urus beretika tanpa kompromi.",
+"form.name":"Nama","form.org":"Organisasi","form.email":"E-mel atau telefon","form.msg":"Mesej","form.send":"Mohon cadangan penuh",
+"footer.tagline":"Pejabat Pengurusan Program untuk BizFund2: pelaksanaan berstruktur, tadbir urus telus dan kecerdasan digital untuk usahawan Sarawak.",
+"footer.h1":"Cadangan","footer.l1":"Mandat","footer.l2":"Rangka tadbir urus","footer.l3":"Kitaran hayat program","footer.l4":"Pusat kawalan","footer.l5":"Lapisan digital",
+"footer.h2":"Hubungi","footer.c1":"Kuching, Sarawak, Malaysia",
+"footer.rights":"© 2026 KOBIS Berhad. Hak cipta terpelihara. Prototaip disediakan untuk Sarawak Business Federation dengan data demonstrasi ilustratif."
+},
+zh:{
+"a11y.skip":"跳至内容",
+"nav.by":"KOBIS Berhad 出品","nav.governance":"治理架构","nav.lifecycle":"项目周期","nav.command":"指挥中心","nav.platform":"数字层","nav.team":"团队","nav.cta":"预约简报",
+"hero.issuer":"由 KOBIS Berhad 编制 · 呈交砂拉越商业联合会",
+"hero.title":"BizFund2 项目管理办公室，<em>已在运行。</em>",
+"hero.sub":"这不是一份幻灯片，而是 KOBIS Berhad 将为 BizFund2 运营的数字项目管理办公室的可用原型：结构化执行、透明治理与实时数据，从首长署直达砂拉越全部十二个省份的每一位创业者。",
+"hero.cta1":"进入指挥中心","hero.cta2":"查看治理架构",
+"hero.c1":"基金 · RM 30.0M","hero.c2":"省份 · <b>12 / 12</b>","hero.c3":"项目 · <b>96</b>","hero.c4":"创业者 · <b>4,820</b>",
+"hero.note":"原型使用示意性演示数据。",
+"mandate.title":"KOBIS Berhad 担任项目管理办公室",
+"mandate.vision":"“Sparkling Sarawak’s Future, Toward 2030 and Beyond.”",
+"mandate.p1":"BizFund2 将通过数十家培训机构，把公共资金输送给数千名创业者。这不仅需要行政管理，更需要一个对每一令吉、每一场培训都负责规划、核实、汇报并承担责任的办公室。KOBIS Berhad 愿意成为这个办公室。",
+"mandate.p2":"我们对 SBF 的承诺建立在四项纪律之上，本原型中的每一个界面都是为了证明其中一项。",
+"mandate.d1":"结构化项目管理","mandate.d1p":"一套生命周期、十四个受控阶段，统一应用于组合中的每个项目。",
+"mandate.d2":"透明治理","mandate.d2p":"每项决策沿首长署至参与者的链条全程可追溯，任何环节都不脱离记录。",
+"mandate.d3":"数据驱动执行","mandate.d3p":"预算、出席、报销与成果一次录入、经过核实，并向相关方实时可见。",
+"mandate.d4":"多方协作","mandate.d4p":"秘书处、部委、培训机构与创业者在同一系统内协同，而非各自为政。",
+"why.title":"BizFund2 为何需要项目管理办公室",
+"why.lede":"没有中央办公室，多机构基金会碎裂成电子表格、聊天群和无人回应的报销。PMO 是协调、控制与问责的唯一枢纽。",
+"why.f1":"中央协调","why.f1p":"所有项目、机构与省份的唯一枢纽。",
+"why.f2":"更好的治理","why.f2p":"权责清晰、升级明确、审计全程留痕。",
+"why.f3":"风险管理","why.f3p":"风险被记录、认领并在扩大前处置。",
+"why.f4":"标准作业程序","why.f4p":"每家机构遵循同一本书面手册。",
+"why.f5":"时间线监控","why.f5p":"里程碑每周对照总日历跟踪。",
+"why.f6":"财务监控","why.f6p":"预算、报销与付款持续对账。",
+"why.f7":"质量保证","why.f7p":"交付按标准检查，而非凭假设。",
+"why.f8":"沟通管理","why.f8p":"相关方按计划获知进展，无需追问。",
+"gov.title":"治理架构",
+"gov.lede":"权力自上而下，证据自下而上。PMO 位于链条中心，是所有相关方之间的协调枢纽。",
+"gov.n1":"首长署","gov.n1p":"砂拉越的战略方向","gov.n2p":"部委监督与政策",
+"gov.n3":"砂拉越商业联合会","gov.n3p":"BizFund2 的项目所有者与守护者",
+"gov.n4":"项目管理办公室","gov.n4p":"KOBIS Berhad · 协调枢纽：规划、监控、财务、质量与汇报","gov.hub":"◄ 协调枢纽",
+"gov.n5":"培训机构","gov.n5p":"经核准、负责交付项目的专业机构",
+"gov.n6":"创业者","gov.n6p":"正在成长的砂拉越企业",
+"gov.n7":"项目成果","gov.n7p":"衡量影响，逐级向上汇报",
+"lc.title":"一套周期，十四个受控阶段",
+"lc.lede":"每个 BizFund2 项目都经过同一编号序列。任何阶段不得跳过，任何付款在证据齐备前不予放行。",
+"lc.pA":"阶段 A · 设计与审批","lc.pB":"阶段 B · 动员","lc.pC":"阶段 C · 交付与核实","lc.pD":"阶段 D · 结算与改进",
+"lc.s1":"规划","lc.s1p":"年度组合与预算框架",
+"lc.s2":"项目设计","lc.s2p":"每个项目的成果、大纲与成本",
+"lc.s3":"机构遴选","lc.s3p":"透明评估与委任",
+"lc.s4":"项目审批","lc.s4p":"委员会批准记录在系统中",
+"lc.s5":"营销与推广","lc.s5p":"跨省份协调宣传",
+"lc.s6":"学员报名","lc.s6p":"在线报名并核查资格",
+"lc.s7":"项目交付","lc.s7p":"按批准计划开展课程",
+"lc.s8":"出席核实","lc.s8p":"二维码签到，逐场核实",
+"lc.s9":"监督","lc.s9p":"实地走访与实时进度跟踪",
+"lc.s10":"汇报","lc.s10p":"机构报告按期提交",
+"lc.s11":"报销","lc.s11p":"报销随证据一并提交",
+"lc.s12":"付款处理","lc.s12p":"核实后的报销在目标天数内支付",
+"lc.s13":"项目评估","lc.s13p":"审视质量与满意度",
+"lc.s14":"影响衡量","lc.s14p":"长期跟踪经营成果",
+"resp.title":"十二项常设职责",
+"resp.lede":"无论同时进行多少个项目，这些模块在 BizFund2 存续期间持续运转。",
+"resp.r1":"项目规划","resp.r1p":"组合、日历与预算框架",
+"resp.r2":"秘书处管理","resp.r2p":"会议、纪要与跟进",
+"resp.r3":"时间线协调","resp.r3p":"覆盖所有机构的总进度表",
+"resp.r4":"机构协调","resp.r4p":"入驻、SOP 与日常联络",
+"resp.r5":"预算监控","resp.r5p":"使用率对照拨款跟踪",
+"resp.r6":"质量保证","resp.r6p":"标准在现场接受检查",
+"resp.r7":"风险监控","resp.r7p":"维护风险登记册，预警逐级上报",
+"resp.r8":"文档管理","resp.r8p":"每份材料归档且可检索",
+"resp.r9":"汇报","resp.r9p":"面向各层级相关方的月度报告包",
+"resp.r10":"合规","resp.r10p":"程序符合拨款条件",
+"resp.r11":"沟通","resp.r11p":"沿链条的结构化通报",
+"resp.r12":"持续改进","resp.r12p":"经验教训回写进 SOP",
+"comm.title":"相关方沟通",
+"comm.lede":"信息按固定节奏双向流动。PMO 是总机，任何一方都无需向另一方追讨事实。",
+"comm.gov":"政府","comm.sbf":"SBF 秘书处","comm.prov":"培训机构","comm.ent":"创业者",
+"comm.f1w":"PMO → 政府","comm.f1":"月度高管报告包、KPI 状态与预算状况。",
+"comm.f2w":"PMO ↔ SBF 秘书处","comm.f2":"每周运营例会、委员会文件与决议。",
+"comm.f3w":"PMO ↔ 培训机构","comm.f3":"日程、SOP、报告与报销周转、现场支持。",
+"comm.f4w":"PMO ↔ 创业者","comm.f4":"报名、提醒、反馈与认证。",
+"cc.title":"BizFund2 指挥中心",
+"cc.lede":"监督与汇报以实时高管仪表盘的形式，呈现给首长署、MINTRED 与 SBF 委员会。这是可操作的预览：请切换下方视图。",
+"cc.live":"实时 · 演示数据",
+"cc.t1":"总览","cc.t2":"预算","cc.t3":"省份","cc.t4":"KPI 登记册",
+"cc.k1":"预算使用率","cc.k1s":"RM 30.0M 中已用 RM 18.4M",
+"cc.k2":"进度正常的项目","cc.k2s":"本月 +6",
+"cc.k3":"已报名创业者","cc.k3s":"覆盖 12 个省份",
+"cc.k4":"完成率","cc.k4s":"满意度 4.6 / 5",
+"cc.ovh":"每月新增创业者","cc.ovs":"2026 项目年度，全部省份",
+"cc.buh":"各支柱预算使用情况","cc.bus":"已用金额对照拨款 · 合计 RM 30.0M 中已用 RM 18.4M",
+"cc.lg1":"已使用","cc.lg2":"已拨款",
+"cc.dih":"各省份参与情况","cc.dis":"已报名创业者 · 砂拉越 12 个省份全部活跃",
+"cc.kph":"KPI 登记册 · 2026 年第三季","cc.kps":"每项指标都有负责人、目标与状态",
+"cc.th1":"指标","cc.th2":"实际","cc.th3":"目标","cc.th4":"状态",
+"dl.title":"超越职责范围：KOBIS 数字层",
+"dl.p1":"传统 PMO 依靠电子表格、邮件链和零散聊天群运转。KOBIS 用一个数字生态取而代之：一个平台承载每个项目、机构、学员、报销与照片。",
+"dl.p2":"七项增值服务随我们的委任一并提供，PMO 职责范围不变。它们共同让 BizFund2 成为砂拉越数字 PMO 生态的标杆。",
+"dl.e1":"数字平台","dl.e1v":"取代手工电子表格",
+"dl.e2":"高管仪表盘","dl.e2v":"面向三个层级实时开放",
+"dl.e3":"机构门户","dl.e3v":"38 家机构，一套流程",
+"dl.e4":"创业者门户","dl.e4v":"4,820 段个人旅程",
+"dl.e5":"媒体引擎","dl.e5v":"每个项目都转化为曝光",
+"dl.e6":"数据分析","dl.e6v":"数据化为高管洞察",
+"dl.e7":"AI 模块","dl.e7v":"自第一天起面向未来",
+"pp.ref":"价值 1 + 3 · 数字平台与机构门户",
+"pp.title":"每家获准机构都在同一门户内工作",
+"pp.p":"日历、SOP、模板、出席、照片上传、报告提交、报销提交与付款跟踪，一次登录全部完成。报销不再躺在邮件附件里，付款状态也不再依赖电话。",
+"pp.l1":"项目日历与 SOP","pp.l2":"出席与照片上传","pp.l3":"报告与报销提交","pp.l4":"付款与进度跟踪",
+"pp.th1":"项目","pp.th2":"省份","pp.th3":"报销","pp.th4":"状态",
+"pp.r1":"出席已上传 · 第 8 场，共 10 场","pp.r2":"下次报告截止",
+"st.paid":"已付款","st.review":"审核中","st.verified":"已核实",
+"ep.ref":"价值 4 · 创业者体验门户",
+"ep.title":"每位创业者的个人学习旅程",
+"ep.p":"从报名到证书，学员把项目装进口袋：门口扫码签到，课后即得资料，一键反馈，还有一枚真正能拿给银行看的数字徽章。",
+"ep.l1":"报名与日程","ep.l2":"扫码签到","ep.l3":"学习资料与反馈","ep.l4":"证书与数字徽章",
+"ep.cta":"签到 · 第 9 场","ep.badge":"已获数字徽章：电商基础","ep.jr":"旅程",
+"md.ref":"价值 5 · 媒体与曝光管理",
+"md.title":"每个项目自动成为公开的成果证明",
+"md.p":"照片、成功故事与学员评价从现场汇入受管理的档案库，再发布到 Facebook、Instagram、TikTok、LinkedIn 与新闻媒体。BizFund2 的影响持续可见，机构无需额外操心。",
+"md.posts":"已发布帖子","md.posts2":"已发布帖子","md.videos":"已发布视频","md.stories":"已发布报道",
+"md.post":"“从甘榜厨房到每月 400 份线上订单：Aina 的参峇酱生意本周在 Betong 完成了电商启航项目。” 📍 Betong · #BizFund2 #SarawakMaju",
+"md.meta":"由现场报告自动起草 · 待秘书处审批",
+"an.ref":"价值 6 · 数据与分析",
+"an.title":"项目数据化为高管情报",
+"an.p":"性别、年龄、地区、行业、出席、完成率、满意度与复训率在日常运营中自然沉淀，再被解读为洞察：BizFund2 触达了谁，还没触达谁。",
+"an.s1":"按性别","an.s2":"按年龄","an.s3":"主要行业",
+"an.g1":"女性","an.g2":"男性","an.i1":"食品与农产","an.i2":"零售与电商","an.i3":"服务业",
+"ai.head":"AI 高管摘要 · 周一 09:00 生成",
+"ai.ref":"价值 7 · 未来 AI 与数字创新",
+"ai.title":"自第一天起面向未来",
+"ai.p":"平台为 BizFund2 的下一个十年而建，使其成为砂拉越数字 PMO 生态的标杆。",
+"ai.r1":"AI 高管摘要与风险预警","ai.r2":"预测分析与项目推荐","ai.r3":"省份对比与资金使用洞察","ai.r4":"长期影响衡量，迈向 2030 及以后",
+"team.title":"PMO 核心团队",
+"team.lede":"专职架构，运营、财务、质量、传播与数字平台均有明确责任人。",
+"team.r1":"项目总监","team.r1d":"对 SBF 委员会的唯一问责点",
+"team.r2":"运营负责人","team.r2d":"所有项目的生命周期执行",
+"team.r3":"财务负责人","team.r3d":"预算、报销核实与付款",
+"team.r4":"项目协调员","team.r4d":"机构与省份的一线协调",
+"team.r5":"质量保证","team.r5d":"标准、实地检查与评估",
+"team.r6":"传播","team.r6d":"相关方汇报与媒体曝光",
+"team.r7":"数字支持","team.r7d":"平台、门户、数据与服务台",
+"close.vision":"KOBIS Berhad，随时为 BizFund2 效力。",
+"close.tri":"管理 · 投资 · 咨询",
+"close.creed":"以结构化执行、数据驱动的智能与毫不妥协的道德治理，赋能社区。",
+"form.name":"姓名","form.org":"机构","form.email":"电邮或电话","form.msg":"留言","form.send":"索取完整提案",
+"footer.tagline":"BizFund2 项目管理办公室：为砂拉越创业者提供结构化执行、透明治理与数字智能。",
+"footer.h1":"提案","footer.l1":"职责授权","footer.l2":"治理架构","footer.l3":"项目周期","footer.l4":"指挥中心","footer.l5":"数字层",
+"footer.h2":"联系","footer.c1":"马来西亚砂拉越古晋",
+"footer.rights":"© 2026 KOBIS Berhad 版权所有。本原型为砂拉越商业联合会编制，使用示意性演示数据。"
+},
+ib:{
+"a11y.skip":"Lompat ngagai isi",
+"nav.by":"ulih KOBIS Berhad","nav.governance":"Perintah","nav.lifecycle":"Pusin Pengawa","nav.command":"Pusat Kawal","nav.platform":"Lapis Digital","nav.team":"Bala Raban","nav.cta":"Minta penerang",
+"hero.issuer":"Disedia ulih KOBIS Berhad · ke Sarawak Business Federation",
+"hero.title":"Opis Program BizFund2, <em>udah bejalai.</em>",
+"hero.sub":"Tu ukai slaid. Tu prototaip ti bejalai ke Opis Pengelola Program Digital ti deka dikemudi KOBIS Berhad ke BizFund2: pengawa ti teratur, perintah ti terang enggau data ti idup, ari Opis Premier nyentuk ngagai semua usahawan ba dua belas bagi menua Sarawak.",
+"hero.cta1":"Tama ngagai pusat kawal","hero.cta2":"Peda rangka perintah",
+"hero.c1":"DANA · RM 30.0M","hero.c2":"BAGI MENUA · <b>12 / 12</b>","hero.c3":"PROGRAM · <b>96</b>","hero.c4":"USAHAWAN · <b>4,820</b>",
+"hero.note":"Prototaip ngena data chunto ke pandang aja.",
+"mandate.title":"KOBIS Berhad nyadi Opis Pengelola Program",
+"mandate.vision":"“Sparkling Sarawak’s Future, Toward 2030 and Beyond.”",
+"mandate.p1":"BizFund2 deka ngirum duit perintah nengah mayuh penyedia ngagai beribu usahawan. Nya begunaka lebih ari pentadbir: iya begunaka siti opis ti berancha, meresa, ngelapur lalu betanggungjawap ke genap ringgit enggau genap sesi. KOBIS Berhad nawar diri nyadi opis nya.",
+"mandate.p2":"Semaya kami ngagai SBF bepun ba empat pelasar, lalu genap skrin ba prototaip tu bisi kena madah siti ari sida.",
+"mandate.d1":"Pengelola program ti teratur","mandate.d1p":"Siti pusin pengawa, empat belas tikas ti dikawal, dikena sebaka ke genap program.",
+"mandate.d2":"Perintah ti terang","mandate.d2p":"Genap pemutus ulih ditansang ari Opis Premier ngagai peserta, nadai utai bejalai luar ari rekod.",
+"mandate.d3":"Pengawa nitih ka data","mandate.d3p":"Bajet, penatai, tuntut enggau asil dikumpul sekali, diperesa, lalu ulih dipeda semua raban ba jam nya empu.",
+"mandate.d4":"Begulai enggau semua raban","mandate.d4p":"Sekretariat, kementerian, penyedia enggau usahawan begawai dalam siti sistem, ukai ba luar iya.",
+"why.title":"Nama kebuah BizFund2 begunaka Opis Pengelola Program",
+"why.lede":"Enti nadai opis pusat, dana ti mayuh penyedia deka pechah nyadi spreadsheet, grup chat enggau tuntut ti nadai disaut. PMO nya endur alai penyelara, kawal enggau tanggungjawap diau.",
+"why.f1":"Penyelara pusat","why.f1p":"Siti hab ke genap program, penyedia enggau bagi menua.",
+"why.f2":"Perintah ti manah agi","why.f2p":"Kuasa terang, tangga laporan terang, jejak audit penuh.",
+"why.f3":"Ngemata ka penanggul","why.f3p":"Penanggul dicatat, dikemisi lalu diatur sebedau besai.",
+"why.f4":"Chara pengawa standard","why.f4p":"Genap penyedia begawai nitih ka siti bup panduan.",
+"why.f5":"Ngemata ka jadual","why.f5p":"Tikas pengawa ditansang tiap minggu.",
+"why.f6":"Ngemata ka duit","why.f6p":"Bajet, tuntut enggau bayar diperesa seruran.",
+"why.f7":"Kualiti dijamin","why.f7p":"Pengawa diperesa nitih ka standard, ukai nitih ka penyangka.",
+"why.f8":"Ngelola penemu","why.f8p":"Semua raban dipadah nitih ka jadual, ukai lebuh ditanya aja.",
+"gov.title":"Rangka perintah",
+"gov.lede":"Kuasa nurun. Bukti niki. PMO diau ba tengah rantai nyadi hab penyelara entara genap raban.",
+"gov.n1":"Opis Premier","gov.n1p":"Tuju strategik Sarawak","gov.n2p":"Peninga kementerian enggau polisi",
+"gov.n3":"Sarawak Business Federation","gov.n3p":"Empu program lalu ngibun BizFund2",
+"gov.n4":"Opis Pengelola Program","gov.n4p":"KOBIS Berhad · hab penyelara: berancha, ngemata, duit, kualiti enggau ngelapur","gov.hub":"◄ hab penyelara",
+"gov.n5":"Penyedia Latih","gov.n5p":"Pakar ti dilantik nyampai ka program",
+"gov.n6":"Usahawan","gov.n6p":"Dagang anak Sarawak ti benung ditumbuh",
+"gov.n7":"Asil Program","gov.n7p":"Penguntung disukat, dilapur pulai niki rantai",
+"lc.title":"Siti pusin pengawa, empat belas tikas dikawal",
+"lc.lede":"Genap program BizFund2 nengah urutan benombor ti sebaka. Nadai tikas dilengka, lalu nadai bayar dilepas sebedau bukti iya bisi.",
+"lc.pA":"Pekat A · Rekabentuk enggau kelulus","lc.pB":"Pekat B · Gerak","lc.pC":"Pekat C · Nyampai enggau meresa","lc.pD":"Pekat D · Kira enggau nambah manah",
+"lc.s1":"Berancha","lc.s1p":"Portfolio setaun enggau rangka bajet",
+"lc.s2":"Rekabentuk program","lc.s2p":"Asil, silibus enggau rega genap program",
+"lc.s3":"Milih penyedia","lc.s3p":"Penilai enggau pelantik ti terang",
+"lc.s4":"Kelulus program","lc.s4p":"Kelulus jawatankuasa dicatat dalam sistem",
+"lc.s5":"Promosyen","lc.s5p":"Penerang diselara ngagai semua bagi menua",
+"lc.s6":"Daftar peserta","lc.s6p":"Daftar online enggau peresa kelayak",
+"lc.s7":"Nyampai ka program","lc.s7p":"Sesi bejalai nitih ka pelan ti dikelulus",
+"lc.s8":"Meresa penatai","lc.s8p":"Daftar tama QR, diperesa genap sesi",
+"lc.s9":"Ngemata","lc.s9p":"Lawat endur enggau tansang pemansang idup",
+"lc.s10":"Ngelapur","lc.s10p":"Laporan penyedia difail nitih ka jadual",
+"lc.s11":"Tuntut","lc.s11p":"Tuntut diserah enggau bukti",
+"lc.s12":"Bayar","lc.s12p":"Tuntut ti sah dibayar dalam hari ti ditagang",
+"lc.s13":"Nilai program","lc.s13p":"Kualiti enggau pengelantang diperesa",
+"lc.s14":"Nyukat penguntung","lc.s14p":"Asil dagang ditansang jemah ila",
+"resp.title":"Dua belas pengawa tetap",
+"resp.lede":"Modul tu bejalai seruran sepemanjai umur BizFund2, enda ngira berapa mayuh program benung bejalai.",
+"resp.r1":"Berancha program","resp.r1p":"Portfolio, kalendar enggau rangka bajet",
+"resp.r2":"Ngelola sekretariat","resp.r2p":"Aum, minit enggau pengawa nitih",
+"resp.r3":"Nyelara jadual","resp.r3p":"Jadual besai ngagai semua penyedia",
+"resp.r4":"Nyelara penyedia","resp.r4p":"Onboarding, SOP enggau kaul tiap hari",
+"resp.r5":"Ngemata ka bajet","resp.r5p":"Pengena ditansang enggau peruntuk",
+"resp.r6":"Kualiti dijamin","resp.r6p":"Standard diperesa ba endur pengawa",
+"resp.r7":"Ngemata ka penanggul","resp.r7p":"Daftar diintu, jaku tangkan diangkat",
+"resp.r8":"Dokumentasyen","resp.r8p":"Genap surat difail lalu ulih diambi baru",
+"resp.r9":"Ngelapur","resp.r9p":"Pek bulan ke genap tikas raban",
+"resp.r10":"Nitih ka atur","resp.r10p":"Chara pengawa nitih ka penanggam dana",
+"resp.r11":"Penemu","resp.r11p":"Berita teratur nengah rantai",
+"resp.r12":"Nambah manah seruran","resp.r12p":"Ajar dibai pulai ngagai SOP",
+"comm.title":"Penemu entara raban",
+"comm.lede":"Penemu bejalai nitih ka rentak tetap, dua penyimpang. PMO nya papan suis, nya alai nadai raban begunaka ngiga penemu ari raban bukai.",
+"comm.gov":"Perintah","comm.sbf":"Sekretariat SBF","comm.prov":"Penyedia","comm.ent":"Usahawan",
+"comm.f1w":"PMO → Perintah","comm.f1":"Pek eksekutif bulan, status KPI enggau penuduk bajet.",
+"comm.f2w":"PMO ↔ Sekretariat SBF","comm.f2":"Rentak pengawa mingguan, surat jawatankuasa enggau pemutus.",
+"comm.f3w":"PMO ↔ Penyedia","comm.f3":"Jadual, SOP, pusin laporan enggau tuntut, sukung ba endur.",
+"comm.f4w":"PMO ↔ Usahawan","comm.f4":"Daftar, jaku ingat, penemu pulai enggau sijil.",
+"cc.title":"Pusat Kawal BizFund2",
+"cc.lede":"Ngemata enggau ngelapur, disampai nyadi dashboard eksekutif idup ke Opis Premier, MINTRED enggau Jawatankuasa SBF. Tu peda dulu ti bejalai: ubah peda ba baruh.",
+"cc.live":"IDUP · DATA DEMO",
+"cc.t1":"Ringkas","cc.t2":"Bajet","cc.t3":"Bagi Menua","cc.t4":"Daftar KPI",
+"cc.k1":"Bajet dikena","cc.k1s":"RM 18.4M ari RM 30.0M",
+"cc.k2":"Program nitih ka jadual","cc.k2s":"+6 bulan tu",
+"cc.k3":"Usahawan udah daftar","cc.k3s":"ngagai 12 bagi menua",
+"cc.k4":"Kadar tembu","cc.k4s":"pengelantang 4.6 / 5",
+"cc.ovh":"Usahawan tama tiap bulan","cc.ovs":"Taun program 2026, semua bagi menua",
+"cc.buh":"Pengena bajet nitih ka tiang","cc.bus":"RM dikena ditansang enggau RM diperuntuk · semua RM 18.4M ari RM 30.0M",
+"cc.lg1":"Dikena","cc.lg2":"Diperuntuk",
+"cc.dih":"Penyerta nitih ka bagi menua","cc.dis":"Usahawan bedaftar · semua 12 bagi menua Sarawak aktif",
+"cc.kph":"Daftar KPI · S3 2026","cc.kps":"Genap penunjuk bisi empu, tuju enggau status",
+"cc.th1":"Penunjuk","cc.th2":"Amat","cc.th3":"Tuju","cc.th4":"Status",
+"dl.title":"Lebih ari mandat: lapis digital KOBIS",
+"dl.p1":"PMO lama bejalai atas spreadsheet, rantai e-mel enggau grup chat ti pechah. KOBIS nukar nya enggau siti ekosistem digital: siti platform alai genap program, penyedia, peserta, tuntut enggau gambar diau begulai.",
+"dl.p2":"Tujuh pemeri nilai datai enggau pelantik kami, nadai ngubah skop PMO. Begulai, sida ngaga BizFund2 nyadi chunto ekosistem PMO Digital ke Sarawak.",
+"dl.e1":"Platform digital","dl.e1v":"nukar spreadsheet manual",
+"dl.e2":"Dashboard eksekutif","dl.e2v":"idup ke tiga tikas raban",
+"dl.e3":"Portal penyedia","dl.e3v":"38 penyedia, siti aliran pengawa",
+"dl.e4":"Portal usahawan","dl.e4v":"4,820 pejalai diri empu",
+"dl.e5":"Injin media","dl.e5v":"genap program nyadi penampak",
+"dl.e6":"Analitik","dl.e6v":"data nyadi penemu eksekutif",
+"dl.e7":"Modul AI","dl.e7v":"sedia ke jemah ari hari keterubah",
+"pp.ref":"NILAI 1 + 3 · PLATFORM DIGITAL &amp; PORTAL PENYEDIA",
+"pp.title":"Genap penyedia begawai dalam siti portal",
+"pp.p":"Kalendar, SOP, templat, penatai, ngambi gambar, nyerah laporan, tuntut enggau tansang bayar, dalam siti log tama. Tuntut enda agi diau dalam e-mel, lalu status bayar enda agi begunaka telefon.",
+"pp.l1":"Kalendar program enggau SOP","pp.l2":"Penatai enggau ngambi gambar","pp.l3":"Nyerah laporan enggau tuntut","pp.l4":"Tansang bayar enggau pemansang",
+"pp.th1":"Program","pp.th2":"Bagi Menua","pp.th3":"Tuntut","pp.th4":"Status",
+"pp.r1":"Penatai udah diangkat · Sesi 8 ari 10","pp.r2":"Laporan siti agi patut diserah",
+"st.paid":"Udah dibayar","st.review":"Benung diperesa","st.verified":"Udah disah",
+"ep.ref":"NILAI 4 · PORTAL PENGELAMAN USAHAWAN",
+"ep.title":"Pejalai belajar diri empu ke genap usahawan",
+"ep.p":"Ari daftar ngagai sijil, genap peserta mai program dalam kandi sida: penatai QR ba pintu, bahan udah genap sesi, penemu pulai enggau sekali tekan, enggau lencana digital ti amat ulih dipandang ka bank.",
+"ep.l1":"Daftar enggau jadual","ep.l2":"Daftar tama QR","ep.l3":"Bahan belajar enggau penemu pulai","ep.l4":"Sijil enggau lencana digital",
+"ep.cta":"Daftar tama · Sesi 9","ep.badge":"Lencana digital diterima: Pun E-Dagang","ep.jr":"PEJALAI",
+"md.ref":"NILAI 5 · NGELOLA MEDIA &amp; PENAMPAK",
+"md.title":"Genap program nyadi bukti ngagai mayuh automatik",
+"md.p":"Gambar, cherita mujur enggau saksi datai ari endur pengawa ngagai arkib ti diintu, lalu pansut ngagai Facebook, Instagram, TikTok, LinkedIn enggau berita. Penguntung BizFund2 seruran ulih dipeda, nadai penyedia begunaka begawai lebih.",
+"md.posts":"pos udah pansut","md.posts2":"pos udah pansut","md.videos":"video udah pansut","md.stories":"cherita udah pansut",
+"md.post":"“Ari dapur kampung ngagai 400 pesan online sebulan: dagang sambal Aina nembu program E-Commerce Onboarding ba Betong minggu tu.” 📍 Betong · #BizFund2 #SarawakMaju",
+"md.meta":"DIGAGA AUTOMATIK ARI LAPORAN ENDUR · NGANTI KELULUS SEKRETARIAT",
+"an.ref":"NILAI 6 · DATA &amp; ANALITIK",
+"an.title":"Data program nyadi penemu eksekutif",
+"an.p":"Jantina, umur, menua, industri, penatai, tembu, pengelantang enggau penyerta bebaru dikumpul ari pengawa tiap hari, lalu dibacha baru nyadi penemu: sapa udah dijangkau BizFund2, lalu sapa apin.",
+"an.s1":"Peserta nitih ka jantina","an.s2":"Peserta nitih ka umur","an.s3":"Industri pemadu tinggi",
+"an.g1":"Indu","an.g2":"Lelaki","an.i1":"Pemakai &amp; agro","an.i2":"Runcit &amp; e-dagang","an.i3":"Servis",
+"ai.head":"RINGKAS EKSEKUTIF AI · DIGAGA HARI SATU 09:00",
+"ai.ref":"NILAI 7 · AI JEMAH &amp; INOVASYEN DIGITAL",
+"ai.title":"Sedia ke jemah ari hari keterubah",
+"ai.p":"Platform tu digaga deka mansang ngagai dekad BizFund2 ti deka datai, ngaga iya nyadi chunto ekosistem PMO Digital ke Sarawak.",
+"ai.r1":"Ringkas eksekutif AI enggau jaku tangkan penanggul","ai.r2":"Analitik ramal enggau saran program","ai.r3":"Banding bagi menua enggau penemu pengena dana","ai.r4":"Nyukat penguntung panjai, ngagai 2030 enggau lebih agi",
+"team.title":"Bala raban pun PMO",
+"team.lede":"Struktur khas enggau tanggungjawap benama ke pengawa, duit, kualiti, penemu enggau platform digital.",
+"team.r1":"Pengarah Program","team.r1d":"Siku aja betanggungjawap ngagai Jawatankuasa SBF",
+"team.r2":"Tuai Operasyen","team.r2d":"Pusin pengawa ngagai semua program",
+"team.r3":"Tuai Duit","team.r3d":"Bajet, meresa tuntut enggau bayar",
+"team.r4":"Penyelara Program","team.r4d":"Nyelara penyedia enggau bagi menua ba endur",
+"team.r5":"Jamin Kualiti","team.r5d":"Standard, peresa endur enggau nilai",
+"team.r6":"Penemu","team.r6d":"Ngelapur ngagai raban enggau penampak media",
+"team.r7":"Sukung Digital","team.r7d":"Platform, portal, data enggau meja tulung",
+"close.vision":"KOBIS Berhad, sedia bekereja ke BizFund2.",
+"close.tri":"Pengelola · Pelabur · Perunding",
+"close.creed":"Ngemetul ka komuniti nengah pengawa teratur, penemu nitih ka data enggau perintah beretika ti enda beganti.",
+"form.name":"Nama","form.org":"Raban","form.email":"E-mel tauka telefon","form.msg":"Pesan","form.send":"Minta cadangan penuh",
+"footer.tagline":"Opis Pengelola Program ke BizFund2: pengawa teratur, perintah terang enggau penemu digital ke usahawan Sarawak.",
+"footer.h1":"Cadangan","footer.l1":"Mandat","footer.l2":"Rangka perintah","footer.l3":"Pusin pengawa program","footer.l4":"Pusat kawal","footer.l5":"Lapis digital",
+"footer.h2":"Kaul","footer.c1":"Kuching, Sarawak, Malaysia",
+"footer.rights":"© 2026 KOBIS Berhad. Semua hak disimpan. Prototaip disedia ke Sarawak Business Federation ngena data chunto ke pandang aja."
+}
+};
+
+/* strings for JS-rendered content */
+var JS_STR = {
+en:{on:"On track",watch:"Watch",behind:"Behind",ent:"entrepreneurs",
+  bu:["Skills training","Digital adoption","Market access","Financing readiness","PMO operations","Contingency"],
+  kpi:["Budget utilisation","Programme delivery","Attendance verification","Claims turnaround","Provider report compliance","Division coverage","Success stories published"]},
+bm:{on:"Ikut jadual",watch:"Pantau",behind:"Ketinggalan",ent:"usahawan",
+  bu:["Latihan kemahiran","Adaptasi digital","Akses pasaran","Kesediaan pembiayaan","Operasi PMO","Luar jangka"],
+  kpi:["Penggunaan bajet","Penyampaian program","Pengesahan kehadiran","Pusingan tuntutan","Pematuhan laporan penyedia","Liputan bahagian","Kisah kejayaan diterbitkan"]},
+zh:{on:"正常",watch:"关注",behind:"滞后",ent:"位创业者",
+  bu:["技能培训","数字化转型","市场准入","融资准备","PMO 运营","备用金"],
+  kpi:["预算使用率","项目交付","出席核实","报销周转","机构报告合规率","省份覆盖","成功故事发布"]},
+ib:{on:"Nitih jadual",watch:"Dipeda",behind:"Tinggal",ent:"usahawan",
+  bu:["Latih kelandik","Ngena digital","Jalai pasar","Sedia pembiayaan","Operasyen PMO","Simpan lebih"],
+  kpi:["Pengena bajet","Nyampai program","Meresa penatai","Pusin tuntut","Laporan penyedia nitih atur","Liput bagi menua","Cherita mujur pansut"]}
+};
+
+var lang = "en";
+function applyLanguage(l){
+  lang = (I18N[l] || l === "en") ? l : "en";
+  document.querySelectorAll("[data-i18n]").forEach(function(el){
+    if(el.dataset.orig === undefined) el.dataset.orig = el.innerHTML;
+    var str = lang === "en" ? el.dataset.orig : (I18N[lang][el.dataset.i18n] || el.dataset.orig);
+    if(/[<&]/.test(str)) el.innerHTML = str; else el.textContent = str;
+  });
+  document.documentElement.lang = lang === "zh" ? "zh" : (lang === "bm" ? "ms" : (lang === "ib" ? "iba" : "en"));
+  document.querySelectorAll(".lang-switch button").forEach(function(b){ b.classList.toggle("active", b.dataset.lang === lang); });
+  try{ localStorage.setItem("bizfund2-lang", lang); }catch(e){}
+  renderBudget(); renderDivisions(); renderKpi();
+}
+document.querySelectorAll(".lang-switch button").forEach(function(b){
+  b.addEventListener("click", function(){ applyLanguage(b.dataset.lang); });
+});
+
+/* ---------- starfield (Sparkling Sarawak) ---------- */
+(function(){
+  var cv = document.getElementById("stars"); if(!cv) return;
+  var ctx = cv.getContext("2d"), stars = [], W, H, raf;
+  function resize(){
+    var dpr = Math.min(window.devicePixelRatio || 1, 2);
+    W = cv.clientWidth; H = cv.clientHeight;
+    cv.width = W * dpr; cv.height = H * dpr; ctx.setTransform(dpr,0,0,dpr,0,0);
+  }
+  function seed(){
+    stars = [];
+    var n = Math.floor(W * H / 11000);
+    for(var i=0;i<n;i++){
+      stars.push({x:Math.random()*W, y:Math.random()*H, r:Math.random()*1.4+.4,
+        gold:Math.random()<.22, p:Math.random()*Math.PI*2, s:Math.random()*.9+.35});
+    }
+  }
+  function draw(t){
+    ctx.clearRect(0,0,W,H);
+    for(var i=0;i<stars.length;i++){
+      var st = stars[i];
+      var a = reduceMotion ? .55 : .28 + .45 * (0.5 + 0.5 * Math.sin(st.p + t * 0.00075 * st.s));
+      ctx.beginPath(); ctx.arc(st.x, st.y, st.r, 0, 7);
+      ctx.fillStyle = st.gold ? "rgba(232,182,76," + a + ")" : "rgba(180,205,240," + a * .8 + ")";
+      ctx.fill();
+    }
+    if(!reduceMotion) raf = requestAnimationFrame(draw);
+  }
+  function boot(){ resize(); seed(); cancelAnimationFrame(raf); draw(0); }
+  boot();
+  window.addEventListener("resize", boot);
+  document.addEventListener("visibilitychange", function(){
+    if(reduceMotion) return;
+    if(document.hidden) cancelAnimationFrame(raf); else raf = requestAnimationFrame(draw);
+  });
+})();
+
+/* ---------- tabs ---------- */
+var tabs = Array.prototype.slice.call(document.querySelectorAll(".tab"));
+function selectTab(tab){
+  tabs.forEach(function(t){
+    var on = t === tab;
+    t.setAttribute("aria-selected", on ? "true" : "false");
+    t.tabIndex = on ? 0 : -1;
+    document.getElementById(t.getAttribute("aria-controls")).hidden = !on;
+  });
+  animateIn(document.getElementById(tab.getAttribute("aria-controls")));
+}
+tabs.forEach(function(t, i){
+  t.addEventListener("click", function(){ selectTab(t); });
+  t.addEventListener("keydown", function(e){
+    var d = e.key === "ArrowRight" ? 1 : e.key === "ArrowLeft" ? -1 : 0;
+    if(!d) return;
+    var n = tabs[(i + d + tabs.length) % tabs.length];
+    n.focus(); selectTab(n);
+  });
+});
+
+/* ---------- chart data ---------- */
+var MONTHS = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+var MONTH_N = [120,210,340,380,420,460,510,540,560,480,450,350];
+var BUDGET = [[9.0,6.2],[6.0,3.9],[5.0,2.7],[4.0,2.1],[3.0,1.6],[3.0,1.9]];
+var DIVS = [["Kuching",980],["Miri",620],["Sibu",540],["Bintulu",470],["Samarahan",410],["Serian",330],["Sri Aman",290],["Betong",250],["Sarikei",240],["Mukah",240],["Kapit",230],["Limbang",220]];
+var KPI = [
+  {a:"61%", t:"60%", s:"on"},
+  {a:"74 / 96", t:"72", s:"on"},
+  {a:"98.2%", t:"95%", s:"on"},
+  {a:"9.4 days", t:"14 days", s:"on"},
+  {a:"91%", t:"95%", s:"watch"},
+  {a:"12 / 12", t:"12", s:"on"},
+  {a:"18", t:"30", s:"behind"}
+];
+var CHIP_SVG = {
+  on:'<svg viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2 6.5L4.8 9 10 3.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>',
+  watch:'<svg viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M6 1.5v5.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><circle cx="6" cy="10" r="1.1" fill="currentColor"/></svg>',
+  behind:'<svg viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M3 3l6 6M9 3l-6 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>'
+};
+function js(k){ return (JS_STR[lang] || JS_STR.en)[k]; }
+
+function renderMonths(){
+  var cols = document.getElementById("monthCols"), labs = document.getElementById("monthLabels");
+  if(!cols) return;
+  var max = 600, ch = "", lh = "";
+  MONTH_N.forEach(function(v, i){
+    ch += '<div class="col"><div class="bar-v" data-h="' + Math.round(v / max * 100) + '" style="height:0" data-tip="' + MONTHS[i] + ' · ' + v.toLocaleString("en-US") + '"></div></div>';
+    lh += "<span>" + MONTHS[i].charAt(0) + "</span>";
+  });
+  cols.innerHTML = ch; labs.innerHTML = lh;
+}
+function renderBudget(){
+  var box = document.getElementById("budgetBars"); if(!box) return;
+  var h = "";
+  BUDGET.forEach(function(row, i){
+    var pct = Math.round(row[1] / row[0] * 100);
+    h += '<div class="bullet"><span class="lab">' + js("bu")[i] + '</span>' +
+      '<span class="track"><span class="fill" data-w="' + pct + '" style="width:0" data-tip="' + js("bu")[i] + ' · RM ' + row[1].toFixed(1) + 'M / RM ' + row[0].toFixed(1) + 'M (' + pct + '%)"></span></span>' +
+      '<span class="val">' + row[1].toFixed(1) + 'M / ' + row[0].toFixed(1) + 'M</span></div>';
+  });
+  box.innerHTML = h;
+  animateIn(box);
+}
+function renderDivisions(){
+  var box = document.getElementById("divBars"); if(!box) return;
+  var max = DIVS[0][1], h = "";
+  DIVS.forEach(function(d){
+    var pct = Math.round(d[1] / 4820 * 100);
+    h += '<div class="hbar"><span class="lab">' + d[0] + '</span>' +
+      '<span class="track"><span class="fill" data-w="' + Math.round(d[1] / max * 100) + '" style="width:0" data-tip="' + d[0] + ' · ' + d[1].toLocaleString("en-US") + ' ' + js("ent") + ' (' + pct + '%)"></span></span>' +
+      '<span class="val">' + d[1].toLocaleString("en-US") + '</span></div>';
+  });
+  box.innerHTML = h;
+  animateIn(box);
+}
+function renderKpi(){
+  var body = document.getElementById("kpiBody"); if(!body) return;
+  var h = "";
+  KPI.forEach(function(k, i){
+    h += "<tr><td>" + js("kpi")[i] + '</td><td class="mono">' + k.a + '</td><td class="mono">' + k.t + "</td>" +
+      '<td><span class="chip ' + (k.s === "on" ? "ok" : k.s) + '">' + CHIP_SVG[k.s] + "<span>" + js(k.s) + "</span></span></td></tr>";
+  });
+  body.innerHTML = h;
+}
+function animateIn(scope){
+  (scope || document).querySelectorAll("[data-w]").forEach(function(el){
+    requestAnimationFrame(function(){ requestAnimationFrame(function(){ el.style.width = el.dataset.w + "%"; }); });
+  });
+  (scope || document).querySelectorAll("[data-h]").forEach(function(el){
+    requestAnimationFrame(function(){ requestAnimationFrame(function(){ el.style.height = el.dataset.h + "%"; }); });
+  });
+}
+renderMonths();
+
+/* ---------- tooltip ---------- */
+var tip = document.getElementById("tip");
+document.addEventListener("mouseover", function(e){
+  var t = e.target.closest && e.target.closest("[data-tip]");
+  if(t){ tip.textContent = t.dataset.tip; tip.classList.add("on"); }
+});
+document.addEventListener("mousemove", function(e){
+  if(!tip.classList.contains("on")) return;
+  var x = Math.min(e.clientX + 14, window.innerWidth - tip.offsetWidth - 10);
+  var y = e.clientY - tip.offsetHeight - 12;
+  if(y < 40) y = e.clientY + 18;
+  tip.style.left = x + "px"; tip.style.top = y + "px";
+});
+document.addEventListener("mouseout", function(e){
+  if(e.target.closest && e.target.closest("[data-tip]")) tip.classList.remove("on");
+});
+
+/* ---------- count-up ---------- */
+function countUp(el){
+  var to = parseFloat(el.dataset.to), dur = 1200, t0 = null;
+  if(reduceMotion){ el.textContent = to.toLocaleString("en-US"); return; }
+  function step(t){
+    if(!t0) t0 = t;
+    var p = Math.min((t - t0) / dur, 1);
+    p = 1 - Math.pow(1 - p, 4);
+    el.textContent = Math.round(to * p).toLocaleString("en-US");
+    if(p < 1) requestAnimationFrame(step);
+  }
+  requestAnimationFrame(step);
+}
+
+/* ---------- reveal on scroll + deferred chart/count animation ---------- */
+var revealSel = ".sec-head,.sec-lede,.vision,.ledger-row,.module,.stage,.chain-node,.hub-flow,.value-block,.org-card,.tile,.contact-form,.hero-console";
+if("IntersectionObserver" in window){
+  var counted = false;
+  document.querySelectorAll(revealSel).forEach(function(el, i){
+    el.classList.add("will-reveal");
+    el.style.transitionDelay = (i % 5) * 55 + "ms";
+  });
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(en){
+      if(!en.isIntersecting) return;
+      en.target.classList.add("in");
+      io.unobserve(en.target);
+    });
+  }, {threshold:.12, rootMargin:"0px 0px -6% 0px"});
+  document.querySelectorAll(".will-reveal").forEach(function(el){ io.observe(el); });
+
+  var io2 = new IntersectionObserver(function(entries){
+    entries.forEach(function(en){
+      if(!en.isIntersecting) return;
+      animateIn(en.target);
+      if(!counted && en.target.id === "command"){
+        counted = true;
+        en.target.querySelectorAll(".count").forEach(countUp);
+      }
+      io2.unobserve(en.target);
+    });
+  }, {threshold:.15});
+  document.querySelectorAll("#command, .value-block, .phone").forEach(function(el){ io2.observe(el); });
+}else{
+  animateIn(document);
+  document.querySelectorAll(".count").forEach(function(el){ el.textContent = parseFloat(el.dataset.to).toLocaleString("en-US"); });
+}
+
+/* ---------- AI summary typewriter ---------- */
+(function(){
+  var el = document.getElementById("aiText"); if(!el) return;
+  var full = el.textContent;
+  if(reduceMotion || !("IntersectionObserver" in window)) return;
+  var done = false;
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(en){
+      if(!en.isIntersecting || done) return;
+      done = true; io.disconnect();
+      el.innerHTML = '<span class="caret"></span>';
+      var i = 0;
+      (function type(){
+        if(i <= full.length){
+          el.innerHTML = full.slice(0, i) + '<span class="caret"></span>';
+          i += 2;
+          setTimeout(type, 24);
+        }else{
+          el.textContent = full;
+        }
+      })();
+    });
+  }, {threshold:.5});
+  io.observe(el);
+})();
+
+/* ---------- boot language ---------- */
+var saved = null;
+try{ saved = localStorage.getItem("bizfund2-lang"); }catch(e){}
+if(!saved){
+  var nav = (navigator.language || "en").toLowerCase();
+  if(nav.indexOf("ms") === 0) saved = "bm";
+  else if(nav.indexOf("zh") === 0) saved = "zh";
+}
+applyLanguage(saved && (saved === "en" || I18N[saved]) ? saved : "en");
+})();
+</script>
+
+</body>
+</html>
