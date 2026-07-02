@@ -329,6 +329,80 @@ footer{background:#0E2C4A;color:#fff}
 .kobis-bar .kobis-link{color:rgba(255,255,255,.85);text-decoration:none;font-weight:500;transition:color .2s ease}
 .kobis-bar .kobis-link:hover{background:linear-gradient(135deg,var(--accent-lt),var(--accent),var(--accent-2));-webkit-background-clip:text;background-clip:text;color:transparent}
 
+/* ---------- demo login + consoles ---------- */
+.nav-login{color:var(--ink-2);text-decoration:none;font-size:.9rem;font-weight:600;cursor:pointer;background:none;border:0;font-family:var(--f-sans);padding:0}
+.nav-login:hover{color:var(--blue)}
+.dash-cta{display:flex;gap:.7rem;align-items:center;flex-wrap:wrap;margin-top:1.2rem;background:#fff;border:1px dashed var(--line);border-radius:12px;padding:.9rem 1.1rem}
+.dash-cta p{margin:0;font-size:.9rem;color:var(--ink-2);font-weight:600}
+.dash-cta .btn{padding:.55rem 1rem;font-size:.85rem}
+.btn-navy{background:var(--navy);color:#fff}
+.btn-navy:hover{transform:translateY(-2px);box-shadow:0 8px 20px rgba(18,59,99,.3)}
+.btn-green{background:var(--green);color:#fff}
+.btn-green:hover{transform:translateY(-2px);box-shadow:0 8px 20px rgba(27,138,75,.3)}
+.login-back{position:fixed;inset:0;background:rgba(10,22,36,.6);z-index:240;display:none;align-items:center;justify-content:center;padding:1rem}
+.login-back.open{display:flex}
+.login-box{background:#fff;border-radius:16px;max-width:660px;width:100%;padding:1.7rem 1.7rem 1.5rem;box-shadow:0 30px 80px rgba(10,22,36,.35)}
+.login-box h3{font-size:1.25rem;margin:0 0 .3rem}
+.login-box .sub{font-size:.88rem;color:var(--ink-3);margin:0 0 1.3rem}
+.login-box .demo-tag{display:inline-block;font-family:var(--f-mono);font-size:.64rem;letter-spacing:.12em;background:var(--amber-tint);color:var(--amber-deep);border-radius:6px;padding:.28rem .55rem;margin-bottom:.9rem}
+.acct-grid{display:grid;grid-template-columns:1fr 1fr;gap:.9rem}
+@media (max-width:620px){.acct-grid{grid-template-columns:1fr}}
+.acct{border:1px solid var(--line);border-radius:12px;padding:1.15rem;display:flex;flex-direction:column;gap:.6rem;transition:border-color .2s ease,transform .2s ease}
+.acct:hover{transform:translateY(-2px)}
+.acct.sec:hover{border-color:var(--navy)}
+.acct.tr:hover{border-color:var(--green)}
+.acct .avatar{width:42px;height:42px;border-radius:50%;display:grid;place-items:center;color:#fff;font-weight:800;font-size:.85rem}
+.acct.sec .avatar{background:var(--navy)}
+.acct.tr .avatar{background:var(--green)}
+.acct h4{margin:0;font-size:1rem}
+.acct .role{font-size:.76rem;color:var(--ink-3)}
+.acct .cred{font-family:var(--f-mono);font-size:.68rem;color:var(--ink-3);background:var(--bg-soft);border:1px solid var(--line);border-radius:7px;padding:.45rem .6rem}
+.acct button{margin-top:.2rem;border:0;border-radius:8px;color:#fff;font:700 .84rem var(--f-sans);padding:.6rem;cursor:pointer}
+.acct.sec button{background:var(--navy)}
+.acct.tr button{background:var(--green)}
+.login-close{float:right;background:none;border:0;font-size:1.3rem;line-height:1;color:var(--ink-3);cursor:pointer;padding:.2rem}
+.console-view{position:fixed;inset:0;z-index:250;background:var(--bg-soft);overflow-y:auto;display:none}
+.console-view.open{display:block}
+body.locked{overflow:hidden}
+.cv-bar{position:sticky;top:0;z-index:10;color:#fff;display:flex;align-items:center;gap:.9rem;padding:.75rem clamp(1rem,3vw,1.8rem)}
+.cv-bar.sec{background:var(--navy)}
+.cv-bar.tr{background:var(--green-deep)}
+.cv-bar .cv-role{font-weight:800;font-size:.95rem}
+.cv-bar .cv-role small{display:block;font-weight:500;font-size:.68rem;opacity:.75;letter-spacing:.08em}
+.cv-bar .cv-demo{font-family:var(--f-mono);font-size:.62rem;letter-spacing:.12em;border:1px solid rgba(255,255,255,.4);border-radius:999px;padding:.25rem .6rem;opacity:.9}
+.cv-exit{margin-left:auto;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.3);color:#fff;font:700 .8rem var(--f-sans);border-radius:8px;padding:.5rem .9rem;cursor:pointer}
+.cv-exit:hover{background:rgba(255,255,255,.24)}
+.cv-wrap{max-width:1100px;margin:0 auto;padding:1.5rem var(--pad) 3.5rem;display:grid;gap:1.1rem}
+.cv-kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:.8rem}
+.cv-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:1.1rem;align-items:start}
+@media (max-width:860px){.cv-grid{grid-template-columns:1fr}}
+.cv-card{background:#fff;border:1px solid var(--line);border-radius:12px;padding:1.15rem 1.25rem;box-shadow:var(--shadow)}
+.cv-card h4{margin:0 0 .2rem;font-size:1rem}
+.cv-card .cs{font-size:.78rem;color:var(--ink-3);margin:0 0 1rem}
+.queue{display:grid;gap:.6rem}
+.q-row{border:1px solid var(--line);border-radius:10px;padding:.75rem .9rem;display:grid;gap:.5rem}
+.q-row .q-top{display:flex;gap:.7rem;align-items:baseline;justify-content:space-between;flex-wrap:wrap}
+.q-row .q-name{font-weight:700;font-size:.92rem}
+.q-row .q-sub{font-family:var(--f-mono);font-size:.7rem;color:var(--ink-3)}
+.q-acts{display:flex;gap:.5rem;flex-wrap:wrap;align-items:center}
+.act{border-radius:8px;font:700 .78rem var(--f-sans);padding:.45rem .8rem;cursor:pointer;border:1.5px solid transparent;transition:all .15s ease}
+.act.ok-act{background:var(--green);color:#fff}
+.act.ok-act:hover{background:var(--green-deep)}
+.act.alt-act{background:#fff;border-color:var(--line);color:var(--ink-2)}
+.act.alt-act:hover{border-color:var(--amber);color:var(--amber-deep)}
+.act:disabled{opacity:.55;cursor:default}
+.cv-form{display:grid;gap:.75rem}
+.cv-form label{font-size:.78rem;font-weight:700;color:var(--ink-2);display:grid;gap:.35rem}
+.cv-form select,.cv-form input{font:500 .92rem var(--f-sans);color:var(--ink);background:var(--bg-soft);border:1px solid var(--line);border-radius:8px;padding:.65rem .8rem;width:100%}
+.cv-form .two{display:grid;grid-template-columns:1fr 1fr;gap:.75rem}
+.evidence{display:flex;gap:.5rem;flex-wrap:wrap}
+.evidence span{font-size:.74rem;background:var(--bg-soft);border:1px dashed var(--line);border-radius:999px;padding:.35rem .75rem;color:var(--ink-3)}
+.toast{position:fixed;left:50%;bottom:26px;transform:translate(-50%,16px);z-index:300;background:var(--navy);color:#fff;font:600 .88rem var(--f-sans);border-radius:10px;padding:.8rem 1.2rem;opacity:0;pointer-events:none;transition:opacity .3s ease,transform .3s ease;max-width:90vw;text-align:center}
+.toast.on{opacity:1;transform:translate(-50%,0)}
+.tile.flash{animation:tile-flash 1.6s ease}
+@keyframes tile-flash{0%{box-shadow:0 0 0 0 rgba(27,138,75,.55)}100%{box-shadow:0 0 0 16px rgba(27,138,75,0)}}
+@media (prefers-reduced-motion:reduce){.tile.flash{animation:none}}
+
 /* ---------- reveal ---------- */
 .will-reveal{opacity:0;transform:translateY(18px);transition:opacity .6s cubic-bezier(.22,1,.36,1),transform .6s cubic-bezier(.22,1,.36,1)}
 .will-reveal.in{opacity:1;transform:none}
@@ -362,6 +436,7 @@ footer{background:#0E2C4A;color:#fff}
       <a href="#dashboard" data-i18n="nav.dash">Dashboard</a>
       <a href="#payment" data-i18n="nav.pay">Payment</a>
       <a href="#stakeholders" data-i18n="nav.stake">Stakeholders</a>
+      <button type="button" class="nav-login" id="navLogin" data-i18n="nav.login">Log in</button>
     </div>
     <div class="lang-switch" role="group" aria-label="Language">
       <button type="button" data-lang="en" class="active">EN</button>
@@ -607,6 +682,12 @@ footer{background:#0E2C4A;color:#fff}
         </div>
       </div>
     </div>
+
+    <div class="dash-cta">
+      <p data-i18n="db.cta">Where do these numbers come from? See the consoles that feed them:</p>
+      <button class="btn btn-navy" type="button" data-console="sec" data-i18n="db.cta1">Log in as Secretariat</button>
+      <button class="btn btn-green" type="button" data-console="tr" data-i18n="db.cta2">Log in as Training Provider</button>
+    </div>
   </div>
 </section>
 
@@ -757,6 +838,154 @@ footer{background:#0E2C4A;color:#fff}
   </div>
 </footer>
 
+<!-- ============ DEMO LOGIN ============ -->
+<div class="login-back" id="loginBack" role="dialog" aria-modal="true" aria-labelledby="loginTitle">
+  <div class="login-box">
+    <button class="login-close" type="button" id="loginClose" aria-label="Close">×</button>
+    <span class="demo-tag">DEMO ACCESS · NO REAL DATA</span>
+    <h3 id="loginTitle" data-i18n="lg.title">Choose a console to explore</h3>
+    <p class="sub" data-i18n="lg.sub">Two working consoles feed the public dashboard. Credentials are prefilled for the demo; in production this is a secured login.</p>
+    <div class="acct-grid">
+      <div class="acct sec">
+        <span class="avatar" aria-hidden="true">SB</span>
+        <h4 data-i18n="lg.a1">Secretariat · PMO</h4>
+        <span class="role" data-i18n="lg.a1r">SBF secretariat with KOBIS Berhad · screens applications, verifies claims, publishes dates</span>
+        <span class="cred">admin@sbf.org.my · ••••••••</span>
+        <button type="button" data-console="sec" data-i18n="lg.enter1">Enter secretariat console</button>
+      </div>
+      <div class="acct tr">
+        <span class="avatar" aria-hidden="true">SS</span>
+        <h4 data-i18n="lg.a2">Training Provider</h4>
+        <span class="role" data-i18n="lg.a2r">Serumpun Skills Sdn Bhd · keys in sessions, attendance and certificates after each class</span>
+        <span class="cred">trainer@serumpun.my · ••••••••</span>
+        <button type="button" data-console="tr" data-i18n="lg.enter2">Enter provider console</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============ SECRETARIAT CONSOLE ============ -->
+<div class="console-view" id="consoleSec" role="dialog" aria-modal="true" aria-label="Secretariat console">
+  <div class="cv-bar sec">
+    <span class="cv-role">Secretariat Console<small>SBF SECRETARIAT × KOBIS BERHAD · PMO</small></span>
+    <span class="cv-demo">DEMO</span>
+    <button class="cv-exit" type="button" data-exit="dash">View public dashboard →</button>
+    <button class="cv-exit" type="button" data-exit="close">Exit</button>
+  </div>
+  <div class="cv-wrap">
+    <div class="cv-kpis">
+      <div class="tile"><div class="lab">Applications pending</div><div class="val mono" id="kSecApps">3</div></div>
+      <div class="tile"><div class="lab">Claims to verify</div><div class="val mono" id="kSecClaims">2</div></div>
+      <div class="tile"><div class="lab">Cohorts without dates</div><div class="val mono" id="kSecTba">6</div></div>
+      <div class="tile hl"><div class="lab">Everything you do here</div><div class="val" style="font-size:.95rem;font-family:var(--f-sans);font-weight:700">updates the public dashboard</div></div>
+    </div>
+    <div class="cv-grid">
+      <div class="cv-card">
+        <h4>Provider applications · screening queue</h4>
+        <p class="cs">Approve to add the programme to the approved portfolio, or return it with a reason.</p>
+        <div class="queue" id="secQueue">
+          <div class="q-row">
+            <div class="q-top"><span class="q-name">Sustainable Aquaculture for Coastal SMEs</span><span class="q-sub">APP-2026-071 · Santubong AquaLearn · Kuching</span></div>
+            <div class="q-acts"><button class="act ok-act" data-app="0">Approve programme</button><button class="act alt-act" data-ret="0">Return with comments</button><span class="chip info" hidden></span></div>
+          </div>
+          <div class="q-row">
+            <div class="q-top"><span class="q-name">Batik &amp; Craft Export Readiness</span><span class="q-sub">APP-2026-074 · Tanoti Academy · Kuching</span></div>
+            <div class="q-acts"><button class="act ok-act" data-app="1">Approve programme</button><button class="act alt-act" data-ret="1">Return with comments</button><span class="chip info" hidden></span></div>
+          </div>
+          <div class="q-row">
+            <div class="q-top"><span class="q-name">Cold Chain Handling for Agrofood</span><span class="q-sub">APP-2026-078 · Borneo Upskill · Sibu</span></div>
+            <div class="q-acts"><button class="act ok-act" data-app="2">Approve programme</button><button class="act alt-act" data-ret="2">Return with comments</button><span class="chip info" hidden></span></div>
+          </div>
+        </div>
+      </div>
+      <div style="display:grid;gap:1.1rem">
+        <div class="cv-card">
+          <h4>Claims · verification queue</h4>
+          <p class="cs">Verify evidence to send the claim to SBF for approval. The 14-day clock is running.</p>
+          <div class="queue">
+            <div class="q-row">
+              <div class="q-top"><span class="q-name">CLM-2026-121 · RM 61,500</span><span class="q-sub">Borneo Upskill · day 4 of 14</span></div>
+              <div class="q-acts"><button class="act ok-act" data-claim="0">Verify evidence</button><span class="chip info" hidden></span></div>
+            </div>
+            <div class="q-row">
+              <div class="q-top"><span class="q-name">CLM-2026-126 · RM 38,900</span><span class="q-sub">Serumpun Skills · day 1 of 14</span></div>
+              <div class="q-acts"><button class="act ok-act" data-claim="1">Verify evidence</button><span class="chip info" hidden></span></div>
+            </div>
+          </div>
+        </div>
+        <div class="cv-card">
+          <h4>Living schedule · publish dates</h4>
+          <p class="cs">UNESCAP MTO Freighting, Cohort 6 is still "TBA" in the public schedule. Confirm its dates and watch the schedule update.</p>
+          <div class="q-acts"><button class="act ok-act" id="secDates">Confirm C6 · 18–27 Aug · Kuching</button><span class="chip info" hidden></span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============ PROVIDER CONSOLE ============ -->
+<div class="console-view" id="consoleTr" role="dialog" aria-modal="true" aria-label="Training provider console">
+  <div class="cv-bar tr">
+    <span class="cv-role">Provider Console<small>SERUMPUN SKILLS SDN BHD · TRAINING PROVIDER</small></span>
+    <span class="cv-demo">DEMO</span>
+    <button class="cv-exit" type="button" data-exit="dash">View public dashboard →</button>
+    <button class="cv-exit" type="button" data-exit="close">Exit</button>
+  </div>
+  <div class="cv-wrap">
+    <div class="cv-grid">
+      <div class="cv-card">
+        <h4>Key in session record</h4>
+        <p class="cs">One minute after class: attendance and certificates. This single entry becomes your report, your claim evidence, and the public dashboard.</p>
+        <form class="cv-form" id="trForm">
+          <label>Programme · cohort
+            <select id="trProg">
+              <option>Digital Marketing for Rural SMEs · C2 · Kuching</option>
+              <option>BIM Modelling of Architecture · C7 · Kuching</option>
+              <option>E-Commerce Onboarding · C4 · Miri</option>
+            </select>
+          </label>
+          <div class="two">
+            <label>Session number
+              <input type="number" id="trSession" value="9" min="1" max="20">
+            </label>
+            <label>Trainees attended
+              <input type="number" id="trAttend" value="24" min="1" max="60">
+            </label>
+          </div>
+          <div class="two">
+            <label>Certificates issued
+              <input type="number" id="trCerts" value="22" min="0" max="60">
+            </label>
+            <label>Evidence attached
+              <span class="evidence"><span>📷 3 photos</span><span>📋 attendance sheet</span></span>
+            </label>
+          </div>
+          <button class="btn btn-green" type="submit" style="justify-self:start">Submit session record</button>
+        </form>
+      </div>
+      <div style="display:grid;gap:1.1rem">
+        <div class="cv-card">
+          <h4>My cohorts</h4>
+          <p class="cs">Serumpun Skills · 2026 season</p>
+          <div class="queue">
+            <div class="q-row"><div class="q-top"><span class="q-name">Digital Marketing for Rural SMEs · C2</span><span class="chip info"><span>Session 8 of 10</span></span></div></div>
+            <div class="q-row"><div class="q-top"><span class="q-name">E-Commerce Onboarding · C4</span><span class="chip ok"><span>Completed · 26 certified</span></span></div></div>
+          </div>
+        </div>
+        <div class="cv-card">
+          <h4>My claims</h4>
+          <div class="queue">
+            <div class="q-row"><div class="q-top"><span class="q-name">CLM-2026-118 · RM 84,000</span><span class="chip ok"><span>Paid · day 8</span></span></div></div>
+            <div class="q-row"><div class="q-top"><span class="q-name">CLM-2026-126 · RM 38,900</span><span class="chip watch"><span>With PMO · day 1 of 14</span></span></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
 <div id="tip" role="presentation"></div>
 
 <script>
@@ -792,6 +1021,14 @@ bm:{
 "sc.n4":"Setiap kohort selesai menyimpan buktinya: mendaftar, hadir, bersijil, terus ke papan pemuka di atas",
 "sc.feed":"PERUBAHAN LANGSUNG",
 "sc.f1":"Tarikh Kohort 7 disahkan, 4 hingga 7 Mac","sc.f2":"Kohort 5 kini dibuka, 18 kerusi tinggal","sc.f3":"Kohort 2 selesai, 26 bersijil",
+"nav.login":"Log masuk",
+"db.cta":"Dari mana angka ini datang? Lihat konsol yang menyalurkannya:",
+"db.cta1":"Log masuk sebagai Sekretariat","db.cta2":"Log masuk sebagai Penyedia Latihan",
+"lg.title":"Pilih konsol untuk diterokai",
+"lg.sub":"Dua konsol berfungsi menyalurkan data ke papan pemuka awam. Kelayakan telah diisi untuk demo; dalam produksi ini log masuk selamat.",
+"lg.a1":"Sekretariat · PMO","lg.a1r":"Sekretariat SBF bersama KOBIS Berhad · menyaring permohonan, mengesah tuntutan, menerbitkan tarikh",
+"lg.a2":"Penyedia Latihan","lg.a2r":"Serumpun Skills Sdn Bhd · memasukkan sesi, kehadiran dan sijil selepas setiap kelas",
+"lg.enter1":"Masuk konsol sekretariat","lg.enter2":"Masuk konsol penyedia",
 "hero.badge":"SBF × KOBIS Berhad · Pejabat Pengurusan Program",
 "hero.title":"BizFund2, dijalankan secara praktikal: <em>digital hanya di tempat yang penting.</em>",
 "hero.sub":"Sebahagian besar BizFund2 kekal dijalankan manusia: jurulatih di bilik latihan, pelatih di tempat kerja, jawatankuasa membuat keputusan. PMO menambah alat digital pada tiga titik di mana kertas benar-benar gagal, supaya permohonan bergerak, latihan kelihatan dan penyedia dibayar tepat pada masa.",
@@ -870,6 +1107,14 @@ zh:{
 "sc.n4":"每个完成的班次保留凭据：报名、出席、获证，直接汇入上方仪表盘",
 "sc.feed":"实时变更",
 "sc.f1":"第 7 班日期已定，3月4日至7日","sc.f2":"第 5 班开放报名，余 18 个名额","sc.f3":"第 2 班已完成，26 人获证",
+"nav.login":"登录",
+"db.cta":"这些数字从哪里来？看看为它们供数的控制台：",
+"db.cta1":"以秘书处身份登录","db.cta2":"以培训机构身份登录",
+"lg.title":"选择要体验的控制台",
+"lg.sub":"两个可操作的控制台为公共仪表盘供数。演示已预填凭据；正式环境为安全登录。",
+"lg.a1":"秘书处 · PMO","lg.a1r":"SBF 秘书处与 KOBIS Berhad · 筛选申请、核验报销、发布日期",
+"lg.a2":"培训机构","lg.a2r":"Serumpun Skills Sdn Bhd · 每堂课后录入课次、出席与证书",
+"lg.enter1":"进入秘书处控制台","lg.enter2":"进入机构控制台",
 "hero.badge":"SBF × KOBIS Berhad · 项目管理办公室",
 "hero.title":"BizFund2，务实地运作：<em>只在关键处数字化。</em>",
 "hero.sub":"BizFund2 的大部分仍由人来完成：培训师在课室，学员在岗位，委员会做决策。PMO 只在纸张真正失灵的三个环节加上数字工具，让申请流动、培训可见、机构准时收款。",
@@ -948,6 +1193,14 @@ ib:{
 "sc.n4":"Genap kohort tembu nyimpan buktinya: daftar, datai, besijil, terus ngagai dashboard di atas",
 "sc.feed":"PENGUBAH IDUP",
 "sc.f1":"Tarikh Kohort 7 disah, 4 ngagai 7 Mac","sc.f2":"Kohort 5 diatu dibuka, 18 kerusi agi","sc.f3":"Kohort 2 tembu, 26 besijil",
+"nav.login":"Tama",
+"db.cta":"Ari ni penatai nombor tu? Peda konsol ti meri iya:",
+"db.cta1":"Tama nyadi Sekretariat","db.cta2":"Tama nyadi Penyedia Latih",
+"lg.title":"Pilih konsol deka dipeda",
+"lg.sub":"Dua konsol ti bejalai meri data ngagai dashboard mayuh. Kelayak udah diisi ke demo; ba produksi tu log tama selamat.",
+"lg.a1":"Sekretariat · PMO","lg.a1r":"Sekretariat SBF enggau KOBIS Berhad · nyaring permohon, meresa tuntut, ngeluar ka tarikh",
+"lg.a2":"Penyedia Latih","lg.a2r":"Serumpun Skills Sdn Bhd · ngengkah ka sesi, penatai enggau sijil udah genap kelas",
+"lg.enter1":"Tama konsol sekretariat","lg.enter2":"Tama konsol penyedia",
 "hero.badge":"SBF × KOBIS Berhad · Opis Pengelola Program",
 "hero.title":"BizFund2, dipejalai chara praktikal: <em>digital semina ba endur ti beguna.</em>",
 "hero.sub":"Mayuh agi BizFund2 agi dipejalai mensia: pengajar ba bilik, murid ba endur pengawa, jawatankuasa mutus ka penemu. PMO nambah ka alat digital ba tiga endur alai kertas amat enda ulih, ngambika permohon bejalai, latih ulih dipeda lalu penyedia dibayar tepat maya.",
@@ -1278,6 +1531,179 @@ if("IntersectionObserver" in window){
   animateIn(document);
   document.querySelectorAll(".count").forEach(function(el){ el.textContent = parseFloat(el.dataset.to).toLocaleString("en-US"); });
 }
+
+/* ---------- demo consoles: everything feeds the public dashboard ---------- */
+var STATE = {trainees:4820, certs:3905, approved:96, monthIdx:8, sessionNo:9};
+var CERT_TARGET = 4800;
+function $id(x){ return document.getElementById(x); }
+function toast(msg){
+  var t = $id("toast"); if(!t) return;
+  t.textContent = msg; t.classList.add("on");
+  clearTimeout(t._h); t._h = setTimeout(function(){ t.classList.remove("on"); }, 3200);
+}
+function bumpCount(el, to){
+  if(!el) return;
+  el.dataset.to = to;
+  var from = parseInt(String(el.textContent).replace(/[^\d]/g,""), 10) || 0;
+  if(reduceMotion){ el.textContent = to.toLocaleString("en-US"); return; }
+  var t0 = null, dur = 700;
+  function step(t){
+    if(!t0) t0 = t;
+    var p = Math.min((t - t0) / dur, 1); p = 1 - Math.pow(1 - p, 3);
+    el.textContent = Math.round(from + (to - from) * p).toLocaleString("en-US");
+    if(p < 1) requestAnimationFrame(step);
+  }
+  requestAnimationFrame(step);
+}
+function addFeed(boldTxt, rest){
+  var feed = document.querySelector(".pulse-feed"); if(!feed) return;
+  var item = document.createElement("span");
+  item.className = "pf-item";
+  var b = document.createElement("b"); b.textContent = boldTxt;
+  item.appendChild(b); item.appendChild(document.createTextNode(" · " + rest));
+  var label = feed.querySelector(".pf-label");
+  label.insertAdjacentElement("afterend", item);
+  var items = feed.querySelectorAll(".pf-item");
+  if(items.length > 4) items[items.length - 1].remove();
+}
+function dashTiles(){ return document.querySelectorAll("#dashboard .tiles .count"); }
+function flashDash(){
+  document.querySelectorAll("#dashboard .tile").forEach(function(t){
+    t.classList.remove("flash"); void t.offsetWidth; t.classList.add("flash");
+  });
+}
+function refreshDashboard(){
+  var tiles = dashTiles();
+  bumpCount(tiles[0], STATE.trainees);
+  bumpCount(tiles[1], STATE.certs);
+  var certB = document.querySelector(".cert-line b");
+  if(certB) certB.textContent = STATE.certs.toLocaleString("en-US") + " / " + CERT_TARGET.toLocaleString("en-US");
+  var certFill = document.querySelector(".cert-fill");
+  if(certFill){
+    var pct = Math.min(Math.round(STATE.certs / CERT_TARGET * 100), 100);
+    certFill.dataset.w = pct;
+    certFill.style.width = pct + "%";
+    certFill.dataset.tip = STATE.certs.toLocaleString("en-US") + " certificates · " + pct + "% of the 2026 target";
+  }
+  var pmoCounts = document.querySelectorAll("#pmo .stat .count");
+  if(pmoCounts[0]) bumpCount(pmoCounts[0], STATE.approved);
+  if(pmoCounts[2]) bumpCount(pmoCounts[2], STATE.trainees);
+}
+/* overlays */
+function lockBody(on){ document.body.classList.toggle("locked", on); }
+function openLogin(){ $id("loginBack").classList.add("open"); lockBody(true); }
+function closeLogin(){ $id("loginBack").classList.remove("open"); lockBody(false); }
+function openConsole(role){
+  closeLogin();
+  $id(role === "sec" ? "consoleSec" : "consoleTr").classList.add("open");
+  lockBody(true);
+}
+function closeConsoles(toDash){
+  document.querySelectorAll(".console-view").forEach(function(c){ c.classList.remove("open"); });
+  lockBody(false);
+  if(toDash){
+    var d = $id("dashboard");
+    if(d){ d.scrollIntoView({behavior: reduceMotion ? "auto" : "smooth"}); setTimeout(flashDash, reduceMotion ? 100 : 650); }
+  }
+}
+var navLogin = $id("navLogin");
+if(navLogin) navLogin.addEventListener("click", openLogin);
+var loginClose = $id("loginClose");
+if(loginClose) loginClose.addEventListener("click", closeLogin);
+$id("loginBack").addEventListener("click", function(e){ if(e.target === this) closeLogin(); });
+document.querySelectorAll("[data-console]").forEach(function(b){
+  b.addEventListener("click", function(){ openConsole(b.dataset.console); });
+});
+document.querySelectorAll("[data-exit]").forEach(function(b){
+  b.addEventListener("click", function(){ closeConsoles(b.dataset.exit === "dash"); });
+});
+document.addEventListener("keydown", function(e){
+  if(e.key === "Escape"){ closeLogin(); closeConsoles(false); }
+});
+/* secretariat actions */
+function resolveQ(btn, chipText){
+  var acts = btn.closest(".q-acts");
+  acts.querySelectorAll(".act").forEach(function(a){ a.disabled = true; a.style.display = "none"; });
+  var chip = acts.querySelector(".chip");
+  chip.hidden = false;
+  chip.className = "chip ok";
+  chip.innerHTML = '<svg viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2 6.5L4.8 9 10 3.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><span></span>';
+  chip.querySelector("span").textContent = chipText;
+}
+function decKpi(id){
+  var el = $id(id); if(!el) return;
+  el.textContent = Math.max(0, (parseInt(el.textContent, 10) || 0) - 1);
+}
+document.querySelectorAll("[data-app]").forEach(function(b){
+  b.addEventListener("click", function(){
+    var name = b.closest(".q-row").querySelector(".q-name").textContent;
+    resolveQ(b, "Approved · in portfolio");
+    decKpi("kSecApps");
+    STATE.approved++;
+    refreshDashboard();
+    var sub = document.querySelectorAll("#dashboard .tiles .tile")[2];
+    if(sub){ var s = sub.querySelector(".sub"); if(s) s.textContent = "of " + STATE.approved + " approved"; }
+    addFeed(name, "approved by the secretariat just now");
+    toast("Programme approved · portfolio is now " + STATE.approved + " · dashboard updated");
+  });
+});
+document.querySelectorAll("[data-ret]").forEach(function(b){
+  b.addEventListener("click", function(){
+    resolveQ(b, "Returned with comments");
+    var chip = b.closest(".q-acts").querySelector(".chip");
+    chip.className = "chip watch";
+    decKpi("kSecApps");
+    toast("Application returned to the provider with comments");
+  });
+});
+document.querySelectorAll("[data-claim]").forEach(function(b){
+  b.addEventListener("click", function(){
+    var name = b.closest(".q-row").querySelector(".q-name").textContent.split(" · ")[0];
+    resolveQ(b, "Verified · sent to SBF");
+    decKpi("kSecClaims");
+    addFeed(name, "verified by the PMO, now with SBF for approval");
+    toast("Claim verified · sent to SBF approval, clock still visible to the provider");
+  });
+});
+var secDates = $id("secDates");
+if(secDates) secDates.addEventListener("click", function(){
+  var un = PROG.filter(function(p){ return p.t.indexOf("UNESCAP") === 0; })[0];
+  if(un){ un.c[1].dt = "18–27 Aug"; un.c[1].st = "soon"; }
+  renderReg();
+  resolveQ(secDates, "Published to the living schedule");
+  decKpi("kSecTba");
+  addFeed("UNESCAP MTO Freighting", "Cohort 6 dates confirmed, 18 to 27 Aug");
+  toast("Dates published · the public schedule updated the moment you clicked");
+});
+/* provider session entry */
+var trForm = $id("trForm");
+if(trForm) trForm.addEventListener("submit", function(e){
+  e.preventDefault();
+  var attend = Math.max(1, parseInt($id("trAttend").value, 10) || 0);
+  var certs = Math.max(0, parseInt($id("trCerts").value, 10) || 0);
+  var progLabel = $id("trProg").value.split(" · ")[0];
+  var loc = $id("trProg").value.indexOf("Miri") >= 0 ? "Miri" : "Kuching";
+  STATE.trainees += attend;
+  STATE.certs += certs;
+  DIVS.forEach(function(d){ if(d[0] === loc) d[1] += attend; });
+  MONTH_N[STATE.monthIdx] += attend;
+  renderDivisions();
+  renderMonths();
+  animateIn($id("dashboard"));
+  refreshDashboard();
+  addFeed(progLabel, "Session " + $id("trSession").value + " keyed in: +" + attend + " trainees, +" + certs + " certificates (" + loc + ")");
+  toast("Session recorded · +" + attend + " trainees, +" + certs + " certificates now on the public dashboard");
+  $id("trSession").value = (parseInt($id("trSession").value, 10) || STATE.sessionNo) + 1;
+});
+/* hash routing for jury deep links */
+function routeHash(){
+  var h = (location.hash || "").toLowerCase();
+  if(h === "#login") openLogin();
+  else if(h === "#login-secretariat" || h === "#secretariat") openConsole("sec");
+  else if(h === "#login-trainer" || h === "#trainer" || h === "#login-provider") openConsole("tr");
+}
+window.addEventListener("hashchange", routeHash);
+routeHash();
 
 /* ---------- boot language ---------- */
 var saved = null;
