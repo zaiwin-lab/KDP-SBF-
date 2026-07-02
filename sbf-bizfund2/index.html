@@ -543,6 +543,104 @@ footer{background:linear-gradient(180deg,#0E2C4A,#0A2138 70%,#081B2E)}
   background:linear-gradient(90deg,var(--gold),rgba(201,162,39,0))}
 html{scrollbar-color:#33517A #F0F3F8}
 
+/* ===== provider console enrichment ===== */
+.pc-hero{display:grid;grid-template-columns:minmax(240px,340px) 1fr;border:1px solid transparent;border-radius:16px;overflow:hidden;
+  background:linear-gradient(#fff,#fff) padding-box,linear-gradient(135deg,#BFE3CE,#C4D6F9 55%,#F0D5B4) border-box;box-shadow:0 22px 50px rgba(18,59,99,.12)}
+@media (max-width:860px){.pc-hero{grid-template-columns:1fr}}
+.pc-poster{position:relative;min-height:230px;padding:1.4rem;display:flex;flex-direction:column;justify-content:space-between;color:#fff;
+  background:
+    radial-gradient(120% 90% at 85% -10%, rgba(201,162,39,.35), transparent 55%),
+    radial-gradient(90% 70% at -10% 110%, rgba(76,195,138,.3), transparent 60%),
+    linear-gradient(150deg,#1D4FBE,#123B63 70%,#0C2A47)}
+.pc-poster::after{content:"";position:absolute;inset:0;background-image:radial-gradient(rgba(255,255,255,.09) 1px,transparent 1px);background-size:20px 20px;
+  -webkit-mask-image:linear-gradient(120deg,#000 20%,transparent 75%);mask-image:linear-gradient(120deg,#000 20%,transparent 75%)}
+.pc-poster .pp-tag{position:relative;z-index:1;font-family:var(--f-mono);font-size:.62rem;letter-spacing:.16em;color:#BFDCF7}
+.pc-poster h3{position:relative;z-index:1;font-family:var(--f-disp);font-weight:600;font-size:clamp(1.4rem,2.2vw,1.9rem);line-height:1.2;color:#fff;margin:0;max-width:14ch}
+.pc-poster .pp-cat{position:relative;z-index:1;display:inline-flex;align-self:flex-start;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.3);border-radius:999px;padding:.3rem .8rem;font-size:.7rem;font-weight:700;letter-spacing:.06em}
+.pc-info{padding:1.3rem 1.5rem;display:flex;flex-direction:column;gap:.9rem}
+.pc-info-top{display:flex;align-items:flex-start;gap:1rem;flex-wrap:wrap}
+.pc-info-top h3{margin:0;font-size:1.25rem}
+.pc-info-top .sub{font-size:.8rem;color:var(--ink-3)}
+.pc-status{margin-left:auto}
+.pc-meta{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:.55rem .9rem}
+.pc-meta div{font-size:.82rem;color:var(--ink-2)}
+.pc-meta span{display:block;font-family:var(--f-mono);font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3);margin-bottom:.15rem}
+.pc-prog{display:grid;gap:.3rem}
+.pc-prog .lab{display:flex;justify-content:space-between;font-size:.74rem;color:var(--ink-3);font-weight:600}
+.pc-prog .track{display:block;height:9px;border-radius:5px;background:var(--bg-soft);overflow:hidden}
+.pc-prog .fill{display:block;height:100%;width:80%;border-radius:0 5px 5px 0;background:linear-gradient(90deg,#28a862,#146B3A)}
+.pc-snapshot{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));border-top:1px solid var(--line);background:linear-gradient(135deg,#F7FAFE,#F0F6FC);grid-column:1/-1}
+.pc-snapshot div{padding:.8rem 1rem;display:flex;align-items:center;gap:.6rem;font-size:.78rem;color:var(--ink-2);border-right:1px solid var(--line)}
+.pc-snapshot div:last-child{border-right:0}
+.pc-snapshot b{display:block;font-family:var(--f-mono);font-size:1.02rem;font-weight:500;color:var(--ink)}
+.pc-snapshot .ico{font-size:1.05rem}
+/* timeline */
+.pc-tl{display:flex;align-items:flex-start;gap:0;background:#fff;border:1px solid var(--line);border-radius:12px;padding:1rem 1.2rem;overflow-x:auto;box-shadow:var(--shadow)}
+.pc-tl .stp{flex:1;min-width:86px;text-align:center;position:relative;font-size:.72rem;font-weight:600;color:var(--ink-3)}
+.pc-tl .stp::before{content:"";position:absolute;top:8px;left:calc(50% + 12px);right:calc(-50% + 12px);height:2px;background:var(--line)}
+.pc-tl .stp:last-child::before{display:none}
+.pc-tl .dot{width:17px;height:17px;border-radius:50%;margin:0 auto .4rem;background:#fff;border:2px solid var(--line);display:grid;place-items:center}
+.pc-tl .stp.done .dot{background:linear-gradient(135deg,#22A55C,#146B3A);border-color:transparent}
+.pc-tl .stp.done .dot::after{content:"";width:6px;height:3.5px;border-left:2px solid #fff;border-bottom:2px solid #fff;transform:rotate(-45deg) translate(0,-1px)}
+.pc-tl .stp.done{color:var(--green-deep)}
+.pc-tl .stp.done::before{background:linear-gradient(90deg,#22A55C,#BFE3CE)}
+.pc-tl .stp.now .dot{border-color:var(--green);box-shadow:0 0 0 5px rgba(27,138,75,.15);background:#fff}
+.pc-tl .stp.now .dot::after{content:"";width:7px;height:7px;border-radius:50%;background:var(--green)}
+.pc-tl .stp.now{color:var(--green-deep);font-weight:800}
+/* kv summary */
+.pc-kv{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:.6rem .9rem}
+.pc-kv div{background:var(--bg-soft);border:1px solid var(--line);border-radius:9px;padding:.55rem .75rem;font-size:.85rem;font-weight:600;color:var(--ink)}
+.pc-kv span{display:block;font-family:var(--f-mono);font-size:.58rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3);margin-bottom:.2rem;font-weight:500}
+/* qr centre */
+.pc-qr{display:grid;grid-template-columns:1fr 1fr;gap:.8rem}
+.pc-qr .qr-box{border:1px solid var(--line);border-radius:10px;padding:.8rem;text-align:center;background:var(--bg-soft)}
+.pc-qr .qr-box svg{width:86px;height:86px;background:#fff;border-radius:8px;padding:6px}
+.pc-qr .qr-box .t{font-size:.72rem;font-weight:700;color:var(--ink-2);margin:.45rem 0 .5rem}
+.pc-qr .qr-box button{font:600 .68rem var(--f-sans);color:var(--blue-deep);background:#fff;border:1px solid var(--blue-line);border-radius:7px;padding:.32rem .6rem;cursor:pointer}
+.pc-qr .qr-box button:hover{background:var(--blue);color:#fff}
+.pc-link{grid-column:1/-1;display:flex;gap:.5rem;align-items:center;border:1px solid var(--line);border-radius:9px;padding:.5rem .5rem .5rem .8rem;background:#fff}
+.pc-link code{flex:1;font:500 .72rem var(--f-mono);color:var(--ink-2);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.pc-link button{font:700 .7rem var(--f-sans);background:linear-gradient(135deg,#3B78F0,#1D4FBE);color:#fff;border:0;border-radius:7px;padding:.42rem .7rem;cursor:pointer;flex:none}
+/* participants */
+.pc-plist{max-height:300px;overflow:auto;border:1px solid var(--line);border-radius:10px}
+.pc-plist table{min-width:460px}
+.cv-grid > *, .cv-grid > div > *{min-width:0}
+.cv-wrap > *{min-width:0}
+.pc-plist table{width:100%;border-collapse:collapse;font-size:.82rem}
+.pc-plist th{position:sticky;top:0;background:var(--bg-soft);text-align:left;font-family:var(--f-mono);font-weight:500;font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3);padding:.55rem .8rem;border-bottom:1px solid var(--line);z-index:1}
+.pc-plist td{padding:.5rem .8rem;border-bottom:1px solid var(--bg-soft);color:var(--ink-2)}
+.pc-plist td:first-child{color:var(--ink);font-weight:600}
+.pc-plist .chip{font-size:.66rem;padding:.22rem .55rem}
+/* evidence cards */
+.pc-ev{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:.7rem}
+.pc-ev div{border:1px solid var(--line);border-radius:10px;padding:.8rem .9rem;background:#fff;transition:transform .2s ease,border-color .2s ease}
+.pc-ev div:hover{transform:translateY(-2px);border-color:var(--green-line)}
+.pc-ev .ic{font-size:1.15rem}
+.pc-ev b{display:block;font-size:.8rem;color:var(--ink);margin:.3rem 0 .1rem}
+.pc-ev span{font-size:.7rem;color:var(--ink-3)}
+.pc-ev .ok-txt{color:var(--green-deep);font-weight:700}
+/* checklist */
+.pc-check{display:grid;gap:.15rem}
+.pc-check label{display:flex;gap:.6rem;align-items:center;font-size:.83rem;color:var(--ink-2);padding:.32rem .2rem;border-radius:7px;cursor:pointer}
+.pc-check label:hover{background:var(--bg-soft)}
+.pc-check input{accent-color:var(--green-deep);width:15px;height:15px;flex:none}
+.pc-check input:checked + span{color:var(--ink);}
+/* quick actions */
+.pc-qa{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:.7rem}
+.pc-qa button{display:flex;flex-direction:column;align-items:flex-start;gap:.4rem;font:700 .78rem var(--f-sans);color:var(--ink);background:#fff;border:1px solid var(--line);border-radius:10px;padding:.85rem .95rem;cursor:pointer;transition:all .2s ease;text-align:left}
+.pc-qa button:hover{transform:translateY(-2px);border-color:var(--green);box-shadow:0 10px 22px rgba(27,138,75,.14)}
+.pc-qa .qi{width:30px;height:30px;border-radius:9px;display:grid;place-items:center;color:#fff;font-size:.85rem}
+/* notifications */
+.pc-notif{display:grid;gap:.55rem}
+.pc-notif div{display:flex;gap:.6rem;align-items:flex-start;border:1px solid var(--line);border-radius:9px;padding:.6rem .75rem;font-size:.78rem;color:var(--ink-2)}
+.pc-notif b{display:block;font-size:.76rem;color:var(--ink)}
+.pc-notif .nd{width:8px;height:8px;border-radius:50%;flex:none;margin-top:.35rem}
+/* claims detail */
+.pc-claim-detail{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:.45rem .8rem;background:var(--bg-soft);border:1px solid var(--line);border-radius:9px;padding:.65rem .8rem;margin-top:.5rem;font-size:.76rem;color:var(--ink-2)}
+.pc-claim-detail span{display:block;font-family:var(--f-mono);font-size:.56rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3)}
+.pc-claim-detail b{font-weight:700;color:var(--ink)}
+.cv-full{grid-column:1/-1}
+
 /* ===== headline aura ===== */
 .hero h1{max-width:none;animation:h-rise .9s cubic-bezier(.22,1,.36,1) both}
 .hero h1 em{display:block;margin-top:.08em;color:#E3C25B;
@@ -969,38 +1067,160 @@ html{scrollbar-color:#33517A #F0F3F8}
     <button class="cv-exit" type="button" data-exit="close">Exit</button>
   </div>
   <div class="cv-wrap">
-    <div class="cv-grid">
-      <div class="cv-card">
-        <h4>Key in session record</h4>
-        <p class="cs">One minute after class: attendance and certificates. This single entry becomes your report, your claim evidence, and the public dashboard.</p>
-        <form class="cv-form" id="trForm">
-          <label>Programme · cohort
-            <select id="trProg">
-              <option>Digital Marketing for Rural SMEs · C2 · Kuching</option>
-              <option>BIM Modelling of Architecture · C7 · Kuching</option>
-              <option>E-Commerce Onboarding · C4 · Miri</option>
-            </select>
-          </label>
-          <div class="two">
-            <label>Session number
-              <input type="number" id="trSession" value="9" min="1" max="20">
-            </label>
-            <label>Trainees attended
-              <input type="number" id="trAttend" value="24" min="1" max="60">
-            </label>
-          </div>
-          <div class="two">
-            <label>Certificates issued
-              <input type="number" id="trCerts" value="22" min="0" max="60">
-            </label>
-            <label>Evidence attached
-              <span class="evidence"><span>📷 3 photos</span><span>📋 attendance sheet</span></span>
-            </label>
-          </div>
-          <button class="btn btn-green" type="submit" style="justify-self:start">Submit session record</button>
-        </form>
+
+    <!-- 1 · programme hero card + snapshot ribbon -->
+    <div class="pc-hero">
+      <div class="pc-poster">
+        <span class="pp-tag">BIZFUND2 · APPROVED PROGRAMME</span>
+        <h3>Digital Marketing for Rural SMEs</h3>
+        <span class="pp-cat">Business &amp; Digital · Cohort 2</span>
       </div>
+      <div class="pc-info">
+        <div class="pc-info-top">
+          <div>
+            <h3>Digital Marketing for Rural SMEs · C2</h3>
+            <span class="sub">Serumpun Skills Sdn Bhd · Kuching Division</span>
+          </div>
+          <span class="chip watch pc-status"><svg viewBox="0 0 12 12" fill="none" aria-hidden="true"><circle cx="6" cy="6" r="4.6" stroke="currentColor" stroke-width="1.6"/><path d="M6 3.6v2.8l1.8 1.2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg><span>In progress</span></span>
+        </div>
+        <div class="pc-meta">
+          <div><span>Venue</span>SBF Training Hall, Kuching</div>
+          <div><span>Date</span>Wed, 12 Aug 2026</div>
+          <div><span>Time</span>9:00 – 17:00</div>
+          <div><span>Trainer</span>Melissa Chong</div>
+          <div><span>Division</span>Kuching</div>
+          <div><span>Duration</span>10 sessions</div>
+        </div>
+        <div class="pc-prog">
+          <span class="lab"><span>Session progress</span><span>Session 8 of 10</span></span>
+          <span class="track"><span class="fill"></span></span>
+        </div>
+      </div>
+      <div class="pc-snapshot">
+        <div><span class="ico" aria-hidden="true">👥</span><div><b id="snapReg">26</b>Registered</div></div>
+        <div><span class="ico" aria-hidden="true">✅</span><div><b id="snapPresent">24</b>Present today</div></div>
+        <div><span class="ico" aria-hidden="true">📷</span><div><b id="snapEv">12</b>Evidence files</div></div>
+        <div><span class="ico" aria-hidden="true">🎓</span><div><b id="snapCerts">22</b>Certificates ready</div></div>
+        <div><span class="ico" aria-hidden="true">💰</span><div><b>Ready</b>Claim submission</div></div>
+      </div>
+    </div>
+
+    <!-- 8 · programme timeline -->
+    <div class="pc-tl" aria-label="Programme timeline">
+      <div class="stp done"><span class="dot"></span>Planning</div>
+      <div class="stp done"><span class="dot"></span>Registration</div>
+      <div class="stp now"><span class="dot"></span>Training</div>
+      <div class="stp"><span class="dot"></span>Evidence</div>
+      <div class="stp"><span class="dot"></span>Report</div>
+      <div class="stp"><span class="dot"></span>Claim</div>
+      <div class="stp"><span class="dot"></span>Payment</div>
+    </div>
+
+    <div class="cv-grid">
       <div style="display:grid;gap:1.1rem">
+        <!-- 2 · session summary -->
+        <div class="cv-card">
+          <h4>Today's session at a glance</h4>
+          <p class="cs">Session 9 · everything the PMO sees, you see first.</p>
+          <div class="pc-kv">
+            <div><span>Registered</span>26</div>
+            <div><span>Confirmed</span>25</div>
+            <div><span>Present today</span>24</div>
+            <div><span>Cert eligible</span>22</div>
+            <div><span>Attendance</span>92%</div>
+            <div><span>Status</span>On track</div>
+          </div>
+        </div>
+        <!-- session record form (existing) -->
+        <div class="cv-card">
+          <h4>Key in session record</h4>
+          <p class="cs">One minute after class: attendance and certificates. This single entry becomes your report, your claim evidence, and the public dashboard.</p>
+          <form class="cv-form" id="trForm">
+            <label>Programme · cohort
+              <select id="trProg">
+                <option>Digital Marketing for Rural SMEs · C2 · Kuching</option>
+                <option>BIM Modelling of Architecture · C7 · Kuching</option>
+                <option>E-Commerce Onboarding · C4 · Miri</option>
+              </select>
+            </label>
+            <div class="two">
+              <label>Session number
+                <input type="number" id="trSession" value="9" min="1" max="20">
+              </label>
+              <label>Trainees attended
+                <input type="number" id="trAttend" value="24" min="1" max="60">
+              </label>
+            </div>
+            <div class="two">
+              <label>Certificates issued
+                <input type="number" id="trCerts" value="22" min="0" max="60">
+              </label>
+              <label>Evidence attached
+                <span class="evidence"><span>📷 3 photos</span><span>📋 attendance sheet</span></span>
+              </label>
+            </div>
+            <button class="btn btn-green" type="submit" style="justify-self:start">Submit session record</button>
+          </form>
+        </div>
+        <!-- 4 · participants -->
+        <div class="cv-card">
+          <h4>Participants · Cohort 2</h4>
+          <p class="cs">Live register, fed by QR attendance check-ins.</p>
+          <div class="pc-plist">
+            <table>
+              <thead><tr><th>Name</th><th>Company</th><th>Attendance</th><th>Certificate</th></tr></thead>
+              <tbody>
+                <tr><td>Ahmad Rahman</td><td>ABC Enterprise</td><td><span class="chip ok"><span>Present</span></span></td><td><span class="chip ok"><span>Eligible</span></span></td></tr>
+                <tr><td>Nurul Aina</td><td>Aina Sambal Co.</td><td><span class="chip ok"><span>Present</span></span></td><td><span class="chip ok"><span>Eligible</span></span></td></tr>
+                <tr><td>Siti Abdullah</td><td>Kuching Trading</td><td><span class="chip watch"><span>Partial</span></span></td><td><span class="chip plain"><span>Pending</span></span></td></tr>
+                <tr><td>David Lim</td><td>Borneo Fresh Mart</td><td><span class="chip ok"><span>Present</span></span></td><td><span class="chip ok"><span>Eligible</span></span></td></tr>
+                <tr><td>John Wong</td><td>XYZ Services</td><td><span class="chip bad"><span>Absent</span></span></td><td><span class="chip plain"><span>—</span></span></td></tr>
+                <tr><td>Faridah Musa</td><td>FM Tailoring</td><td><span class="chip ok"><span>Present</span></span></td><td><span class="chip ok"><span>Eligible</span></span></td></tr>
+                <tr><td>Peter anak Jimmy</td><td>PJ AgroWorks</td><td><span class="chip ok"><span>Present</span></span></td><td><span class="chip ok"><span>Eligible</span></span></td></tr>
+                <tr><td>Lee Mei Ling</td><td>ML Bakery</td><td><span class="chip watch"><span>Partial</span></span></td><td><span class="chip plain"><span>Pending</span></span></td></tr>
+                <tr><td>Hafiz Karim</td><td>HK Auto Care</td><td><span class="chip ok"><span>Present</span></span></td><td><span class="chip ok"><span>Eligible</span></span></td></tr>
+                <tr><td>Rosnah Bujang</td><td>RB Handicraft</td><td><span class="chip ok"><span>Present</span></span></td><td><span class="chip ok"><span>Eligible</span></span></td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <div style="display:grid;gap:1.1rem">
+        <!-- 3 · registration & QR centre -->
+        <div class="cv-card">
+          <h4>Registration &amp; QR centre</h4>
+          <p class="cs">Generated automatically for every cohort. No more third-party forms.</p>
+          <div class="pc-qr">
+            <div class="qr-box"><svg viewBox="0 0 29 29" shape-rendering="crispEdges" aria-hidden="true"><rect width="29" height="29" fill="#fff"/><path fill="#0E2C4A" d="M0 0h7v7H0zM2 2h3v3H2zM22 0h7v7h-7zM24 2h3v3h-3zM0 22h7v7H0zM2 24h3v3H2zM9 0h2v2H9zM13 1h2v3h-2zM17 0h2v2h-2zM10 4h3v2h-3zM16 4h2v3h-2zM9 8h2v2H9zM0 9h2v2H0zM3 9h3v2H3zM12 8h3v3h-3zM19 9h2v2h-2zM23 9h3v2h-3zM27 8h2v3h-2zM1 13h3v2H1zM6 12h2v3H6zM10 13h3v3h-3zM15 12h2v2h-2zM18 13h3v2h-3zM23 13h2v2h-2zM26 12h3v2h-3zM0 17h2v3H0zM4 16h2v2H4zM8 17h3v2H8zM13 17h2v3h-2zM17 16h2v3h-2zM21 17h3v2h-3zM26 16h2v2h-2zM9 22h2v3H9zM12 21h3v2h-3zM16 22h3v3h-3zM21 21h2v3h-2zM24 22h3v2h-3zM10 26h3v3h-3zM15 26h2v2h-2zM19 26h3v3h-3zM24 26h2v2h-2zM27 24h2v3h-2z"/></svg><div class="t">QR · Registration</div><button type="button" data-qa="qr-reg">Download QR</button></div>
+            <div class="qr-box"><svg viewBox="0 0 29 29" shape-rendering="crispEdges" aria-hidden="true"><rect width="29" height="29" fill="#fff"/><path fill="#0E2C4A" d="M0 0h7v7H0zM2 2h3v3H2zM22 0h7v7h-7zM24 2h3v3h-3zM0 22h7v7H0zM2 24h3v3H2zM9 0h2v2H9zM13 1h2v3h-2zM17 0h2v2h-2zM10 4h3v2h-3zM16 4h2v3h-2zM9 8h2v2H9zM0 9h2v2H0zM3 9h3v2H3zM12 8h3v3h-3zM19 9h2v2h-2zM23 9h3v2h-3zM27 8h2v3h-2zM1 13h3v2H1zM6 12h2v3H6zM10 13h3v3h-3zM15 12h2v2h-2zM18 13h3v2h-3zM23 13h2v2h-2zM26 12h3v2h-3zM0 17h2v3H0zM4 16h2v2H4zM8 17h3v2H8zM13 17h2v3h-2zM17 16h2v3h-2zM21 17h3v2h-3zM26 16h2v2h-2zM9 22h2v3H9zM12 21h3v2h-3zM16 22h3v3h-3zM21 21h2v3h-2zM24 22h3v2h-3zM10 26h3v3h-3zM15 26h2v2h-2zM19 26h3v3h-3zM24 26h2v2h-2zM27 24h2v3h-2z"/></svg><div class="t">QR · Attendance</div><button type="button" data-qa="qr-att">Download QR</button></div>
+            <div class="pc-link"><code>bizfund2.sarawak/join/DM-C2-KCH</code><button type="button" id="pcCopy">Copy link</button></div>
+          </div>
+        </div>
+        <!-- 6 · trainer checklist -->
+        <div class="cv-card">
+          <h4>Trainer checklist · Session 9</h4>
+          <div class="pc-check">
+            <label><input type="checkbox" checked><span>Venue confirmed</span></label>
+            <label><input type="checkbox" checked><span>Registration open</span></label>
+            <label><input type="checkbox" checked><span>QR attendance ready</span></label>
+            <label><input type="checkbox" checked><span>Morning attendance taken</span></label>
+            <label><input type="checkbox"><span>Afternoon attendance taken</span></label>
+            <label><input type="checkbox" checked><span>Photos uploaded</span></label>
+            <label><input type="checkbox"><span>Final report submitted</span></label>
+            <label><input type="checkbox"><span>Claim submitted</span></label>
+          </div>
+        </div>
+        <!-- 10 · PMO notices -->
+        <div class="cv-card">
+          <h4>PMO notices</h4>
+          <div class="pc-notif">
+            <div><span class="nd" style="background:var(--warn)"></span><div><b>Reminder</b>Final report for C2 due within 3 working days of the last session.</div></div>
+            <div><span class="nd" style="background:var(--blue)"></span><div><b>New SOP v2.1</b>Updated photo evidence guideline published to your library.</div></div>
+            <div><span class="nd" style="background:var(--good)"></span><div><b>Claim received</b>CLM-2026-126 is with the PMO · day 1 of 14.</div></div>
+          </div>
+        </div>
+        <!-- my cohorts (existing, kept) -->
         <div class="cv-card">
           <h4>My cohorts</h4>
           <p class="cs">Serumpun Skills · 2026 season</p>
@@ -1009,11 +1229,57 @@ html{scrollbar-color:#33517A #F0F3F8}
             <div class="q-row"><div class="q-top"><span class="q-name">E-Commerce Onboarding · C4</span><span class="chip ok"><span>Completed · 26 certified</span></span></div></div>
           </div>
         </div>
-        <div class="cv-card">
-          <h4>My claims</h4>
-          <div class="queue">
-            <div class="q-row"><div class="q-top"><span class="q-name">CLM-2026-118 · RM 84,000</span><span class="chip ok"><span>Paid · day 8</span></span></div></div>
-            <div class="q-row"><div class="q-top"><span class="q-name">CLM-2026-126 · RM 38,900</span><span class="chip watch"><span>With PMO · day 1 of 14</span></span></div></div>
+      </div>
+
+      <!-- 5 · evidence -->
+      <div class="cv-card cv-full">
+        <h4>Session evidence</h4>
+        <p class="cs">Everything attaches itself to the claim later. Nothing gets lost in phone galleries.</p>
+        <div class="pc-ev">
+          <div><span class="ic" aria-hidden="true">📷</span><b>Photos</b><span class="ok-txt">12 uploaded</span></div>
+          <div><span class="ic" aria-hidden="true">📄</span><b>Attendance sheet</b><span class="ok-txt">Uploaded</span></div>
+          <div><span class="ic" aria-hidden="true">🎥</span><b>Short video</b><span class="ok-txt">2 uploaded</span></div>
+          <div><span class="ic" aria-hidden="true">📑</span><b>Presentation slides</b><span class="ok-txt">Uploaded</span></div>
+          <div><span class="ic" aria-hidden="true">⭐</span><b>Participant feedback</b><span class="ok-txt">24 responses</span></div>
+        </div>
+      </div>
+
+      <!-- 9 · quick actions -->
+      <div class="cv-card cv-full">
+        <h4>Quick actions</h4>
+        <div class="pc-qa">
+          <button type="button" data-qa="qr"><span class="qi" style="background:linear-gradient(135deg,#3B78F0,#1D4FBE)">▦</span>Generate QR</button>
+          <button type="button" data-qa="photos"><span class="qi" style="background:linear-gradient(135deg,#22A55C,#146B3A)">📷</span>Upload photos</button>
+          <button type="button" data-qa="report"><span class="qi" style="background:linear-gradient(135deg,#CE7112,#92430A)">📄</span>Upload report</button>
+          <button type="button" data-qa="claim"><span class="qi" style="background:linear-gradient(135deg,#16466F,#0E2C4A)">💰</span>Submit claim</button>
+          <button type="button" data-qa="att"><span class="qi" style="background:linear-gradient(135deg,#0E7490,#155E75)">⬇</span>Download attendance</button>
+          <button type="button" data-qa="certs"><span class="qi" style="background:linear-gradient(135deg,#C9A227,#8A6D14)">🎓</span>Generate certificates</button>
+        </div>
+      </div>
+
+      <!-- 7 · claims (enhanced) -->
+      <div class="cv-card cv-full">
+        <h4>My claims</h4>
+        <div class="queue">
+          <div class="q-row">
+            <div class="q-top"><span class="q-name">CLM-2026-118 · RM 84,000</span><span class="chip ok"><span>Paid · day 8</span></span></div>
+            <div class="pc-claim-detail">
+              <div><span>Programme budget</span><b>RM 96,000</b></div>
+              <div><span>Claim amount</span><b>RM 84,000</b></div>
+              <div><span>Approval</span><b>SBF approved</b></div>
+              <div><span>Paid on</span><b>18 Jul 2026</b></div>
+              <div><span>PMO review</span><b>Evidence verified</b></div>
+            </div>
+          </div>
+          <div class="q-row">
+            <div class="q-top"><span class="q-name">CLM-2026-126 · RM 38,900</span><span class="chip watch"><span>With PMO · day 1 of 14</span></span></div>
+            <div class="pc-claim-detail">
+              <div><span>Programme budget</span><b>RM 42,500</b></div>
+              <div><span>Claim amount</span><b>RM 38,900</b></div>
+              <div><span>Approval</span><b>Pending PMO</b></div>
+              <div><span>Expected payment</span><b>26 Aug 2026</b></div>
+              <div><span>PMO review</span><b>2 of 3 sessions verified</b></div>
+            </div>
           </div>
         </div>
       </div>
@@ -1783,6 +2049,29 @@ if(trForm) trForm.addEventListener("submit", function(e){
   addFeed(progLabel, "Session " + $id("trSession").value + " keyed in: +" + attend + " trainees, +" + certs + " certificates (" + loc + ")");
   toast("Session recorded · +" + attend + " trainees, +" + certs + " certificates now on the public dashboard");
   $id("trSession").value = (parseInt($id("trSession").value, 10) || STATE.sessionNo) + 1;
+  var sp = $id("snapPresent"), sc2 = $id("snapCerts"), se = $id("snapEv");
+  if(sp) sp.textContent = attend;
+  if(sc2) sc2.textContent = certs;
+  if(se) se.textContent = (parseInt(se.textContent, 10) || 12) + 1;
+});
+/* provider console: quick actions + copy link (demo) */
+var QA_MSG = {
+  qr:"QR codes regenerated for C2 · registration and attendance (demo)",
+  "qr-reg":"Registration QR downloaded (demo)",
+  "qr-att":"Attendance QR downloaded (demo)",
+  photos:"Photo upload ready · files attach to Session 9 evidence (demo)",
+  report:"Report template opened · pre-filled from your session records (demo)",
+  claim:"Claim drafted from verified sessions · review before submitting (demo)",
+  att:"Attendance register for C2 downloaded as PDF (demo)",
+  certs:"22 certificates generated and queued for issue (demo)"
+};
+document.querySelectorAll("[data-qa]").forEach(function(b){
+  b.addEventListener("click", function(){ toast(QA_MSG[b.dataset.qa] || "Done (demo)"); });
+});
+var pcCopy = $id("pcCopy");
+if(pcCopy) pcCopy.addEventListener("click", function(){
+  try{ navigator.clipboard.writeText("https://bizfund2.sarawak/join/DM-C2-KCH"); }catch(e){}
+  toast("Registration link copied · share it anywhere");
 });
 /* hash routing for jury deep links */
 function routeHash(){
