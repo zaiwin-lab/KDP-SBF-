@@ -3,11 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>BizFund2 PULSE · The Hybrid Digital PMO for SBF, by KOBIS Berhad</title>
-<meta name="description" content="The practical, hybrid Programme Management Office for SBF BizFund2: digital only where it solves real problems. Provider applications, training execution dashboard, and a clear payment flow.">
+<title>BizFund2 PULSE · Funded Business Training by the Sarawak Business Federation</title>
+<meta name="description" content="BizFund2 by the Sarawak Business Federation: funded business training for Sarawak’s entrepreneurs. Browse approved programmes, register interest, and follow live progress across all twelve divisions.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800&family=Spline+Sans+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800&family=Frank+Ruhl+Libre:wght@500;600;700&family=Spline+Sans+Mono:wght@400;500&display=swap" rel="stylesheet">
 <!-- Critical CSS: ticker bars must render as a single clean line on first paint, before the main styles load. Literal values only. -->
 <style>
 *{box-sizing:border-box}
@@ -38,7 +38,9 @@
   /* kobis credit bar gradient hover */
   --accent-lt:#5B8DF0; --accent:#2563EB; --accent-2:#1B8A4B;
   --f-sans:'Figtree',system-ui,sans-serif;
+  --f-disp:'Frank Ruhl Libre',Georgia,serif;
   --f-mono:'Spline Sans Mono',ui-monospace,monospace;
+  --gold:#C9A227; --gold-deep:#8A6D14; --gold-tint:#FAF5E4;
   --z-nav:180; --z-ticker:200; --z-tip:300;
   --radius:12px;
   --pad:clamp(1.25rem,4vw,2.25rem);
@@ -77,13 +79,29 @@ p{margin:0 0 1em;max-width:66ch;text-wrap:pretty}
 @media (max-width:960px){.nav-links{display:none}}
 @media (max-width:700px){.nav-inner{gap:.7rem;padding:.55rem 1rem}.nav-cta{display:none}.lang-switch{margin-left:auto}.brand small{display:none}}
 
-/* ---------- hero ---------- */
-.hero{background:linear-gradient(180deg,var(--bg-soft),#fff 78%);padding:clamp(3.6rem,9vh,6.5rem) 0 clamp(2.6rem,6vh,4rem);border-bottom:1px solid var(--line)}
-.hero-badge{display:inline-flex;align-items:center;gap:.5rem;background:#fff;border:1px solid var(--line);border-radius:999px;padding:.42rem .95rem;font-size:.8rem;font-weight:700;color:var(--navy);margin-bottom:1.5rem;box-shadow:var(--shadow)}
-.hero-badge i{width:8px;height:8px;border-radius:50%;background:var(--green);display:inline-block}
-.hero h1{font-size:clamp(2.3rem,5.4vw,3.9rem);font-weight:800;letter-spacing:-.025em;max-width:19ch}
-.hero h1 em{font-style:normal;color:var(--blue)}
-.hero-sub{font-size:clamp(1.02rem,1.5vw,1.18rem);color:var(--ink-2);max-width:56ch;margin-bottom:1.9rem}
+/* ---------- hero: premium consultancy, navy with gold ---------- */
+.hero{
+  background:
+    radial-gradient(900px 480px at 85% -12%, rgba(201,162,39,.14), transparent 60%),
+    radial-gradient(760px 420px at 4% 108%, rgba(37,99,235,.16), transparent 62%),
+    linear-gradient(168deg,#0C2A47,#123B63 58%,#16466F);
+  color:#fff;
+  padding:clamp(4rem,10vh,7rem) 0 clamp(3rem,7vh,4.6rem);
+  border-bottom:4px solid var(--gold);
+}
+.hero-badge{display:inline-flex;align-items:center;gap:.55rem;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.25);border-radius:999px;padding:.45rem 1rem;font-size:.78rem;font-weight:600;letter-spacing:.04em;color:#EAF1FA;margin-bottom:1.7rem}
+.hero-badge i{width:8px;height:8px;border-radius:50%;background:var(--gold);display:inline-block}
+.hero h1{font-family:var(--f-disp);font-size:clamp(2.4rem,5.6vw,4.1rem);font-weight:600;letter-spacing:-.012em;line-height:1.12;max-width:21ch;color:#fff}
+.hero h1 em{font-style:normal;color:#E3C25B}
+.hero-sub{font-size:clamp(1.02rem,1.5vw,1.18rem);color:#C9D8E8;max-width:58ch;margin-bottom:2rem;line-height:1.75}
+.btn-gold{background:var(--gold);color:#231A02}
+.btn-gold:hover{transform:translateY(-2px);box-shadow:0 10px 26px rgba(201,162,39,.35)}
+.btn-ghost{border:1.5px solid rgba(255,255,255,.4);color:#fff;background:transparent}
+.btn-ghost:hover{border-color:#fff;transform:translateY(-2px)}
+.trust-chips{display:flex;gap:.6rem 1.6rem;flex-wrap:wrap;margin-top:2.3rem;padding-top:1.4rem;border-top:1px solid rgba(255,255,255,.16)}
+.trust-chips span{display:inline-flex;align-items:center;gap:.5rem;font-size:.84rem;font-weight:600;color:#D9E4F0}
+.trust-chips svg{width:15px;height:15px;flex:none;color:var(--gold)}
+.hero .demo-note{font-family:var(--f-mono);font-size:.68rem;color:#8FA9C4;margin:1.6rem 0 0}
 .hero-btns{display:flex;gap:.8rem;flex-wrap:wrap;margin-bottom:2.4rem}
 .btn{display:inline-block;text-decoration:none;font-weight:700;font-size:.96rem;padding:.8rem 1.4rem;border-radius:10px;transition:transform .22s cubic-bezier(.22,1,.36,1),box-shadow .22s ease;border:0;cursor:pointer;font-family:var(--f-sans)}
 .btn-blue{background:var(--blue);color:#fff}
@@ -102,7 +120,7 @@ p{margin:0 0 1em;max-width:66ch;text-wrap:pretty}
 .sec{padding:clamp(3.4rem,8vw,6rem) 0}
 .sec-head{max-width:760px;margin-bottom:2.4rem}
 .sec-tag{display:inline-block;font-family:var(--f-mono);font-size:.72rem;letter-spacing:.12em;font-weight:500;border-radius:6px;padding:.3rem .6rem;margin-bottom:.9rem}
-.sec-head h2{font-size:clamp(1.7rem,3.4vw,2.5rem);letter-spacing:-.02em}
+.sec-head h2{font-family:var(--f-disp);font-weight:600;font-size:clamp(1.75rem,3.5vw,2.6rem);letter-spacing:-.01em}
 .sec-head p{color:var(--ink-2);font-size:1.05rem;margin:0}
 .tag-navy{background:#E8EFF7;color:var(--navy)}
 .tag-blue{background:var(--blue-tint);color:var(--blue-deep)}
@@ -403,6 +421,45 @@ body.locked{overflow:hidden}
 @keyframes tile-flash{0%{box-shadow:0 0 0 0 rgba(27,138,75,.55)}100%{box-shadow:0 0 0 16px rgba(27,138,75,0)}}
 @media (prefers-reduced-motion:reduce){.tile.flash{animation:none}}
 
+/* ---------- floating helpers: bot (left) + whatsapp (right) ---------- */
+.fab{position:fixed;bottom:22px;z-index:230;width:58px;height:58px;border-radius:50%;display:grid;place-items:center;cursor:pointer;border:0;box-shadow:0 12px 32px rgba(10,22,36,.3);transition:transform .2s cubic-bezier(.22,1,.36,1)}
+.fab:hover{transform:translateY(-3px) scale(1.04)}
+.fab svg{width:28px;height:28px}
+.bot-fab{left:22px;background:var(--navy);color:#fff}
+.bot-fab .live-dot{position:absolute;top:2px;right:2px;width:13px;height:13px;border-radius:50%;background:var(--green);border:2.5px solid #fff}
+.wa-fab{right:22px;background:#25D366;color:#fff}
+.fab-tag{position:fixed;bottom:36px;z-index:229;background:#fff;border:1px solid var(--line);border-radius:999px;padding:.35rem .8rem;font-size:.72rem;font-weight:700;color:var(--ink-2);box-shadow:var(--shadow);pointer-events:none;white-space:nowrap}
+.fab-tag.left{left:90px}
+.fab-tag.right{right:90px}
+@media (max-width:640px){.fab-tag{display:none}}
+.bot-panel{position:fixed;left:18px;bottom:92px;z-index:235;width:min(370px,calc(100vw - 36px));max-height:min(560px,calc(100vh - 130px));background:#fff;border:1px solid var(--line);border-radius:16px;box-shadow:0 28px 70px rgba(10,22,36,.35);display:none;flex-direction:column;overflow:hidden}
+.bot-panel.open{display:flex}
+.bot-head{background:var(--navy);color:#fff;padding:.85rem 1.1rem;display:flex;align-items:center;gap:.7rem}
+.bot-head .b-ava{width:34px;height:34px;border-radius:50%;background:rgba(255,255,255,.14);display:grid;place-items:center;flex:none}
+.bot-head .b-ava svg{width:19px;height:19px}
+.bot-head h4{margin:0;font-size:.92rem;color:#fff}
+.bot-head .b-sub{font-size:.68rem;color:#9FC1E4;display:flex;align-items:center;gap:.35rem}
+.bot-head .b-sub i{width:7px;height:7px;border-radius:50%;background:#4CC38A;display:inline-block}
+.bot-close{margin-left:auto;background:none;border:0;color:#B9CBDF;font-size:1.25rem;cursor:pointer;line-height:1;padding:.2rem}
+.bot-msgs{flex:1;overflow-y:auto;padding:1rem;display:flex;flex-direction:column;gap:.6rem;background:var(--bg-soft)}
+.b-msg{max-width:86%;padding:.6rem .85rem;border-radius:12px;font-size:.85rem;line-height:1.5}
+.b-msg.bot{background:#fff;border:1px solid var(--line);border-bottom-left-radius:4px;align-self:flex-start;color:var(--ink)}
+.b-msg.user{background:var(--blue);color:#fff;border-bottom-right-radius:4px;align-self:flex-end}
+.b-msg.bot b{color:var(--navy)}
+.b-msg .b-open{display:block;margin-top:.3rem;font-size:.8rem;color:var(--ink-2)}
+.bot-chips{display:flex;gap:.4rem;flex-wrap:wrap;padding:.6rem 1rem;border-top:1px solid var(--line);background:#fff}
+.bot-chips button{font:600 .72rem var(--f-sans);color:var(--blue-deep);background:var(--blue-tint);border:1px solid var(--blue-line);border-radius:999px;padding:.38rem .7rem;cursor:pointer;transition:all .15s ease}
+.bot-chips button:hover{background:var(--blue);color:#fff}
+.bot-input{display:flex;gap:.5rem;padding:.7rem 1rem .85rem;background:#fff}
+.bot-input input{flex:1;font:500 .88rem var(--f-sans);color:var(--ink);background:var(--bg-soft);border:1px solid var(--line);border-radius:999px;padding:.6rem 1rem}
+.bot-input button{width:40px;height:40px;border-radius:50%;border:0;background:var(--navy);color:#fff;cursor:pointer;display:grid;place-items:center;flex:none}
+.bot-input button svg{width:16px;height:16px}
+.b-typing{display:inline-flex;gap:4px;align-items:center;padding:.7rem .9rem}
+.b-typing i{width:6px;height:6px;border-radius:50%;background:var(--ink-3);animation:b-blink 1s infinite}
+.b-typing i:nth-child(2){animation-delay:.18s}.b-typing i:nth-child(3){animation-delay:.36s}
+@keyframes b-blink{0%,80%,100%{opacity:.25}40%{opacity:1}}
+@media (prefers-reduced-motion:reduce){.b-typing i{animation:none}}
+
 /* ---------- reveal ---------- */
 .will-reveal{opacity:0;transform:translateY(18px);transition:opacity .6s cubic-bezier(.22,1,.36,1),transform .6s cubic-bezier(.22,1,.36,1)}
 .will-reveal.in{opacity:1;transform:none}
@@ -427,14 +484,12 @@ body.locked{overflow:hidden}
         <path d="M12 26V15l8-4 8 4v11" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
         <path d="M16 26v-6h8v6" stroke="#5B8DF0" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
       </svg>
-      <span>BizFund2 PULSE<small data-i18n="nav.by">Hybrid Digital PMO · SBF × KOBIS</small></span>
+      <span>BizFund2 PULSE<small data-i18n="nav.by">Sarawak Business Federation</small></span>
     </a>
     <div class="nav-links">
-      <a href="#why" data-i18n="nav.why">Why hybrid</a>
-      <a href="#apply" data-i18n="nav.apply">Apply</a>
-      <a href="#schedule" data-i18n="nav.sched">Schedule</a>
-      <a href="#dashboard" data-i18n="nav.dash">Dashboard</a>
-      <a href="#payment" data-i18n="nav.pay">Payment</a>
+      <a href="#schedule" data-i18n="nav.sched">Programmes</a>
+      <a href="#how" data-i18n="nav.how">How it works</a>
+      <a href="#dashboard" data-i18n="nav.dash">Live dashboard</a>
       <a href="#stakeholders" data-i18n="nav.stake">Stakeholders</a>
       <button type="button" class="nav-login" id="navLogin" data-i18n="nav.login">Log in</button>
     </div>
@@ -444,7 +499,7 @@ body.locked{overflow:hidden}
       <button type="button" data-lang="zh">中</button>
       <button type="button" data-lang="ib">IB</button>
     </div>
-    <a class="nav-cta" href="#apply" data-i18n="nav.cta">Apply as provider</a>
+    <a class="nav-cta" href="#schedule" data-i18n="nav.cta">Find your training</a>
   </div>
 </nav>
 
@@ -453,144 +508,52 @@ body.locked{overflow:hidden}
 <!-- ============ HERO ============ -->
 <header class="hero" id="top">
   <div class="wrap">
-    <span class="hero-badge"><i aria-hidden="true"></i><span data-i18n="hero.badge">SBF × KOBIS Berhad · Programme Management Office</span></span>
-    <h1 data-i18n="hero.title">BizFund2, run the practical way: <em>digital only where it counts.</em></h1>
-    <p class="hero-sub" data-i18n="hero.sub">Most of BizFund2 stays human: trainers in rooms, learners at work, committees deciding. The PMO adds digital tools at the three points where paper actually breaks down, so applications move, training is visible, and providers get paid on time.</p>
+    <span class="hero-badge"><i aria-hidden="true"></i><span data-i18n="hero.badge">Sarawak Business Federation · BizFund2 Programme</span></span>
+    <h1 data-i18n="hero.title">The training your business needs. <em>The funding already arranged.</em></h1>
+    <p class="hero-sub" data-i18n="hero.sub">BizFund2 places funded seats with shortlisted training providers across all twelve divisions of Sarawak: from BIM and electrical licensing to maritime, safety and plantation management. Browse the live schedule, register your interest in one tap, and earn a credential that goes on record.</p>
     <div class="hero-btns">
-      <a class="btn btn-blue" href="#dashboard" data-i18n="hero.cta1">See the live dashboard</a>
-      <a class="btn btn-line" href="#apply" data-i18n="hero.cta2">How providers apply</a>
+      <a class="btn btn-gold" href="#schedule" data-i18n="hero.cta1">Find your training</a>
+      <a class="btn btn-ghost" href="#dashboard" data-i18n="hero.cta2">See the live dashboard</a>
     </div>
-    <div class="stage-pills">
-      <a class="stage-pill s1" href="#apply"><span class="n">1</span><span data-i18n="hero.p1">Providers apply online</span></a>
-      <a class="stage-pill s2" href="#dashboard"><span class="n">2</span><span data-i18n="hero.p2">Training tracked on one dashboard</span></a>
-      <a class="stage-pill s3" href="#payment"><span class="n">3</span><span data-i18n="hero.p3">Payment flows to completion</span></a>
+    <div class="trust-chips">
+      <span><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8.5L6.5 12 13 4.5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span data-i18n="hero.t1">Funded under BizFund2</span></span>
+      <span><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8.5L6.5 12 13 4.5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span data-i18n="hero.t2">Shortlisted providers only</span></span>
+      <span><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8.5L6.5 12 13 4.5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span data-i18n="hero.t3">All 12 divisions covered</span></span>
+      <span><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8.5L6.5 12 13 4.5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span data-i18n="hero.t4">Certificates on record</span></span>
     </div>
+    <p class="demo-note" data-i18n="hero.note">Exclusive demonstration prototype · illustrative data</p>
   </div>
 </header>
-
-<!-- ============ WHY HYBRID ============ -->
-<section class="sec" id="why">
-  <div class="wrap">
-    <div class="sec-head">
-      <span class="sec-tag tag-navy" data-i18n="why.tag">THE REAL PROBLEMS</span>
-      <h2 data-i18n="why.title">Three points where funding programmes usually break</h2>
-      <p data-i18n="why.lede">We are not digitising everything. We are fixing the three bottlenecks that cost SBF time, trust and money, and leaving the rest to people who do it well.</p>
-    </div>
-    <div class="prob-grid">
-      <div class="prob-card c1">
-        <div class="prob-top"><span class="mono">PROBLEM 1</span><h3 data-i18n="why.pr1">Proposals arrive as paper and email</h3></div>
-        <div class="prob-body">
-          <p data-i18n="why.pr1p">Provider applications sit in inboxes, attachments go missing, and nobody can say where a proposal stands or why it stalled.</p>
-          <div class="prob-fix"><svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M3 10.5L8 15.5 17 5" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg><span data-i18n="why.fx1">Digital fix: one application form, one pipeline, visible status for every proposal.</span></div>
-        </div>
-      </div>
-      <div class="prob-card c2">
-        <div class="prob-top"><span class="mono">PROBLEM 2</span><h3 data-i18n="why.pr2">Nobody sees training as it happens</h3></div>
-        <div class="prob-body">
-          <p data-i18n="why.pr2p">Attendance lives in photocopied forms. Numbers arrive months late, so SBF reports old news and problems surface after the money is spent.</p>
-          <div class="prob-fix"><svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M3 10.5L8 15.5 17 5" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg><span data-i18n="why.fx2">Digital fix: one dashboard for locality, trainee numbers and certificates, updated per session.</span></div>
-        </div>
-      </div>
-      <div class="prob-card c3">
-        <div class="prob-top"><span class="mono">PROBLEM 3</span><h3 data-i18n="why.pr3">Providers wait too long to be paid</h3></div>
-        <div class="prob-body">
-          <p data-i18n="why.pr3p">Claims bounce between offices for missing evidence. Good trainers stop applying because payment feels like a lottery.</p>
-          <div class="prob-fix"><svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M3 10.5L8 15.5 17 5" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg><span data-i18n="why.fx3">Digital fix: claims with evidence attached, a tracked verification flow, payment inside 14 days.</span></div>
-        </div>
-      </div>
-    </div>
-    <div class="hybrid-note">
-      <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 3l7 4v5c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V7l7-4z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M9 12l2 2 4-4.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
-      <p data-i18n="why.note"><b>This is a hybrid PMO.</b> Committee decisions, site visits, coaching and relationships stay human, run by KOBIS Berhad together with the SBF secretariat. The platform only carries the three flows above, which is why it is simple enough to use from day one.</p>
-    </div>
-  </div>
-</section>
-
-<!-- ============ JOURNEY RAIL ============ -->
-<section class="sec" id="journey" style="padding-top:0">
-  <div class="wrap">
-    <div class="sec-head">
-      <span class="sec-tag tag-navy" data-i18n="jr.tag">HOW IT WORKS</span>
-      <h2 data-i18n="jr.title">One programme, three stages, three colours</h2>
-    </div>
-    <div class="rail">
-      <div class="rail-step s1">
-        <span class="num">1</span>
-        <h3 data-i18n="jr.s1">Apply</h3>
-        <p data-i18n="jr.s1p">Training providers submit proposals online and follow their status through evaluation to approval.</p>
-        <a href="#apply" data-i18n="jr.s1a">See the application flow</a>
-      </div>
-      <div class="rail-step s2">
-        <span class="num">2</span>
-        <h3 data-i18n="jr.s2">Deliver</h3>
-        <p data-i18n="jr.s2p">Approved programmes run on the ground. Each session's attendance and certificates are keyed into the dashboard.</p>
-        <a href="#dashboard" data-i18n="jr.s2a">See the dashboard</a>
-      </div>
-      <div class="rail-step s3">
-        <span class="num">3</span>
-        <h3 data-i18n="jr.s3">Get paid</h3>
-        <p data-i18n="jr.s3p">Completed sessions become claims with evidence attached, verified by the PMO and paid on a committed clock.</p>
-        <a href="#payment" data-i18n="jr.s3a">See the payment flow</a>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ============ STAGE 1 · APPLY ============ -->
-<section class="sec sec-tint-blue" id="apply">
-  <div class="wrap">
-    <div class="sec-head">
-      <span class="sec-tag tag-blue" data-i18n="ap.tag">STAGE 1 · APPLICATIONS</span>
-      <h2 data-i18n="ap.title">Provider proposals, out of the inbox and into a pipeline</h2>
-    </div>
-    <div class="split">
-      <div>
-        <p class="muted" data-i18n="ap.p1">Every training provider applies through the same online form, attaching their programme outline, costing and track record. From that moment the proposal has a number, a stage and a visible status, for the provider and for the secretariat.</p>
-        <ul class="checklist">
-          <li><svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><circle cx="10" cy="10" r="8.4" stroke="#2563EB" stroke-width="1.7"/><path d="M6.5 10.4l2.3 2.3 4.7-5" stroke="#2563EB" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg><span data-i18n="ap.c1"><b>One form, one standard.</b> Programme outline, target learners, locality, costing and provider credentials.</span></li>
-          <li><svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><circle cx="10" cy="10" r="8.4" stroke="#2563EB" stroke-width="1.7"/><path d="M6.5 10.4l2.3 2.3 4.7-5" stroke="#2563EB" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg><span data-i18n="ap.c2"><b>Screening by the PMO.</b> Completeness and eligibility checked within 5 working days.</span></li>
-          <li><svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><circle cx="10" cy="10" r="8.4" stroke="#2563EB" stroke-width="1.7"/><path d="M6.5 10.4l2.3 2.3 4.7-5" stroke="#2563EB" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg><span data-i18n="ap.c3"><b>Panel evaluation stays human.</b> The SBF panel decides; the platform just gives them tidy papers and records the outcome.</span></li>
-          <li><svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><circle cx="10" cy="10" r="8.4" stroke="#2563EB" stroke-width="1.7"/><path d="M6.5 10.4l2.3 2.3 4.7-5" stroke="#2563EB" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg><span data-i18n="ap.c4"><b>Every applicant gets an answer.</b> Approved, revise and resubmit, or declined with a reason.</span></li>
-        </ul>
-      </div>
-      <div class="panel-card">
-        <div class="panel-bar"><span class="dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="t">bizfund2 · provider applications</span></div>
-        <div class="panel-body">
-          <div class="steps-line" aria-label="Application stages">
-            <span class="st done" data-i18n="ap.st1">Submitted</span><span class="arr">→</span>
-            <span class="st done" data-i18n="ap.st2">Screening</span><span class="arr">→</span>
-            <span class="st now" data-i18n="ap.st3">Panel evaluation</span><span class="arr">→</span>
-            <span class="st" data-i18n="ap.st4">Approved</span>
-          </div>
-          <div class="pipe">
-            <div class="pipe-row">
-              <div><div class="p-name">Digital Marketing for Rural SMEs</div><div class="p-sub">APP-2026-041 · Serumpun Skills · Kuching</div></div>
-              <span class="chip ok"><svg viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2 6.5L4.8 9 10 3.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><span data-i18n="ap.a1">Approved</span></span>
-            </div>
-            <div class="pipe-row">
-              <div><div class="p-name">Food Safety &amp; Halal Readiness</div><div class="p-sub">APP-2026-057 · Borneo Upskill · Sibu</div></div>
-              <span class="chip info"><svg viewBox="0 0 12 12" fill="none" aria-hidden="true"><circle cx="6" cy="6" r="4.6" stroke="currentColor" stroke-width="1.6"/><path d="M6 3.6v2.8l1.8 1.2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg><span data-i18n="ap.a2">Panel · 12 Aug</span></span>
-            </div>
-            <div class="pipe-row">
-              <div><div class="p-name">Basic Bookkeeping for Micro Business</div><div class="p-sub">APP-2026-063 · Miri LearnWorks · Miri</div></div>
-              <span class="chip watch"><svg viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M6 1.5v5.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><circle cx="6" cy="10" r="1.1" fill="currentColor"/></svg><span data-i18n="ap.a3">Revise costing</span></span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
 
 <!-- ============ PULSE · LIVING SCHEDULE ============ -->
 <section class="sec" id="schedule">
   <div class="wrap">
     <div class="sec-head">
-      <span class="sec-tag tag-navy" data-i18n="sc.tag">PULSE · THE LIVING SCHEDULE</span>
-      <h2 data-i18n="sc.title">Last season's training list, upgraded from PDF to pulse</h2>
-      <p data-i18n="sc.lede">The Recovery BizFund schedule lived in a PDF, updated by hand and full of TBA. Every programme below is real, taken from that exact list. In PULSE each cohort carries a live status, live seats and a live outcome, and the list can never be out of date again.</p>
+      <span class="sec-tag tag-navy" data-i18n="sc.tag">FIND YOUR TRAINING</span>
+      <h2 data-i18n="sc.title">Approved programmes, live seats, real dates</h2>
+      <p data-i18n="sc.lede">Every programme below is approved and funded under BizFund2, delivered by a shortlisted training provider. Dates, seats and statuses update the moment the secretariat publishes them. Found yours? Register your interest and the secretariat will be in touch.</p>
     </div>
 
+    <div class="pulse-feed" aria-label="Latest schedule changes">
+      <span class="pf-label"><span class="pf-dot" aria-hidden="true"></span><span data-i18n="sc.feed">LIVE CHANGES</span></span>
+      <span class="pf-item"><b>BIM Modelling of Architecture</b> · <span data-i18n="sc.f1">Cohort 7 dates confirmed, 4 to 7 Mar</span></span>
+      <span class="pf-item"><b>Wireman Grade 1</b> · <span data-i18n="sc.f2">Cohort 5 now open, 18 seats left</span></span>
+      <span class="pf-item"><b>Safe Handling of Chemicals (Miri)</b> · <span data-i18n="sc.f3">Cohort 2 completed, 26 certified</span></span>
+    </div>
+
+    <div class="reg-bar">
+      <input type="search" id="regSearch" data-i18n-ph="sc.search" placeholder="Search programme or provider" aria-label="Search programmes">
+      <select id="regSector" aria-label="Filter by sector"></select>
+      <select id="regLoc" aria-label="Filter by location"></select>
+      <select id="regStatus" aria-label="Filter by status"></select>
+      <span class="reg-count" id="regCount"></span>
+    </div>
+    <div class="reg-grid" id="regGrid"></div>
+
+    <div class="sec-head" style="margin-top:3.4rem;margin-bottom:1.4rem">
+      <span class="sec-tag tag-navy" data-i18n="sc.thentag">SINCE LAST SEASON</span>
+      <h2 style="font-size:clamp(1.3rem,2.4vw,1.7rem)" data-i18n="sc.thenh">What changed from the old training list</h2>
+    </div>
     <div class="then-now">
       <div class="tn-col old">
         <h3><svg width="15" height="15" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M5 2.5h7l3.5 3.5v11.5H5z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M12 2.5V6h3.5" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg><span data-i18n="sc.oldh">The 2023/24 list · a PDF</span></h3>
@@ -612,21 +575,33 @@ body.locked{overflow:hidden}
       </div>
     </div>
 
-    <div class="pulse-feed" aria-label="Latest schedule changes">
-      <span class="pf-label"><span class="pf-dot" aria-hidden="true"></span><span data-i18n="sc.feed">LIVE CHANGES</span></span>
-      <span class="pf-item"><b>BIM Modelling of Architecture</b> · <span data-i18n="sc.f1">Cohort 7 dates confirmed, 4 to 7 Mar</span></span>
-      <span class="pf-item"><b>Wireman Grade 1</b> · <span data-i18n="sc.f2">Cohort 5 now open, 18 seats left</span></span>
-      <span class="pf-item"><b>Safe Handling of Chemicals (Miri)</b> · <span data-i18n="sc.f3">Cohort 2 completed, 26 certified</span></span>
-    </div>
+  </div>
+</section>
 
-    <div class="reg-bar">
-      <input type="search" id="regSearch" data-i18n-ph="sc.search" placeholder="Search programme or provider" aria-label="Search programmes">
-      <select id="regSector" aria-label="Filter by sector"></select>
-      <select id="regLoc" aria-label="Filter by location"></select>
-      <select id="regStatus" aria-label="Filter by status"></select>
-      <span class="reg-count" id="regCount"></span>
+<!-- ============ HOW IT WORKS ============ -->
+<section class="sec" id="how" style="background:var(--bg-soft)">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="sec-tag tag-navy" data-i18n="how.tag">HOW IT WORKS</span>
+      <h2 data-i18n="how.title">Three steps from interest to credential</h2>
     </div>
-    <div class="reg-grid" id="regGrid"></div>
+    <div class="rail">
+      <div class="rail-step s1">
+        <span class="num">1</span>
+        <h3 data-i18n="how.s1">Browse</h3>
+        <p data-i18n="how.s1p">Filter the live schedule by sector, division and status. Every cohort shows its real dates and seats.</p>
+      </div>
+      <div class="rail-step s2">
+        <span class="num">2</span>
+        <h3 data-i18n="how.s2">Register your interest</h3>
+        <p data-i18n="how.s2p">One tap on the cohort you want. The secretariat confirms your seat and sends the details.</p>
+      </div>
+      <div class="rail-step s3">
+        <span class="num">3</span>
+        <h3 data-i18n="how.s3">Attend and get certified</h3>
+        <p data-i18n="how.s3p">Your attendance is recorded properly at every session, and your certificate goes on record for employers and banks.</p>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -634,9 +609,9 @@ body.locked{overflow:hidden}
 <section class="sec sec-tint-green" id="dashboard">
   <div class="wrap">
     <div class="sec-head">
-      <span class="sec-tag tag-green" data-i18n="db.tag">STAGE 2 · EXECUTION</span>
-      <h2 data-i18n="db.title">The training dashboard: who, where, how many, certified</h2>
-      <p data-i18n="db.lede">Providers key in each session's attendance. The dashboard turns it into the picture SBF has never had in real time: locality coverage, trainee numbers and certificates, per division and per programme.</p>
+      <span class="sec-tag tag-green" data-i18n="db.tag">LIVE TRANSPARENCY</span>
+      <h2 data-i18n="db.title">One live dashboard the whole state can read</h2>
+      <p data-i18n="db.lede">Providers key in each session’s attendance, and everyone reads the same picture: locality coverage, trainee numbers and certificates, per division and per programme, refreshed after every class.</p>
     </div>
 
     <div class="dash">
@@ -691,46 +666,6 @@ body.locked{overflow:hidden}
   </div>
 </section>
 
-<!-- ============ STAGE 3 · PAYMENT ============ -->
-<section class="sec sec-tint-amber" id="payment">
-  <div class="wrap">
-    <div class="sec-head">
-      <span class="sec-tag tag-amber" data-i18n="py.tag">STAGE 3 · PAYMENT</span>
-      <h2 data-i18n="py.title">A payment flow providers can actually see</h2>
-    </div>
-    <div class="split rev">
-      <div class="panel-card">
-        <div class="panel-bar"><span class="dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="t">bizfund2 · claims &amp; payments</span></div>
-        <div class="panel-body" style="overflow-x:auto">
-          <div class="steps-line" aria-label="Claim stages">
-            <span class="st done" data-i18n="py.st1">Claim submitted</span><span class="arr">→</span>
-            <span class="st done" data-i18n="py.st2">PMO verifies</span><span class="arr">→</span>
-            <span class="st now" data-i18n="py.st3">SBF approves</span><span class="arr">→</span>
-            <span class="st" data-i18n="py.st4">Paid</span>
-          </div>
-          <table class="pay-table">
-            <thead><tr><th data-i18n="py.th1">Claim</th><th data-i18n="py.th2">Amount</th><th data-i18n="py.th3">Days in</th><th data-i18n="py.th4">Status</th></tr></thead>
-            <tbody>
-              <tr><td>CLM-2026-118 · Serumpun Skills</td><td class="mono">RM 84,000</td><td class="mono">8</td><td><span class="chip ok"><svg viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2 6.5L4.8 9 10 3.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><span data-i18n="py.a1">Paid</span></span></td></tr>
-              <tr><td>CLM-2026-121 · Borneo Upskill</td><td class="mono">RM 61,500</td><td class="mono">4</td><td><span class="chip info"><svg viewBox="0 0 12 12" fill="none" aria-hidden="true"><circle cx="6" cy="6" r="4.6" stroke="currentColor" stroke-width="1.6"/><path d="M6 3.6v2.8l1.8 1.2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg><span data-i18n="py.a2">In verification</span></span></td></tr>
-              <tr><td>CLM-2026-124 · Miri LearnWorks</td><td class="mono">RM 47,200</td><td class="mono">2</td><td><span class="chip watch"><svg viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M6 1.5v5.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><circle cx="6" cy="10" r="1.1" fill="currentColor"/></svg><span data-i18n="py.a3">Evidence requested</span></span></td></tr>
-            </tbody>
-          </table>
-          <div class="pay-promise"><svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><circle cx="10" cy="10" r="8.4" stroke="currentColor" stroke-width="1.7"/><path d="M10 5.5V10l3 2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><span data-i18n="py.promise">Commitment: verified claims paid within 14 days.</span></div>
-        </div>
-      </div>
-      <div>
-        <p class="muted" data-i18n="py.p1">When a programme's sessions are complete in the dashboard, the claim almost writes itself: attendance, certificates and photos are already attached as evidence. The provider submits, then watches the same four steps the PMO watches.</p>
-        <ul class="checklist">
-          <li><svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><circle cx="10" cy="10" r="8.4" stroke="#B45309" stroke-width="1.7"/><path d="M6.5 10.4l2.3 2.3 4.7-5" stroke="#B45309" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg><span data-i18n="py.c1"><b>Evidence travels with the claim.</b> No more chasing attendance sheets after the fact.</span></li>
-          <li><svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><circle cx="10" cy="10" r="8.4" stroke="#B45309" stroke-width="1.7"/><path d="M6.5 10.4l2.3 2.3 4.7-5" stroke="#B45309" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg><span data-i18n="py.c2"><b>One clock, visible to all.</b> Every claim shows its age; nothing sits quietly in a drawer.</span></li>
-          <li><svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><circle cx="10" cy="10" r="8.4" stroke="#B45309" stroke-width="1.7"/><path d="M6.5 10.4l2.3 2.3 4.7-5" stroke="#B45309" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg><span data-i18n="py.c3"><b>SBF keeps the final say.</b> Approval stays with the secretariat and committee; the platform just makes it fast.</span></li>
-        </ul>
-      </div>
-    </div>
-  </div>
-</section>
-
 <!-- ============ STAKEHOLDERS ============ -->
 <section class="sec" id="stakeholders">
   <div class="wrap">
@@ -774,8 +709,8 @@ body.locked{overflow:hidden}
 <section class="pmo-strip" id="pmo">
   <div class="wrap">
     <div>
-      <h2 data-i18n="pmo.title">The PMO behind it: KOBIS Berhad with the SBF secretariat</h2>
-      <p data-i18n="pmo.p">The platform does not run the programme; people do. KOBIS Berhad staffs the PMO together with the SBF secretariat: screening proposals, visiting training sites, verifying claims and preparing committee papers. The dashboard is simply where our work becomes visible to everyone.</p>
+      <h2 data-i18n="pmo.title">Behind the portal: the BizFund2 Programme Management Office</h2>
+      <p data-i18n="pmo.p">The portal does not run the programme; people do. The appointed PMO secretariat screens providers, publishes schedules, visits training sites, verifies evidence and prepares committee papers, so every number on this page stays honest. The dashboard is simply where that work becomes public.</p>
     </div>
     <div class="stats">
       <div class="stat"><div class="n"><span class="count" data-to="96">0</span></div><div class="l" data-i18n="pmo.s1">programmes approved</div></div>
@@ -793,11 +728,11 @@ body.locked{overflow:hidden}
 
 <!-- ============ CTA ============ -->
 <section class="cta-banner" id="contact">
-  <h2 data-i18n="cta.title">Ready to run BizFund2 the practical way?</h2>
-  <p data-i18n="cta.p">Request a walkthrough for the SBF committee, or register interest as a training provider. The demo above is exactly what your team would use.</p>
+  <h2 data-i18n="cta.title">Your next qualification is already funded.</h2>
+  <p data-i18n="cta.p">Seats are confirmed in order of interest, cohort by cohort. Find your programme above, register in one tap, or talk to the secretariat directly.</p>
   <div class="btns">
-    <a class="btn btn-blue" href="mailto:hello@kobisberhad.com?subject=BizFund2%20PMO%20walkthrough" data-i18n="cta.b1">Request a walkthrough</a>
-    <a class="btn btn-line" href="mailto:hello@kobisberhad.com?subject=Training%20provider%20interest" data-i18n="cta.b2">Register as a provider</a>
+    <a class="btn btn-blue" href="#schedule" data-i18n="cta.b1">Browse programmes</a>
+    <a class="btn btn-line" href="https://wa.me/60168331121?text=Hi%20SBF%20Secretariat%2C%20I%20would%20like%20to%20ask%20about%20BizFund2%20training." target="_blank" rel="noopener" data-i18n="cta.b2">WhatsApp the secretariat</a>
   </div>
 </section>
 
@@ -812,26 +747,26 @@ body.locked{overflow:hidden}
         <path d="M16 26v-6h8v6" stroke="#5B8DF0" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
       </svg>
       <div>
-        <h3>SBF BizFund2 · Hybrid Digital PMO</h3>
-        <p data-i18n="footer.tagline">Run by KOBIS Berhad with the SBF secretariat: digital where it solves real problems, human everywhere else.</p>
+        <h3>BizFund2 · Sarawak Business Federation</h3>
+        <p data-i18n="footer.tagline">Funded business training for Sarawak’s entrepreneurs, run by the BizFund2 Programme Management Office and the SBF secretariat.</p>
       </div>
     </div>
     <div class="footer-col">
       <h4 data-i18n="footer.h1">The platform</h4>
-      <a href="#why" data-i18n="footer.l1">Why hybrid</a>
-      <a href="#apply" data-i18n="footer.l2">Provider applications</a>
-      <a href="#dashboard" data-i18n="footer.l3">Execution dashboard</a>
-      <a href="#payment" data-i18n="footer.l4">Payment flow</a>
+      <a href="#schedule" data-i18n="footer.l1">Programmes</a>
+      <a href="#how" data-i18n="footer.l2">How it works</a>
+      <a href="#dashboard" data-i18n="footer.l3">Live dashboard</a>
+      <a href="#stakeholders" data-i18n="footer.l4">Stakeholders</a>
     </div>
     <div class="footer-col">
       <h4 data-i18n="footer.h2">Contact</h4>
-      <p>KOBIS Berhad</p>
+      <p data-i18n="footer.c0">SBF Secretariat</p>
       <p data-i18n="footer.c1">Kuching, Sarawak, Malaysia</p>
-      <a href="https://www.kobisberhad.com" target="_blank" rel="noopener">www.kobisberhad.com</a>
+      <a href="mailto:admin@sbf.org.my">admin@sbf.org.my</a>
     </div>
   </div>
   <div class="footer-copy">
-    <p data-i18n="footer.rights">© 2026 KOBIS Berhad. All rights reserved. Prototype prepared for the Sarawak Business Federation with illustrative demonstration data.</p>
+    <p data-i18n="footer.rights">© 2026 Sarawak Business Federation · BizFund2. Demonstration prototype with illustrative data.</p>
   </div>
   <div class="kobis-bar">
     <p>This Digital Experience is Part of the <a class="kobis-link" href="https://www.kobisberhad.com" target="_blank" rel="noopener">KOBIS Berhad</a> Innovation Ecosystem</p>
@@ -849,7 +784,7 @@ body.locked{overflow:hidden}
       <div class="acct sec">
         <span class="avatar" aria-hidden="true">SB</span>
         <h4 data-i18n="lg.a1">Secretariat · PMO</h4>
-        <span class="role" data-i18n="lg.a1r">SBF secretariat with KOBIS Berhad · screens applications, verifies claims, publishes dates</span>
+        <span class="role" data-i18n="lg.a1r">The appointed PMO secretariat · screens providers, verifies claims, publishes dates</span>
         <span class="cred">admin@sbf.org.my · ••••••••</span>
         <button type="button" data-console="sec" data-i18n="lg.enter1">Enter secretariat console</button>
       </div>
@@ -867,7 +802,7 @@ body.locked{overflow:hidden}
 <!-- ============ SECRETARIAT CONSOLE ============ -->
 <div class="console-view" id="consoleSec" role="dialog" aria-modal="true" aria-label="Secretariat console">
   <div class="cv-bar sec">
-    <span class="cv-role">Secretariat Console<small>SBF SECRETARIAT × KOBIS BERHAD · PMO</small></span>
+    <span class="cv-role">Secretariat Console<small>SBF SECRETARIAT · PROGRAMME MANAGEMENT OFFICE</small></span>
     <span class="cv-demo">DEMO</span>
     <button class="cv-exit" type="button" data-exit="dash">View public dashboard →</button>
     <button class="cv-exit" type="button" data-exit="close">Exit</button>
@@ -984,6 +919,33 @@ body.locked{overflow:hidden}
   </div>
 </div>
 
+<!-- ============ 24/7 ASSISTANT (left) + WHATSAPP (right) ============ -->
+<span class="fab-tag left" data-i18n="fab.bot">Ask anything · 24/7</span>
+<button class="fab bot-fab" id="botFab" type="button" aria-label="Open the BizFund2 assistant" aria-expanded="false">
+  <svg viewBox="0 0 28 28" fill="none" aria-hidden="true"><rect x="5" y="9" width="18" height="13" rx="4" stroke="currentColor" stroke-width="2"/><circle cx="11" cy="15.5" r="1.7" fill="currentColor"/><circle cx="17" cy="15.5" r="1.7" fill="currentColor"/><path d="M14 9V5.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><circle cx="14" cy="4.4" r="1.6" fill="currentColor"/><path d="M9.5 19h9" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+  <span class="live-dot" aria-hidden="true"></span>
+</button>
+<span class="fab-tag right" data-i18n="fab.wa">WhatsApp the secretariat</span>
+<a class="fab wa-fab" href="https://wa.me/60168331121?text=Hi%20SBF%20Secretariat%2C%20I%20would%20like%20to%20ask%20about%20BizFund2%20training." target="_blank" rel="noopener" aria-label="Chat with the secretariat on WhatsApp">
+  <svg viewBox="0 0 32 32" fill="currentColor" aria-hidden="true"><path d="M16 3C9.4 3 4 8.3 4 14.9c0 2.6.8 5 2.3 7L4.5 28l6.3-1.7c1.9 1 4 1.6 6.2 1.6 6.6 0 12-5.3 12-11.9C29 8.3 22.6 3 16 3zm0 22.1c-2 0-3.9-.6-5.5-1.5l-.4-.2-3.7 1 1-3.6-.3-.4a9.6 9.6 0 0 1-1.8-5.5C5.3 9.5 10.1 5 16 5s10.7 4.5 10.7 9.9c0 5.5-4.8 10.2-10.7 10.2zm5.5-7.4c-.3-.2-1.8-.9-2-1-.3-.1-.5-.2-.7.2-.2.3-.8 1-1 1.2-.2.2-.4.2-.7.1-.3-.2-1.3-.5-2.4-1.5-.9-.8-1.5-1.8-1.7-2.1-.2-.3 0-.5.1-.6l.5-.6c.2-.2.2-.3.3-.6.1-.2 0-.4 0-.6l-.9-2.3c-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1.1 1-1.1 2.5s1.1 2.9 1.3 3.1c.2.2 2.2 3.4 5.4 4.8.8.3 1.4.5 1.8.7.8.2 1.5.2 2 .1.6-.1 1.8-.7 2.1-1.4.3-.7.3-1.3.2-1.4-.1-.2-.3-.2-.6-.4z"/></svg>
+</a>
+<div class="bot-panel" id="botPanel" role="dialog" aria-label="BizFund2 assistant">
+  <div class="bot-head">
+    <span class="b-ava" aria-hidden="true"><svg viewBox="0 0 28 28" fill="none"><rect x="5" y="9" width="18" height="13" rx="4" stroke="#fff" stroke-width="2"/><circle cx="11" cy="15.5" r="1.7" fill="#fff"/><circle cx="17" cy="15.5" r="1.7" fill="#fff"/><path d="M14 9V5.5" stroke="#fff" stroke-width="2" stroke-linecap="round"/><circle cx="14" cy="4.4" r="1.6" fill="#fff"/></svg></span>
+    <div>
+      <h4>BizFund2 Assistant</h4>
+      <span class="b-sub"><i aria-hidden="true"></i><span data-i18n="bot.sub">Online · answers 24/7</span></span>
+    </div>
+    <button class="bot-close" id="botClose" type="button" aria-label="Close assistant">×</button>
+  </div>
+  <div class="bot-msgs" id="botMsgs"></div>
+  <div class="bot-chips" id="botChips"></div>
+  <form class="bot-input" id="botForm">
+    <input type="text" id="botIn" data-i18n-bph autocomplete="off" placeholder="Type your question">
+    <button type="submit" aria-label="Send"><svg viewBox="0 0 16 16" fill="none"><path d="M2 8h11M9 3.5L13.5 8 9 12.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+  </form>
+</div>
+
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
 <div id="tip" role="presentation"></div>
@@ -997,7 +959,7 @@ var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches
 var sparkle = '<svg class="ticker-icon" viewBox="0 0 14 14" fill="currentColor" aria-hidden="true"><path d="M7 0l1.6 4.2L13 5.8 8.6 7.4 7 11.6 5.4 7.4 1 5.8l4.4-1.6z"/><circle cx="12" cy="12" r="1.3"/></svg>';
 function fillTicker(id){
   var t = document.getElementById(id); if(!t) return;
-  var item = '<span class="ticker-item">'+sparkle+'This website is built by KOBIS Berhad</span>';
+  var item = '<span class="ticker-item">'+sparkle+'Exclusive Demonstration Prototype for SBF \u2022 Built with Purpose. Engineered for Impact. Developed by KOBIS Berhad.</span>';
   var half = item.repeat(8);
   t.innerHTML = half + half;
 }
@@ -1007,9 +969,17 @@ fillTicker("tickerTrack1"); fillTicker("tickerTrack2");
 var I18N = {
 bm:{
 "a11y.skip":"Langkau ke kandungan",
-"nav.by":"PMO Digital Hibrid · SBF × KOBIS","nav.why":"Kenapa hibrid","nav.apply":"Mohon","nav.sched":"Jadual","nav.dash":"Papan Pemuka","nav.pay":"Bayaran","nav.stake":"Pemegang Taruh","nav.cta":"Mohon sebagai penyedia",
-"sc.tag":"PULSE · JADUAL YANG HIDUP","sc.title":"Senarai latihan musim lepas, dinaik taraf daripada PDF kepada nadi",
-"sc.lede":"Jadual Recovery BizFund dahulu hidup dalam PDF, dikemas kini secara manual dan penuh TBA. Setiap program di bawah adalah benar, diambil daripada senarai itu. Dalam PULSE setiap kohort membawa status, kerusi dan hasil secara langsung, dan senarai ini tidak boleh lapuk lagi.",
+"nav.by":"Sarawak Business Federation","nav.sched":"Program","nav.how":"Cara Ia Berfungsi","nav.dash":"Papan Pemuka Langsung","nav.stake":"Pemegang Taruh","nav.cta":"Cari latihan anda",
+"hero.t1":"Dibiayai di bawah BizFund2","hero.t2":"Penyedia tersenarai pendek sahaja","hero.t3":"Kesemua 12 bahagian diliputi","hero.t4":"Sijil tercatat dalam rekod",
+"hero.note":"Prototaip demonstrasi eksklusif · data ilustratif",
+"sc.thentag":"SEJAK MUSIM LEPAS","sc.thenh":"Apa yang berubah daripada senarai latihan lama",
+"how.tag":"CARA IA BERFUNGSI","how.title":"Tiga langkah dari minat ke kelayakan",
+"how.s1":"Semak imbas","how.s1p":"Tapis jadual langsung mengikut sektor, bahagian dan status. Setiap kohort memaparkan tarikh dan kerusi sebenar.",
+"how.s2":"Daftar minat","how.s2p":"Satu ketukan pada kohort pilihan anda. Sekretariat mengesahkan kerusi dan menghantar butiran.",
+"how.s3":"Hadir dan dapatkan sijil","how.s3p":"Kehadiran anda direkod dengan betul pada setiap sesi, dan sijil anda tercatat untuk majikan dan bank.",
+"fab.bot":"Tanya apa-apa · 24/7","fab.wa":"WhatsApp sekretariat","bot.sub":"Dalam talian · menjawab 24/7","footer.c0":"Sekretariat SBF",
+"sc.tag":"CARI LATIHAN ANDA","sc.title":"Program diluluskan, kerusi langsung, tarikh sebenar",
+"sc.lede":"Setiap program di bawah diluluskan dan dibiayai di bawah BizFund2, disampaikan oleh penyedia latihan tersenarai pendek. Tarikh, kerusi dan status dikemas kini sebaik sahaja sekretariat menerbitkannya. Jumpa yang sesuai? Daftar minat dan sekretariat akan menghubungi anda.",
 "sc.oldh":"Senarai 2023/24 · sebuah PDF","sc.newh":"BizFund2 PULSE · hidup",
 "sc.o1":"Dikemas kini manual: \"Updated 14 February 2024\", diedar melalui e-mel, versi merata-rata",
 "sc.o2":"Kebanyakan kohort ditanda TBA, tanpa cara mengetahui bila ia berubah",
@@ -1026,13 +996,13 @@ bm:{
 "db.cta1":"Log masuk sebagai Sekretariat","db.cta2":"Log masuk sebagai Penyedia Latihan",
 "lg.title":"Pilih konsol untuk diterokai",
 "lg.sub":"Dua konsol berfungsi menyalurkan data ke papan pemuka awam. Kelayakan telah diisi untuk demo; dalam produksi ini log masuk selamat.",
-"lg.a1":"Sekretariat · PMO","lg.a1r":"Sekretariat SBF bersama KOBIS Berhad · menyaring permohonan, mengesah tuntutan, menerbitkan tarikh",
+"lg.a1":"Sekretariat · PMO","lg.a1r":"Sekretariat PMO yang dilantik · menyaring penyedia, mengesah tuntutan, menerbitkan tarikh",
 "lg.a2":"Penyedia Latihan","lg.a2r":"Serumpun Skills Sdn Bhd · memasukkan sesi, kehadiran dan sijil selepas setiap kelas",
 "lg.enter1":"Masuk konsol sekretariat","lg.enter2":"Masuk konsol penyedia",
-"hero.badge":"SBF × KOBIS Berhad · Pejabat Pengurusan Program",
-"hero.title":"BizFund2, dijalankan secara praktikal: <em>digital hanya di tempat yang penting.</em>",
-"hero.sub":"Sebahagian besar BizFund2 kekal dijalankan manusia: jurulatih di bilik latihan, pelatih di tempat kerja, jawatankuasa membuat keputusan. PMO menambah alat digital pada tiga titik di mana kertas benar-benar gagal, supaya permohonan bergerak, latihan kelihatan dan penyedia dibayar tepat pada masa.",
-"hero.cta1":"Lihat papan pemuka","hero.cta2":"Cara penyedia memohon",
+"hero.badge":"Sarawak Business Federation · Program BizFund2",
+"hero.title":"Latihan yang perniagaan anda perlukan. <em>Pembiayaannya sudah diuruskan.</em>",
+"hero.sub":"BizFund2 menyediakan tempat berbiaya penuh dengan penyedia latihan tersenarai pendek di kesemua dua belas bahagian Sarawak: daripada BIM dan perlesenan elektrik hingga maritim, keselamatan dan pengurusan ladang. Semak imbas jadual langsung, daftar minat dengan satu ketukan, dan raih kelayakan yang tercatat dalam rekod.",
+"hero.cta1":"Cari latihan anda","hero.cta2":"Lihat papan pemuka langsung",
 "hero.p1":"Penyedia mohon dalam talian","hero.p2":"Latihan dijejak pada satu papan pemuka","hero.p3":"Bayaran mengalir hingga selesai",
 "why.tag":"MASALAH SEBENAR","why.title":"Tiga titik di mana program dana biasanya gagal",
 "why.lede":"Kami tidak mendigitalkan segala-galanya. Kami membaiki tiga kesesakan yang merugikan masa, kepercayaan dan wang SBF, dan menyerahkan yang lain kepada manusia yang melakukannya dengan baik.",
@@ -1055,8 +1025,8 @@ bm:{
 "ap.c4":"<b>Setiap pemohon dapat jawapan.</b> Lulus, pinda dan hantar semula, atau ditolak dengan sebab.",
 "ap.st1":"Dihantar","ap.st2":"Saringan","ap.st3":"Penilaian panel","ap.st4":"Diluluskan",
 "ap.a1":"Diluluskan","ap.a2":"Panel · 12 Ogo","ap.a3":"Pinda kos",
-"db.tag":"PERINGKAT 2 · PELAKSANAAN","db.title":"Papan pemuka latihan: siapa, di mana, berapa, bersijil",
-"db.lede":"Penyedia memasukkan kehadiran setiap sesi. Papan pemuka mengubahnya menjadi gambaran yang SBF tidak pernah ada secara masa nyata: liputan lokaliti, bilangan pelatih dan sijil, mengikut bahagian dan program.",
+"db.tag":"KETELUSAN LANGSUNG","db.title":"Satu papan pemuka langsung yang boleh dibaca seluruh negeri",
+"db.lede":"Penyedia memasukkan kehadiran setiap sesi, dan semua pihak membaca gambaran yang sama: liputan lokaliti, bilangan pelatih dan sijil, mengikut bahagian dan program, disegarkan selepas setiap kelas.",
 "db.head":"Papan Pemuka Pelaksanaan BizFund2","db.note":"DATA DEMO · TAHUN PROGRAM 2026",
 "db.f1":"Semua bahagian","db.f2":"S3 2026","db.add":"Masukkan data sesi",
 "db.k1":"Pelatih mendaftar","db.k1s":"+312 bulan ini","db.k2":"Sijil dikeluarkan","db.k2s":"81% daripada pendaftaran",
@@ -1080,22 +1050,30 @@ bm:{
 "sk.c2a":"Mohon sekali, jejak status, tak perlu mengejar sekretariat","sk.c2b":"Masukkan kehadiran sekali; ia menjadi laporan dan bukti tuntutan","sk.c2c":"Bayaran atas jam 14 hari yang jelas selepas pengesahan",
 "sk.w3":"Pelatih · Peserta","sk.t3":"Latihan yang terbukti atas kertas",
 "sk.c3a":"Pendaftaran mudah melalui penyedia pilihan mereka","sk.c3b":"Kehadiran direkod dengan betul, jadi tamat latihan diiktiraf","sk.c3c":"Sijil dalam rekod yang boleh ditunjukkan kepada majikan atau bank",
-"pmo.title":"PMO di sebaliknya: KOBIS Berhad bersama sekretariat SBF",
-"pmo.p":"Platform tidak menjalankan program; manusia yang menjalankannya. KOBIS Berhad menganggotai PMO bersama sekretariat SBF: menyaring cadangan, melawat tapak latihan, mengesahkan tuntutan dan menyediakan kertas jawatankuasa. Papan pemuka hanyalah tempat kerja kami kelihatan kepada semua.",
+"pmo.title":"Di sebalik portal: Pejabat Pengurusan Program BizFund2",
+"pmo.p":"Portal tidak menjalankan program; manusia yang menjalankannya. Sekretariat PMO yang dilantik menyaring penyedia, menerbitkan jadual, melawat tapak latihan, mengesahkan bukti dan menyediakan kertas jawatankuasa, supaya setiap angka di halaman ini kekal jujur. Papan pemuka hanyalah tempat kerja itu menjadi umum.",
 "pmo.s1":"program diluluskan","pmo.s2":"bahagian diliputi","pmo.s3":"pelatih mendaftar","pmo.s4":"hari komitmen bayaran",
-"cta.title":"Sedia menjalankan BizFund2 secara praktikal?",
-"cta.p":"Mohon sesi demonstrasi untuk jawatankuasa SBF, atau daftar minat sebagai penyedia latihan. Demo di atas ialah apa yang pasukan anda akan gunakan.",
-"cta.b1":"Mohon sesi demonstrasi","cta.b2":"Daftar sebagai penyedia",
-"footer.tagline":"Dikendalikan KOBIS Berhad bersama sekretariat SBF: digital di tempat yang menyelesaikan masalah sebenar, manusia di tempat lain.",
-"footer.h1":"Platform","footer.l1":"Kenapa hibrid","footer.l2":"Permohonan penyedia","footer.l3":"Papan pemuka pelaksanaan","footer.l4":"Aliran bayaran",
+"cta.title":"Kelayakan anda yang seterusnya sudah dibiayai.",
+"cta.p":"Kerusi disahkan mengikut susunan minat, kohort demi kohort. Cari program anda di atas, daftar dengan satu ketukan, atau hubungi sekretariat secara terus.",
+"cta.b1":"Semak imbas program","cta.b2":"WhatsApp sekretariat",
+"footer.tagline":"Latihan perniagaan berbiaya untuk usahawan Sarawak, dikendalikan Pejabat Pengurusan Program BizFund2 dan sekretariat SBF.",
+"footer.h1":"Portal","footer.l1":"Program","footer.l2":"Cara ia berfungsi","footer.l3":"Papan pemuka langsung","footer.l4":"Pemegang taruh",
 "footer.h2":"Hubungi","footer.c1":"Kuching, Sarawak, Malaysia",
-"footer.rights":"© 2026 KOBIS Berhad. Hak cipta terpelihara. Prototaip disediakan untuk Sarawak Business Federation dengan data demonstrasi ilustratif."
+"footer.rights":"© 2026 Sarawak Business Federation · BizFund2. Prototaip demonstrasi dengan data ilustratif."
 },
 zh:{
 "a11y.skip":"跳至内容",
-"nav.by":"混合数字 PMO · SBF × KOBIS","nav.why":"为何混合","nav.apply":"申请","nav.sched":"课程表","nav.dash":"仪表盘","nav.pay":"付款","nav.stake":"相关方","nav.cta":"以机构身份申请",
-"sc.tag":"PULSE · 活的课程表","sc.title":"上一季的培训清单：从 PDF 升级为脉搏",
-"sc.lede":"Recovery BizFund 的课程表曾经活在一份手工更新、写满 TBA 的 PDF 里。下面每个项目都是真实的，取自那份清单。在 PULSE 中，每个班次都有实时状态、实时名额与实时成果，这份清单再也不会过期。",
+"nav.by":"砂拉越商业联合会","nav.sched":"课程","nav.how":"如何参加","nav.dash":"实时仪表盘","nav.stake":"相关方","nav.cta":"找到您的培训",
+"hero.t1":"BizFund2 全额资助","hero.t2":"仅限入围培训机构","hero.t3":"覆盖全部 12 个省份","hero.t4":"证书记录在案",
+"hero.note":"专属演示原型 · 示意数据",
+"sc.thentag":"对比上一季","sc.thenh":"与旧培训清单相比有何不同",
+"how.tag":"如何参加","how.title":"从意向到证书，只需三步",
+"how.s1":"浏览","how.s1p":"按领域、省份和状态筛选实时课程表。每个班次都显示真实日期与名额。",
+"how.s2":"登记意向","how.s2p":"在心仪的班次上轻点一下，秘书处会确认名额并发送详情。",
+"how.s3":"出席并获证","how.s3p":"每堂课的出席都被规范记录，证书记录在案，雇主与银行均可查证。",
+"fab.bot":"随时提问 · 24/7","fab.wa":"WhatsApp 联系秘书处","bot.sub":"在线 · 24/7 应答","footer.c0":"SBF 秘书处",
+"sc.tag":"找到您的培训","sc.title":"获批课程、实时名额、真实日期",
+"sc.lede":"下面每个课程都经批准并由 BizFund2 资助，由入围培训机构授课。日期、名额与状态在秘书处发布的那一刻即更新。找到合适的？登记意向，秘书处会与您联系。",
 "sc.oldh":"2023/24 清单 · 一份 PDF","sc.newh":"BizFund2 PULSE · 活的",
 "sc.o1":"手工更新：\"Updated 14 February 2024\"，靠邮件传阅，版本混乱",
 "sc.o2":"大多数班次标注 TBA，无从得知何时会变",
@@ -1112,13 +1090,13 @@ zh:{
 "db.cta1":"以秘书处身份登录","db.cta2":"以培训机构身份登录",
 "lg.title":"选择要体验的控制台",
 "lg.sub":"两个可操作的控制台为公共仪表盘供数。演示已预填凭据；正式环境为安全登录。",
-"lg.a1":"秘书处 · PMO","lg.a1r":"SBF 秘书处与 KOBIS Berhad · 筛选申请、核验报销、发布日期",
+"lg.a1":"秘书处 · PMO","lg.a1r":"受委任的 PMO 秘书处 · 筛选机构、核验报销、发布日期",
 "lg.a2":"培训机构","lg.a2r":"Serumpun Skills Sdn Bhd · 每堂课后录入课次、出席与证书",
 "lg.enter1":"进入秘书处控制台","lg.enter2":"进入机构控制台",
-"hero.badge":"SBF × KOBIS Berhad · 项目管理办公室",
-"hero.title":"BizFund2，务实地运作：<em>只在关键处数字化。</em>",
-"hero.sub":"BizFund2 的大部分仍由人来完成：培训师在课室，学员在岗位，委员会做决策。PMO 只在纸张真正失灵的三个环节加上数字工具，让申请流动、培训可见、机构准时收款。",
-"hero.cta1":"查看仪表盘","hero.cta2":"机构如何申请",
+"hero.badge":"砂拉越商业联合会 · BizFund2 计划",
+"hero.title":"您的企业需要的培训，<em>资金已经安排好。</em>",
+"hero.sub":"BizFund2 与入围培训机构合作，在砂拉越全部十二个省份提供资助名额：从 BIM、电气执照到海事、安全与种植园管理。浏览实时课程表，一键登记意向，赢得一份记录在案的资格证书。",
+"hero.cta1":"找到您的培训","hero.cta2":"查看实时仪表盘",
 "hero.p1":"机构在线申请","hero.p2":"培训在一个仪表盘上跟踪","hero.p3":"付款一路走到完成",
 "why.tag":"真实的问题","why.title":"资助项目通常在三个环节出问题",
 "why.lede":"我们不把一切数字化。我们只修复让 SBF 损失时间、信任与资金的三个瓶颈，其余交给擅长的人来做。",
@@ -1141,8 +1119,8 @@ zh:{
 "ap.c4":"<b>每位申请者都有答复。</b>批准、修改重交，或说明理由的婉拒。",
 "ap.st1":"已提交","ap.st2":"初筛","ap.st3":"评审中","ap.st4":"已批准",
 "ap.a1":"已批准","ap.a2":"评审 · 8月12日","ap.a3":"修改费用",
-"db.tag":"阶段 2 · 执行","db.title":"培训仪表盘：谁、在哪、多少人、多少证书",
-"db.lede":"机构逐场录入出席记录。仪表盘把它变成 SBF 从未实时拥有过的全景：地区覆盖、学员人数与证书，按省份、按项目呈现。",
+"db.tag":"实时透明","db.title":"一个全州都能读懂的实时仪表盘",
+"db.lede":"机构逐场录入出席记录，所有人读到同一幅全景：地区覆盖、学员人数与证书，按省份、按课程呈现，每堂课后刷新。",
 "db.head":"BizFund2 执行仪表盘","db.note":"演示数据 · 2026 项目年度",
 "db.f1":"全部省份","db.f2":"2026 第三季","db.add":"录入课程数据",
 "db.k1":"已报名学员","db.k1s":"本月 +312","db.k2":"已发证书","db.k2s":"占报名 81%",
@@ -1166,22 +1144,30 @@ zh:{
 "sk.c2a":"申请一次、跟踪状态，无需追问秘书处","sk.c2b":"出席录一次，自动成为报告与报销证据","sk.c2c":"核验后按可见的 14 天时钟付款",
 "sk.w3":"学员 · 受训者","sk.t3":"写得进履历的培训",
 "sk.c3a":"通过所选机构轻松报名","sk.c3b":"出席被规范记录，结业才算数","sk.c3c":"证书在册，可出示给雇主或银行",
-"pmo.title":"背后的 PMO：KOBIS Berhad 携手 SBF 秘书处",
-"pmo.p":"平台不运营项目，人才是。KOBIS Berhad 与 SBF 秘书处共同组成 PMO：筛选提案、走访培训现场、核验报销、准备委员会材料。仪表盘只是让我们的工作对所有人可见的地方。",
+"pmo.title":"门户背后：BizFund2 项目管理办公室",
+"pmo.p":"门户不运营项目，人才是。受委任的 PMO 秘书处筛选机构、发布课程表、走访培训现场、核验凭据并准备委员会材料，让本页每个数字都经得起推敲。仪表盘只是这些工作公开呈现的地方。",
 "pmo.s1":"个项目获批","pmo.s2":"个省份覆盖","pmo.s3":"名学员报名","pmo.s4":"天付款承诺",
-"cta.title":"准备好务实地运作 BizFund2 了吗？",
-"cta.p":"为 SBF 委员会预约一次演示讲解，或以培训机构身份登记意向。上面的演示就是您的团队将来使用的界面。",
-"cta.b1":"预约演示讲解","cta.b2":"登记为培训机构",
-"footer.tagline":"由 KOBIS Berhad 与 SBF 秘书处共同运营：在解决真问题的地方数字化，其余交给人。",
-"footer.h1":"平台","footer.l1":"为何混合","footer.l2":"机构申请","footer.l3":"执行仪表盘","footer.l4":"付款流程",
+"cta.title":"您的下一份资格证书，资金已备好。",
+"cta.p":"名额按意向先后逐班确认。在上方找到您的课程，一键登记，或直接与秘书处联系。",
+"cta.b1":"浏览课程","cta.b2":"WhatsApp 联系秘书处",
+"footer.tagline":"为砂拉越创业者提供的资助商业培训，由 BizFund2 项目管理办公室与 SBF 秘书处运营。",
+"footer.h1":"门户","footer.l1":"课程","footer.l2":"如何参加","footer.l3":"实时仪表盘","footer.l4":"相关方",
 "footer.h2":"联系","footer.c1":"马来西亚砂拉越古晋",
-"footer.rights":"© 2026 KOBIS Berhad 版权所有。本原型为砂拉越商业联合会编制，使用示意性演示数据。"
+"footer.rights":"© 2026 砂拉越商业联合会 · BizFund2。演示原型，使用示意数据。"
 },
 ib:{
 "a11y.skip":"Lompat ngagai isi",
-"nav.by":"PMO Digital Hibrid · SBF × KOBIS","nav.why":"Nama kebuah hibrid","nav.apply":"Mohon","nav.sched":"Jadual","nav.dash":"Dashboard","nav.pay":"Bayar","nav.stake":"Raban","nav.cta":"Mohon nyadi penyedia",
-"sc.tag":"PULSE · JADUAL TI IDUP","sc.title":"Senarai latih musim tadi, dipejalai ari PDF ngagai nadi",
-"sc.lede":"Jadual Recovery BizFund suba diau dalam PDF, dikemansang ngena jari lalu penuh TBA. Genap program di baruh amat, diambi ari senarai nya. Dalam PULSE genap kohort mai status, kerusi enggau asil ti idup, lalu senarai tu enda ulih lapuk agi.",
+"nav.by":"Sarawak Business Federation","nav.sched":"Program","nav.how":"Chara Iya Bejalai","nav.dash":"Dashboard Idup","nav.stake":"Raban","nav.cta":"Giga latih nuan",
+"hero.t1":"Dibiayai baruh BizFund2","hero.t2":"Semina penyedia dipilih","hero.t3":"Semua 12 bagi menua diliput","hero.t4":"Sijil tercatat dalam rekod",
+"hero.note":"Prototaip demo eksklusif · data chunto",
+"sc.thentag":"KENA BANDING MUSIM TADI","sc.thenh":"Nama ti berubah ari senarai latih lama",
+"how.tag":"CHARA IYA BEJALAI","how.title":"Tiga langkah ari minat ngagai sijil",
+"how.s1":"Peda","how.s1p":"Tapis jadual idup nitih ka sektor, bagi menua enggau status. Genap kohort mandang ka tarikh enggau kerusi amat.",
+"how.s2":"Daftar minat","how.s2p":"Sekali tekan ba kohort dipilih nuan. Sekretariat ngesah kerusi lalu ngirum penerang.",
+"how.s3":"Datai lalu bulih sijil","how.s3p":"Penatai nuan direkod betul ba genap sesi, lalu sijil nuan tercatat ke tuan pengawa enggau bank.",
+"fab.bot":"Tanya sebarang utai · 24/7","fab.wa":"WhatsApp sekretariat","bot.sub":"Online · nyaut 24/7","footer.c0":"Sekretariat SBF",
+"sc.tag":"GIGA LATIH NUAN","sc.title":"Program dikelulus, kerusi idup, tarikh amat",
+"sc.lede":"Genap program di baruh udah dikelulus lalu dibiayai baruh BizFund2, disampai ka penyedia latih ti udah dipilih. Tarikh, kerusi enggau status dikemansang lebuh sekretariat ngeluar ka iya. Udah tetemu? Daftar minat lalu sekretariat deka betelefon enggau nuan.",
 "sc.oldh":"Senarai 2023/24 · siti PDF","sc.newh":"BizFund2 PULSE · idup",
 "sc.o1":"Dikemansang ngena jari: \"Updated 14 February 2024\", dianjur ngena e-mel, versi merata",
 "sc.o2":"Mayuh kohort ditanda TBA, nadai chara nemu kemaya iya berubah",
@@ -1198,13 +1184,13 @@ ib:{
 "db.cta1":"Tama nyadi Sekretariat","db.cta2":"Tama nyadi Penyedia Latih",
 "lg.title":"Pilih konsol deka dipeda",
 "lg.sub":"Dua konsol ti bejalai meri data ngagai dashboard mayuh. Kelayak udah diisi ke demo; ba produksi tu log tama selamat.",
-"lg.a1":"Sekretariat · PMO","lg.a1r":"Sekretariat SBF enggau KOBIS Berhad · nyaring permohon, meresa tuntut, ngeluar ka tarikh",
+"lg.a1":"Sekretariat · PMO","lg.a1r":"Sekretariat PMO ti dilantik · nyaring penyedia, meresa tuntut, ngeluar ka tarikh",
 "lg.a2":"Penyedia Latih","lg.a2r":"Serumpun Skills Sdn Bhd · ngengkah ka sesi, penatai enggau sijil udah genap kelas",
 "lg.enter1":"Tama konsol sekretariat","lg.enter2":"Tama konsol penyedia",
-"hero.badge":"SBF × KOBIS Berhad · Opis Pengelola Program",
-"hero.title":"BizFund2, dipejalai chara praktikal: <em>digital semina ba endur ti beguna.</em>",
-"hero.sub":"Mayuh agi BizFund2 agi dipejalai mensia: pengajar ba bilik, murid ba endur pengawa, jawatankuasa mutus ka penemu. PMO nambah ka alat digital ba tiga endur alai kertas amat enda ulih, ngambika permohon bejalai, latih ulih dipeda lalu penyedia dibayar tepat maya.",
-"hero.cta1":"Peda dashboard","hero.cta2":"Chara penyedia mohon",
+"hero.badge":"Sarawak Business Federation · Program BizFund2",
+"hero.title":"Latih ti diguna dagang nuan. <em>Pembiayaan udah diatur.</em>",
+"hero.sub":"BizFund2 nyedia ka kerusi dibiayai enggau penyedia latih ti udah dipilih ba semua dua belas bagi menua Sarawak: ari BIM enggau lesen elektrik ngagai maritim, keselamatan enggau pengelola ladang. Peda jadual idup, daftar minat sekali tekan, lalu bulih kelayak ti tercatat dalam rekod.",
+"hero.cta1":"Giga latih nuan","hero.cta2":"Peda dashboard idup",
 "hero.p1":"Penyedia mohon online","hero.p2":"Latih ditansang ba siti dashboard","hero.p3":"Bayar bejalai nyentuk tembu",
 "why.tag":"PENANGGUL AMAT","why.title":"Tiga endur alai program dana suah enda ulih",
 "why.lede":"Kami ukai ngaga semua utai nyadi digital. Kami semina meruan tiga penanggul ti ngerugi ka jam, pengarap enggau duit SBF, lalu nejuka ti bukai dipejalai mensia ti landik.",
@@ -1227,8 +1213,8 @@ ib:{
 "ap.c4":"<b>Genap pemohon bulih saut.</b> Lulus, pinda lalu ngirum baru, tauka ditulak enggau kebuah.",
 "ap.st1":"Udah dikirum","ap.st2":"Saring","ap.st3":"Penilai panel","ap.st4":"Dikelulus",
 "ap.a1":"Dikelulus","ap.a2":"Panel · 12 Ogo","ap.a3":"Pinda rega",
-"db.tag":"TIKAS 2 · PELAKSANA","db.title":"Dashboard latih: sapa, dini, berapa, besijil",
-"db.lede":"Penyedia ngengkah ka penatai genap sesi. Dashboard ngubah nya nyadi gambar ti SBF nadai kala bisi ba jam nya empu: liput endur, penyampau murid enggau sijil, nitih ka bagi menua enggau program.",
+"db.tag":"PENERANG IDUP","db.title":"Siti dashboard idup ti ulih dibacha semua menua",
+"db.lede":"Penyedia ngengkah ka penatai genap sesi, lalu semua orang macha gambar ti sebaka: liput endur, penyampau murid enggau sijil, nitih ka bagi menua enggau program, disegar udah genap kelas.",
 "db.head":"Dashboard Pelaksana BizFund2","db.note":"DATA DEMO · TAUN PROGRAM 2026",
 "db.f1":"Semua bagi menua","db.f2":"S3 2026","db.add":"Engkah ka data sesi",
 "db.k1":"Murid bedaftar","db.k1s":"+312 bulan tu","db.k2":"Sijil dikeluar","db.k2s":"81% ari bedaftar",
@@ -1252,16 +1238,16 @@ ib:{
 "sk.c2a":"Mohon sekali, tansang status, enda ibuh ngiga sekretariat","sk.c2b":"Engkah penatai sekali; iya nyadi laporan enggau bukti tuntut","sk.c2c":"Bayar nitih ka jam 14 hari ti terang udah diperesa",
 "sk.w3":"Murid · Peserta","sk.t3":"Latih ti pegari ba kertas",
 "sk.c3a":"Daftar mudah nengah penyedia dipilih sida","sk.c3b":"Penatai direkod betul, nya alai tembu latih diketan","sk.c3c":"Sijil dalam rekod ti ulih dipandang ka tuan pengawa tauka bank",
-"pmo.title":"PMO di belakang: KOBIS Berhad enggau sekretariat SBF",
-"pmo.p":"Platform enda ngemudi ka program; mensia ti ngemudi. KOBIS Berhad begulai enggau sekretariat SBF nyadi PMO: nyaring cadangan, ngabas endur latih, meresa tuntut lalu nyedia ka surat jawatankuasa. Dashboard semina endur alai pengawa kami ulih dipeda semua.",
+"pmo.title":"Di belakang portal: Opis Pengelola Program BizFund2",
+"pmo.p":"Portal enda ngemudi ka program; mensia ti ngemudi. Sekretariat PMO ti dilantik nyaring penyedia, ngeluar ka jadual, ngabas endur latih, meresa bukti lalu nyedia ka surat jawatankuasa, ngambika genap nombor ba lambar tu tetap lurus. Dashboard semina endur alai pengawa nya dipeda mayuh.",
 "pmo.s1":"program dikelulus","pmo.s2":"bagi menua diliput","pmo.s3":"murid bedaftar","pmo.s4":"hari semaya bayar",
-"cta.title":"Sedia ngemudi ka BizFund2 chara praktikal?",
-"cta.p":"Minta sesi penerang ke jawatankuasa SBF, tauka daftar minat nyadi penyedia latih. Demo di atas nya utai ti deka dikena bala kita.",
-"cta.b1":"Minta sesi penerang","cta.b2":"Daftar nyadi penyedia",
-"footer.tagline":"Dikemudi KOBIS Berhad enggau sekretariat SBF: digital ba endur ti mutar ka penanggul amat, mensia ba endur bukai.",
-"footer.h1":"Platform","footer.l1":"Nama kebuah hibrid","footer.l2":"Permohon penyedia","footer.l3":"Dashboard pelaksana","footer.l4":"Aliran bayar",
+"cta.title":"Kelayak nuan ti deka datai udah dibiayai.",
+"cta.p":"Kerusi disah nitih ka urutan minat, kohort demi kohort. Giga program nuan di atas, daftar sekali tekan, tauka betelefon terus enggau sekretariat.",
+"cta.b1":"Peda program","cta.b2":"WhatsApp sekretariat",
+"footer.tagline":"Latih dagang dibiayai ke usahawan Sarawak, dikemudi Opis Pengelola Program BizFund2 enggau sekretariat SBF.",
+"footer.h1":"Portal","footer.l1":"Program","footer.l2":"Chara iya bejalai","footer.l3":"Dashboard idup","footer.l4":"Raban",
 "footer.h2":"Kaul","footer.c1":"Kuching, Sarawak, Malaysia",
-"footer.rights":"© 2026 KOBIS Berhad. Semua hak disimpan. Prototaip disedia ke Sarawak Business Federation ngena data chunto ke pandang aja."
+"footer.rights":"© 2026 Sarawak Business Federation · BizFund2. Prototaip demo ngena data chunto."
 }
 };
 
@@ -1287,6 +1273,7 @@ function applyLanguage(l){
   document.querySelectorAll("[data-i18n-ph]").forEach(function(el){ el.placeholder = PH[lang] || PH.en; });
   renderDivisions();
   if(typeof fillRegFilters === "function"){ fillRegFilters(); renderReg(); }
+  if(typeof botChipsRender === "function" && document.getElementById("botChips") && document.getElementById("botChips").children.length){ botChipsRender(); }
 }
 document.querySelectorAll(".lang-switch button").forEach(function(b){
   b.addEventListener("click", function(){ applyLanguage(b.dataset.lang); });
@@ -1704,6 +1691,134 @@ function routeHash(){
 }
 window.addEventListener("hashchange", routeHash);
 routeHash();
+
+/* ---------- 24/7 assistant (scripted demo, answers from live schedule data) ---------- */
+var BOT_STR = {
+en:{hi:"Hi! I am the BizFund2 assistant, here 24/7. Ask me about programmes, locations, funding or certificates.",
+  chips:["What is open now?","Is it really funded?","Training near Miri","How do I register?"],
+  funded:"Yes. Approved participants train on <b>funded seats under BizFund2</b>: no fee for the seat itself. The secretariat confirms the funding when it confirms your place.",
+  cert:"Every completed programme issues a <b>certificate that goes on record</b>, so employers and banks can rely on it. Completed cohorts on this page already show their certified counts.",
+  reg:"Three steps: find your programme in the schedule, tap <b>Register interest</b> on the cohort you want, and the secretariat will contact you to confirm your seat.",
+  contact:"Tap the <b>green WhatsApp button</b> at the bottom right to chat with the secretariat, or email admin@sbf.org.my. For schedule questions, I can answer right here.",
+  fallback:"I can help with what is open, locations, funding, certificates and how to register. Try a button below, or WhatsApp the secretariat for anything else.",
+  openHead:"Open for interest right now:",near:"Programmes with cohorts in",seats:"seats left",
+  more:"Full list in the schedule above · tap Register interest on any card.",ph:"Type your question"},
+bm:{hi:"Hai! Saya pembantu BizFund2, sedia 24/7. Tanya saya tentang program, lokasi, pembiayaan atau sijil.",
+  chips:["Apa yang dibuka sekarang?","Betul ke dibiayai?","Latihan dekat Miri","Macam mana nak daftar?"],
+  funded:"Ya. Peserta yang diluluskan berlatih atas <b>kerusi berbiaya di bawah BizFund2</b>: tiada yuran untuk kerusi itu sendiri. Sekretariat mengesahkan pembiayaan semasa mengesahkan tempat anda.",
+  cert:"Setiap program yang tamat mengeluarkan <b>sijil yang tercatat dalam rekod</b>, boleh dipercayai majikan dan bank. Kohort yang selesai di halaman ini sudah memaparkan bilangan bersijil.",
+  reg:"Tiga langkah: cari program anda dalam jadual, tekan <b>Daftar minat</b> pada kohort pilihan, dan sekretariat akan menghubungi anda untuk mengesahkan kerusi.",
+  contact:"Tekan <b>butang WhatsApp hijau</b> di kanan bawah untuk berbual dengan sekretariat, atau e-mel admin@sbf.org.my. Soalan jadual boleh terus tanya saya di sini.",
+  fallback:"Saya boleh bantu tentang apa yang dibuka, lokasi, pembiayaan, sijil dan cara mendaftar. Cuba butang di bawah, atau WhatsApp sekretariat.",
+  openHead:"Dibuka untuk minat sekarang:",near:"Program dengan kohort di",seats:"kerusi tinggal",
+  more:"Senarai penuh dalam jadual di atas · tekan Daftar minat pada mana-mana kad.",ph:"Taip soalan anda"},
+zh:{hi:"您好！我是 BizFund2 助手，24/7 在线。欢迎询问项目、地点、资助或证书。",
+  chips:["现在有什么开放？","真的有资助吗？","美里附近的培训","怎么报名？"],
+  funded:"是的。获批学员的名额<b>由 BizFund2 资助</b>：名额本身不收费。秘书处确认您的名额时会一并确认资助。",
+  cert:"每个完成的项目都会颁发<b>记录在案的证书</b>，雇主和银行都可查证。本页已完成的班次已显示获证人数。",
+  reg:"三步：在课程表中找到项目，点击心仪班次上的<b>登记意向</b>，秘书处会联系您确认名额。",
+  contact:"点击右下角的<b>绿色 WhatsApp 按钮</b>与秘书处对话，或发邮件至 admin@sbf.org.my。课程表问题可以直接问我。",
+  fallback:"我可以回答开放班次、地点、资助、证书和报名方式。试试下面的按钮，其他问题请 WhatsApp 秘书处。",
+  openHead:"目前开放登记：",near:"以下项目在此地有班次：",seats:"个名额",
+  more:"完整列表见上方课程表 · 点击任意卡片上的登记意向。",ph:"输入您的问题"},
+ib:{hi:"Hai! Aku pembantu BizFund2, sedia 24/7. Tanya aku pasal program, endur, pembiayaan tauka sijil.",
+  chips:["Nama ti dibuka diatu?","Amat dibiayai?","Latih semak Miri","Baka ni deka daftar?"],
+  funded:"Au. Peserta ti dikelulus belatih ba <b>kerusi dibiayai BizFund2</b>: nadai bayar ke kerusi nya empu. Sekretariat ngesah pembiayaan lebuh ngesah endur nuan.",
+  cert:"Genap program ti tembu ngeluar ka <b>sijil ti tercatat dalam rekod</b>, dikarap ka tuan pengawa enggau bank. Kohort ti tembu ba lambar tu udah mandang ka penyampau besijil.",
+  reg:"Tiga langkah: giga program nuan dalam jadual, tekan <b>Daftar minat</b> ba kohort dipilih, lalu sekretariat deka betelefon ngesah kerusi nuan.",
+  contact:"Tekan <b>butang WhatsApp gadong</b> ba kanan baruh deka berandau enggau sekretariat, tauka e-mel admin@sbf.org.my. Tanya pasal jadual ulih terus ditanya ditu.",
+  fallback:"Aku ulih nulung pasal utai ti dibuka, endur, pembiayaan, sijil enggau chara daftar. Uji butang di baruh, tauka WhatsApp sekretariat.",
+  openHead:"Dibuka ke minat diatu:",near:"Program bisi kohort ba",seats:"kerusi agi",
+  more:"Senarai penuh ba jadual di atas · tekan Daftar minat ba sebarang kad.",ph:"Taip tanya nuan"}
+};
+function bstr(){ return BOT_STR[lang] || BOT_STR.en; }
+var botFab = $id("botFab"), botPanel = $id("botPanel"), botMsgs = $id("botMsgs"), botChips = $id("botChips");
+function botMsg(html, who){
+  var d = document.createElement("div");
+  d.className = "b-msg " + who;
+  if(who === "user") d.textContent = html; else d.innerHTML = html;
+  botMsgs.appendChild(d);
+  botMsgs.scrollTop = botMsgs.scrollHeight;
+  return d;
+}
+function botChipsRender(){
+  botChips.innerHTML = "";
+  bstr().chips.forEach(function(c){
+    var b = document.createElement("button");
+    b.type = "button"; b.textContent = c;
+    b.addEventListener("click", function(){ botAsk(c); });
+    botChips.appendChild(b);
+  });
+  var inp = $id("botIn"); if(inp) inp.placeholder = bstr().ph;
+}
+function openCohortLines(){
+  var out = [];
+  PROG.forEach(function(p){
+    p.c.forEach(function(c){
+      if(c.st === "open") out.push("• <b>" + p.t + "</b> · " + c.n + " " + c.l + " · " + c.dt + " · " + c.seats + " " + bstr().seats);
+    });
+  });
+  return out;
+}
+function botAnswer(q){
+  var s = bstr(), t = q.toLowerCase();
+  var locs = ["kuching","miri","sibu","bintulu"];
+  for(var i = 0; i < locs.length; i++){
+    if(t.indexOf(locs[i]) >= 0){
+      var L = locs[i].charAt(0).toUpperCase() + locs[i].slice(1);
+      var hits = PROG.filter(function(p){ return p.c.some(function(c){ return c.l === L; }); }).slice(0, 5)
+        .map(function(p){ return "• <b>" + p.t + "</b> · " + p.p; });
+      return s.near + " <b>" + L + "</b>:<span class=\"b-open\">" + hits.join("<br>") + "<br>" + s.more + "</span>";
+    }
+  }
+  if(/open|now|available|dibuka|sekarang|diatu|开放|现在/.test(t)){
+    return s.openHead + "<span class=\"b-open\">" + openCohortLines().join("<br>") + "<br>" + s.more + "</span>";
+  }
+  if(/free|fee|cost|price|fund|biaya|percuma|bayar|资助|免费|费用/.test(t)) return s.funded;
+  if(/cert|sijil|证书/.test(t)) return s.cert;
+  if(/regist|daftar|how|cara|baka ni|报名|怎么/.test(t)) return s.reg;
+  if(/whatsapp|human|staff|talk|call|phone|orang|人工|电话|secretariat|sekretariat/.test(t)) return s.contact;
+  var kw = [["bim","BIM"],["construction","BIM"],["electr","Electrical"],["wire","Wireman"],["chargeman","Chargeman"],["drone","Drone"],["safety","Safety"],["osh","OSH"],["boat","Master Domestic"],["marin","Master Domestic"],["captain","Master Domestic"],["plantation","Plantation"],["palm","Plantation"],["account","Accounting"],["sql","Accounting"],["tourist","Tourist"],["guide","Tourist"],["freight","Freighting"],["logis","Freighting"],["halal","Chemicals"],["chemical","Chemicals"]];
+  for(var k = 0; k < kw.length; k++){
+    if(t.indexOf(kw[k][0]) >= 0){
+      var m = PROG.filter(function(p){ return (p.t + " " + p.s).toLowerCase().indexOf(kw[k][1].toLowerCase()) >= 0; }).slice(0, 4)
+        .map(function(p){
+          var nxt = p.c[0];
+          return "• <b>" + p.t + "</b> · " + p.p + " (" + nxt.n + " " + nxt.l + " · " + nxt.dt + ")";
+        });
+      if(m.length) return "<span class=\"b-open\">" + m.join("<br>") + "<br>" + s.more + "</span>";
+    }
+  }
+  return s.fallback;
+}
+function botAsk(q){
+  botMsg(q, "user");
+  var ty = document.createElement("div");
+  ty.className = "b-msg bot b-typing"; ty.innerHTML = "<i></i><i></i><i></i>";
+  botMsgs.appendChild(ty); botMsgs.scrollTop = botMsgs.scrollHeight;
+  setTimeout(function(){
+    ty.remove();
+    botMsg(botAnswer(q), "bot");
+  }, reduceMotion ? 60 : 650);
+}
+var botGreeted = false;
+function toggleBot(open){
+  botPanel.classList.toggle("open", open);
+  botFab.setAttribute("aria-expanded", open ? "true" : "false");
+  if(open && !botGreeted){ botGreeted = true; botMsg(bstr().hi, "bot"); botChipsRender(); }
+  if(open) $id("botIn").focus();
+}
+if(botFab){
+  botFab.addEventListener("click", function(){ toggleBot(!botPanel.classList.contains("open")); });
+  $id("botClose").addEventListener("click", function(){ toggleBot(false); });
+  $id("botForm").addEventListener("submit", function(e){
+    e.preventDefault();
+    var v = $id("botIn").value.trim();
+    if(!v) return;
+    $id("botIn").value = "";
+    botAsk(v);
+  });
+}
 
 /* ---------- boot language ---------- */
 var saved = null;
