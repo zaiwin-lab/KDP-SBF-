@@ -1,67 +1,127 @@
-# Programme Management PULSE
+# Programme Management PULSE — Digital PMO Demonstrator
 
-A client-neutral **digital programme-management concept** designed to coordinate training providers, participants, delivery evidence, certification, claims and management reporting through one integrated experience.
+**Maturity:** Interactive concept prototype  
+**Portfolio category:** Programme operations, governance and public-sector service design  
+**Production status:** Not commissioned, endorsed or production-ready
 
-> From fragmented documents and manual follow-ups to a living programme operations view.
+Programme Management PULSE explores how a complex, multi-provider funding or training programme could be coordinated through a shared digital operating view. It turns governance, delivery, evidence, certification, claims and reporting requirements into an inspectable front-end experience.
 
-## The Operational Challenge
+> This repository demonstrates product and workflow thinking. It is not an official platform of Sarawak Business Federation, MINTRED, the Sarawak Premier's Office or any other external organisation.
 
-Multi-provider programmes often depend on disconnected spreadsheets, messaging threads, PDF schedules and manually compiled evidence. This makes it difficult to see delivery status, participant progress, certificate readiness, claim readiness and emerging risks in one place.
+## Business problem
 
-## The Concept
+Large programmes are frequently managed through disconnected spreadsheets, messages, schedules and evidence files. That makes it difficult for decision-makers to answer basic operational questions:
 
-Programme Management PULSE demonstrates how a programme secretariat, delivery providers and participants could work through connected but role-appropriate views.
+- Which cohorts and providers are on schedule?
+- Is attendance or delivery evidence complete?
+- Which certificates and claims are ready for review?
+- Where are exceptions, delays or governance risks emerging?
+- Can management see one current view without manually consolidating reports?
 
-### Management and Secretariat
+PULSE provides a concrete interface concept for discussing those questions before investing in a production system.
 
-- portfolio, cohort and delivery overview;
-- programme timeline and status monitoring;
-- participant, attendance and certificate indicators;
-- provider application and claims review;
-- evidence completeness and management notices;
-- locality, enrolment and delivery reporting.
+## Intended users
 
-### Delivery Providers
+- programme owners, sponsors and executive evaluators;
+- programme secretariat and PMO teams;
+- training or delivery providers;
+- finance, claims and governance reviewers;
+- participants seeking programme and cohort information.
 
-- session and cohort management;
-- registration and attendance tools;
-- participant register;
-- evidence and certificate tracking;
-- trainer checklist;
-- budget, claim and payment-readiness view.
+These are intended personas, not evidence of current users or adoption.
 
-### Participants
+## Demonstrated capabilities
 
-- programme discovery and filtering;
-- live cohort availability;
-- registration of interest;
-- multilingual information access;
-- direct support pathways.
+The repository contains two self-contained interactive HTML experiences:
 
-## Prototype Highlights
+- executive portfolio and programme dashboards;
+- programme lifecycle, schedule and status views;
+- provider, participant, attendance and certificate concepts;
+- evidence-completeness and claim-readiness views;
+- governance, accountability and management-reporting flows;
+- provider and participant journey demonstrations;
+- English, Bahasa Malaysia, Chinese and Iban interface content;
+- responsive layouts and reduced-motion support.
 
-- four-language interface concept;
-- searchable living programme schedule;
-- management and provider console demonstrations;
-- live-updating dashboard indicators;
-- participant, evidence and certification workflows;
-- claim-readiness and payment-status concepts;
-- mobile-responsive interaction design.
+The experiences are useful for workflow discovery, stakeholder workshops and proposal evaluation. They do not establish that an operational PMO system exists.
 
-## Product Role
+## What the implementation actually does
 
-This prototype demonstrates capability in programme workflow architecture, stakeholder and role mapping, dashboard and information design, rapid product prototyping, and AI-assisted implementation.
+- Both variants are static HTML, CSS and client-side JavaScript applications.
+- Dashboard figures and named entities are demonstration content.
+- Some indicators and interface interactions are calculated or updated in the browser.
+- Browser storage is used only for small interface preferences such as language selection.
+- The visible contact or registration forms do not transmit data to a server.
+- There is no API integration, shared database, authentication, role enforcement, audit log, payment rail, certificate service or claims-processing backend.
+- “AI” panels are interface demonstrations; this repository contains no model call or AI inference service.
 
-## Status
+This distinction is important: the prototype makes a future operating model visible, but it does not execute that operating model.
 
-**Independent concept prototype — not a production system.**
+## Strategic value
 
-This public demonstration is presented to illustrate digital programme-management capabilities. It is not an official, commissioned or endorsed platform of any external organisation. Names, data and workflows used in demonstrations should be treated as illustrative unless explicitly identified as public-source information.
+PULSE demonstrates how KOBIS can convert a long-form programme proposal into an interactive operating blueprint. Its value is in:
 
-## Responsible Use
+1. aligning stakeholders around roles and process stages;
+2. exposing data, approval and evidence requirements early;
+3. making governance and exception-management needs tangible;
+4. providing a testable basis for a properly scoped pilot;
+5. reducing ambiguity before backend, security and integration work begins.
 
-Before production deployment, the platform would require stakeholder validation, privacy and security controls, role-based access, audit logging, verified integrations, accessibility testing and approved branding.
+## Technology
 
-## Delivery Team
+| Layer | Evidence in this repository |
+|---|---|
+| Interface | Semantic HTML, responsive CSS and vanilla JavaScript |
+| Visualisation | Client-side dashboard, chart and progress components |
+| Local state | Browser state and limited localStorage preferences |
+| Internationalisation | In-page English, Bahasa Malaysia, Chinese and Iban content |
+| Backend | Not implemented |
+| AI service | Not implemented |
+| Data source | Illustrative datasets embedded in the pages |
 
-Product strategy, workflow architecture and solution direction by **Zaiwin Kassim**, together with the **KOBIS AI Prodigy Team**, using supervised AI-assisted development.
+## Demonstration links
+
+Two matching Netlify projects were confirmed in a ready state on **25 August 2026**:
+
+- [BizFund2 Digital PMO](https://bizfund2-digital-pmo.netlify.app)
+- [SBF BizFund2 / PULSE](https://sbfbizfund2.netlify.app)
+
+Both are manual hosted demonstrations. The repository does not record a Git-linked deployment provenance, so validate the deployed build against the repository before using either as canonical evidence.
+
+## Delivery role
+
+**Ts. Zaiwin Kassim** led the product strategy, workflow architecture, executive narrative and solution direction with the **KOBIS AI Prodigy Team**, using supervised AI-assisted development.
+
+This is a delivery and prototyping role statement. It does not imply appointment by, partnership with or endorsement from any organisation shown in the concept.
+
+## Responsible use
+
+Before any external pilot or production use:
+
+- obtain written approval for programme names, logos, partners and institutional references;
+- replace all illustrative budgets, participant counts, programme statistics and timelines with validated sources;
+- implement consent, privacy notices, retention rules and PDPA-aligned data handling;
+- introduce authentication, least-privilege roles, audit trails and security testing;
+- validate eligibility, claims, payments, certificates and reporting rules with authorised owners;
+- establish accessibility, language and content review with qualified stakeholders;
+- retain human authority over approvals, funding, provider selection and participant decisions.
+
+## Limitations
+
+- No operational adoption, user count, revenue, impact or programme outcome is evidenced.
+- No external institution is represented as a verified client, partner or sponsor.
+- Displayed numbers and success indicators must not be cited as real performance.
+- The prototype cannot accept valid registrations, process claims or make funding decisions.
+- It should not be used to imply that the proposed programme, budget or governance model has been approved.
+
+## Run locally
+
+Open either `index.html` or `sbf-bizfund2/index.html` in a modern browser. No build step is required.
+
+## Evidence needed for the next maturity stage
+
+A credible pilot should demonstrate one authenticated, auditable workflow end to end:
+
+**provider submission → evidence review → authorised decision → status notification → management report**
+
+That vertical slice should use synthetic data first, documented roles, tested permissions and an approved programme taxonomy.
